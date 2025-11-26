@@ -1,23 +1,23 @@
-# Arquivo: .github/workflows/deploy.yml
-
-name: Deploy Static Page
+name: Deploy GitHub Page
 
 on:
   push:
     branches:
-      - main # Define a branch que acionará o workflow (pode ser 'master' dependendo do seu repo)
+      - main  # Altere para master se for a sua branch principal
 
 jobs:
-  build:
+  build-and-deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout your repository
+      - name: Checkout 
         uses: actions/checkout@v4
-      
-      # Esta ação cuida de todo o processo de deploy para o GitHub Pages
+        with:
+          fetch-depth: 0
+
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./ # O diretório a ser publicado ('.' se seus arquivos HTML estiverem na raiz)
+          publish_dir: ./ # A pasta raiz do repositório
+          keep_files: false # Não manter arquivos antigos
+          destination_dir: .
