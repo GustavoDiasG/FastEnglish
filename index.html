@@ -85,12 +85,6 @@
             <h1 class="text-3xl md:text-4xl font-bold text-amber-700">Plano de Estudos Interativo</h1>
             <p class="text-lg text-stone-600 mt-2">Seu guia de estudos para o Inglês em Negócios de Futebol.</p>
             <p class="text-md text-stone-500 mt-4">Este painel interativo ajuda você a navegar pelo seu plano de aulas, consultar regras gramaticais, pesquisar vocabulário técnico e acessar exercícios práticos. Use as abas abaixo para explorar.</p>
-            
-            <div id="loading-indicator" class="mt-4 p-3 bg-blue-100 border border-blue-400 text-blue-700 rounded-lg text-sm flex items-center hidden">
-                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
-                <span>Carregando dados do servidor (Firebase)...</span>
-            </div>
-            <div id="auth-info" class="mt-2 text-xs text-stone-500"></div>
         </header>
 
         <!-- Navegação por Abas -->
@@ -396,8 +390,8 @@
                                     <tr><td class="py-2 px-3 font-medium"><b>What</b></td><td class="py-2 px-3">O quê / Qual</td><td class="py-2 px-3"><b>What</b> is the transfer fee?</td></tr>
                                     <tr><td class="py-2 px-3 font-medium"><b>Where</b></td><td class="py-2 px-3">Onde</td><td class="py-2 px-3"><b>Where</b> is the final draft?</td></tr>
                                     <tr><td class="py-2 px-3"><b>Who</b></td><td class="py-2 px-3">Quem</td><td class="py-2 px-3"><b>Who</b> is the agent?</td></tr>
-                                    <tr><td class="py-2 px-3 font-medium"><b>When</b></td><td class="py-2 px-3">Quando</td><td class="py-2 px-3"><b>When</b> was the last meeting?</td></tr>
-                                    <tr><td class="py-2 px-3 font-medium"><b>Why</b></td><td class="py-2 px-3">Por quê</td><td class="py-2 px-3"><b>Why</b> is the clause complicated?</td></tr>
+                                    <tr><td class="py-2 px-3"><b>When</b></td><td class="py-2 px-3">Quando</td><td class="py-2 px-3"><b>When</b> was the last meeting?</td></tr>
+                                    <tr><td class="py-2 px-3"><b>Why</b></td><td class="py-2 px-3">Por quê</td><td class="py-2 px-3"><b>Why</b> is the clause complicated?</td></tr>
                                     <tr><td class="py-2 px-3 font-medium"><b>How</b></td><td class="py-2 px-3">Como (Não começa com W, mas funciona igual)</td><td class="py-2 px-3"><b>How</b> was your flight?</td></tr>
                                 </tbody>
                             </table>
@@ -484,18 +478,18 @@
                                         <tr><td class="py-2 px-3">6. Call</td><td class="py-2 px-3">Ligar / Chamar</td><td class="py-2 px-3">26. Think</td><td class="py-2 px-3">Pensar / Achar</td></tr>
                                         <tr><td class="py-2 px-3">7. Send</td><td class="py-2 px-3">Enviar</td><td class="py-2 px-3">27. Find</td><td class="py-2 px-3">Encontrar / Achar</td></tr>
                                         <tr><td class="py-2 px-3">8. Agree</td><td class="py-2 px-3">Concordar</td><td class="py-2 px-3">28. Tell</td><td class="py-2 px-3">Contar / Dizer</td></tr>
-                                        <tr><td class="py-2 px-3">9. Discuss</td><td class="py-2 px-3">Discutir</td><td class="py-2 px-3">30. Try</td><td class="py-2 px-3">Tentar</td></tr>
-                                        <tr><td class="py-2 px-3">10. Finish</td><td class="py-2 px-3">Finalizar / Terminar</td><td class="py-2 px-3">31. Look</td><td class="py-2 px-3">Olhar / Parecer</td></tr>
-                                        <tr><td class="py-2 px-3">11. Buy</td><td class="py-2 px-3">Comprar</td><td class="py-2 px-3">32. Want</td><td class="py-2 px-3">Querer</td></tr>
-                                        <tr><td class="py-2 px-3">12. Sell</td><td class="py-2 px-3">Vender</td><td class="py-2 px-3">33. Keep</td><td class="py-2 px-3">Manter / Guardar</td></tr>
-                                        <tr><td class="py-2 px-3">13. Watch</td><td class="py-2 px-3">Assistir / Observar</td><td class="py-2 px-3">34. Let</td><td class="py-2 px-3">Permitir / Deixar</td></tr>
-                                        <tr><td class="py-2 px-3">14. Sign</td><td class="py-2 px-3">Assinar</td><td class="py-2 px-3">35. Put</td><td class="py-2 px-3">Colocar</td></tr>
-                                        <tr><td class="py-2 px-3">15. Read</td><td class="py-2 px-3">Ler</td><td class="py-2 px-3">36. Show</td><td class="py-2 px-3">Mostrar</td></tr>
-                                        <tr><td class="py-2 px-3">16. Write</td><td class="py-2 px-3">Escrever</td><td class="py-2 px-3">37. Change</td><td class="py-2 px-3">Mudar / Trocar</td></tr>
-                                        <tr><td class="py-2 px-3">17. Believe</td><td class="py-2 px-3">Acreditar</td><td class="py-2 px-3">38. Mean</td><td class="py-2 px-3">Significar / Querer dizer</td></tr>
-                                        <tr><td class="py-2 px-3">18. Hope</td><td class="py-2 px-3">Esperar (ter esperança)</td><td class="py-2 px-3">39. Consider</td><td class="py-2 px-3">Considerar / Pensar em</td></tr>
-                                        <tr><td class="py-2 px-3">19. Start</td><td class="py-2 px-3">Começar / Iniciar</td><td class="py-2 px-3">40. Expect</td><td class="py-2 px-3">Esperar (ter expectativa)</td></tr>
-                                        <tr><td class="py-2 px-3">20. Help</td><td class="py-2 px-3">Ajudar</td><td class="py-2 px-3"></td><td class="py-2 px-3"></td></tr>
+                                        <tr><td class="py-2 px-3">9. Discuss</td><td class="py-2 px-3">Discutir</td><td class="py-2 px-3">29. Use</td><td class="py-2 px-3">Usar</td></tr>
+                                        <tr><td class="py-2 px-3">10. Finish</td><td class="py-2 px-3">Finalizar / Terminar</td><td class="py-2 px-3">30. Try</td><td class="py-2 px-3">Tentar</td></tr>
+                                        <tr><td class="py-2 px-3">11. Buy</td><td class="py-2 px-3">Comprar</td><td class="py-2 px-3">31. Look</td><td class="py-2 px-3">Olhar / Parecer</td></tr>
+                                        <tr><td class="py-2 px-3">12. Sell</td><td class="py-2 px-3">Vender</td><td class="py-2 px-3">32. Want</td><td class="py-2 px-3">Querer</td></tr>
+                                        <tr><td class="py-2 px-3">13. Watch</td><td class="py-2 px-3">Assistir / Observar</td><td class="py-2 px-3">33. Keep</td><td class="py-2 px-3">Manter / Guardar</td></tr>
+                                        <tr><td class="py-2 px-3">14. Sign</td><td class="py-2 px-3">Assinar</td><td class="py-2 px-3">34. Let</td><td class="py-2 px-3">Permitir / Deixar</td></tr>
+                                        <tr><td class="py-2 px-3">15. Read</td><td class="py-2 px-3">Ler</td><td class="py-2 px-3">35. Put</td><td class="py-2 px-3">Colocar</td></tr>
+                                        <tr><td class="py-2 px-3">16. Write</td><td class="py-2 px-3">Escrever</td><td class="py-2 px-3">36. Show</td><td class="py-2 px-3">Mostrar</td></tr>
+                                        <tr><td class="py-2 px-3">17. Believe</td><td class="py-2 px-3">Acreditar</td><td class="py-2 px-3">37. Change</td><td class="py-2 px-3">Mudar / Trocar</td></tr>
+                                        <tr><td class="py-2 px-3">18. Hope</td><td class="py-2 px-3">Esperar (ter esperança)</td><td class="py-2 px-3">38. Mean</td><td class="py-2 px-3">Significar / Querer dizer</td></tr>
+                                        <tr><td class="py-2 px-3">19. Start</td><td class="py-2 px-3">Começar / Iniciar</td><td class="py-2 px-3">39. Consider</td><td class="py-2 px-3">Considerar / Pensar em</td></tr>
+                                        <tr><td class="py-2 px-3">20. Help</td><td class="py-2 px-3">Ajudar</td><td class="py-2 px-3">40. Expect</td><td class="py-2 px-3">Esperar (ter expectativa)</td></tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -910,7 +904,7 @@
                             </ol>
                         </div>
                     </div>
-
+                    
                     <!-- Exercício 3 (AGORA SEMANA 3 - Present Continuous) -->
                     <div class="bg-white rounded-lg shadow-sm border border-stone-200">
                         <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
@@ -938,9 +932,9 @@
                             <ol class="list-decimal list-inside space-y-2 text-stone-600">
                                 <li>Nós estamos aprendendo uma nova língua. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="13" placeholder="Traduza para o Inglês"></li>
                                 <li>Está chovendo muito hoje. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="14" placeholder="Traduza para o Inglês"></li>
-                                <li>Por que você não está sorrindo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="15" placeholder="Traduza a pergunta"></li>
+                                <li>Por que você não está sorrindo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="15" placeholder="Traduza para o Inglês"></li>
                                 <li>Eles estão construindo uma casa nova. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="16" placeholder="Traduza para o Inglês"></li>
-                                <li>O que ele está lendo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="17" placeholder="Traduza a pergunta"></li>
+                                <li>O que ele está lendo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="17" placeholder="Traduza para o Inglês"></li>
                             </ol>
                         </div>
                     </div>
@@ -1173,7 +1167,7 @@
                                 <p>1. We **are learning** a new language.</p>
                                 <p>2. It **is raining** a lot today.</p>
                                 <p>3. Why **are** you **not smiling** (aren't you smiling)?</p>
-                                <p>4. Eles **estão building** a new house.</p>
+                                <p>4. They **are building** a new house.</p>
                                 <p>5. What **is** he **reading**?</p>
                             </div>
 
@@ -1230,8 +1224,8 @@
             
             <!-- Aba 5: Anotações -->
             <section id="tab-anotacoes" class="tab-content hidden">
-                <p class="text-stone-600 mb-4">Use esta área como sua folha de anotações pessoal para cada aula. Registre vocabulário novo, dúvidas, pontos de foco e tarefas de casa. O conteúdo é **salvo automaticamente na nuvem (Firebase)**, permitindo que você e seu aluno compartilhem as notas.</p>
-                <textarea id="notes-textarea" class="w-full p-4 border border-stone-300 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-amber-500 text-stone-800 bg-white" placeholder="Carregando notas..."></textarea>
+                <p class="text-stone-600 mb-4">Use esta área como sua folha de anotações pessoal para cada aula. Registre vocabulário novo, dúvidas, pontos de foco e tarefas de casa. O conteúdo é **salvo automaticamente no seu navegador**.</p>
+                <textarea id="notes-textarea" class="w-full p-4 border border-stone-300 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-amber-500 text-stone-800 bg-white" placeholder="Comece a digitar suas notas aqui. Ex: 10/11 - Foco: Diferença entre Simple Past e Present Perfect. Próxima aula: Revisar lista de verbos irregulares."></textarea>
             </section>
 
             <!-- Aba 6: Metodologia -->
@@ -1274,294 +1268,174 @@
         </main>
     </div>
 
-    <!-- Firebase SDKs -->
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
-        import { getFirestore, doc, setDoc, onSnapshot, updateDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+    <script>
+        const NOTES_STORAGE_KEY = 'appNotesContent';
+        const CUSTOM_GLOSSARY_KEY = 'customGlossary';
+        const EXERCISE_ANSWERS_KEY = 'exerciseAnswersState';
 
-        // Global variables provided by the environment
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
-
-        // Firebase Initialization
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
-        // Firestore document references (PUBLIC PATH for collaborative content)
-        const NOTES_REF = doc(db, `artifacts/${appId}/public/data/learning_session/main_notes`);
-        const EXERCISES_REF = doc(db, `artifacts/${appId}/public/data/learning_session/exercise_answers`);
-        const GLOSSARY_REF = doc(db, `artifacts/${appId}/public/data/learning_session/custom_glossary`);
-
-        // UI elements
-        const notesTextarea = document.getElementById('notes-textarea');
-        const loadingIndicator = document.getElementById('loading-indicator');
-        const authInfo = document.getElementById('auth-info');
-        const glossaryTbody = document.getElementById('glossary-tbody');
-        const addTermButton = document.getElementById('add-term-button');
-
-        let isAuthReady = false;
-
-        function showLoading(show) {
-            loadingIndicator.classList.toggle('hidden', !show);
-        }
-
-        // --- 1. Authentication ---
-        async function authenticate() {
-            showLoading(true);
-            try {
-                if (initialAuthToken) {
-                    await signInWithCustomToken(auth, initialAuthToken);
-                    authInfo.textContent = `Sessão autenticada (UID: ${auth.currentUser.uid})`;
-                } else {
-                    await signInAnonymously(auth);
-                    authInfo.textContent = `Sessão anônima (UID: ${auth.currentUser.uid})`;
+        function loadNotes() {
+            const notesTextarea = document.getElementById('notes-textarea');
+            if (notesTextarea) {
+                const savedContent = localStorage.getItem(NOTES_STORAGE_KEY);
+                if (savedContent) {
+                    notesTextarea.value = savedContent;
                 }
-                isAuthReady = true;
-            } catch (error) {
-                console.error("Firebase Auth Error:", error);
-                authInfo.textContent = `Erro de autenticação: ${error.message}`;
-            } finally {
-                showLoading(false);
             }
         }
 
-        // --- 2. Notes Persistence (Firestore) ---
-        function setupNotesListener() {
-            onSnapshot(NOTES_REF, (docSnapshot) => {
-                if (docSnapshot.exists() && docSnapshot.data().content) {
-                    notesTextarea.value = docSnapshot.data().content;
-                } else {
-                    notesTextarea.value = "Comece a digitar suas notas aqui. Elas serão salvas automaticamente na nuvem.";
-                }
-            }, (error) => {
-                console.error("Erro ao carregar notas:", error);
-                notesTextarea.value = "ERRO ao carregar notas. Verifique a conexão.";
-            });
-        }
-
-        let debounceTimeout;
         function saveNotes() {
-            clearTimeout(debounceTimeout);
-            debounceTimeout = setTimeout(async () => {
-                if (!isAuthReady) return;
-                try {
-                    await setDoc(NOTES_REF, { content: notesTextarea.value }, { merge: true });
-                } catch (e) {
-                    console.error("Erro ao salvar anotações:", e);
-                }
-            }, 1000); // Debounce de 1 segundo
+            const notesTextarea = document.getElementById('notes-textarea');
+            if (notesTextarea) {
+                localStorage.setItem(NOTES_STORAGE_KEY, notesTextarea.value);
+            }
         }
+        
+        function loadCustomGlossary() {
+            const tbody = document.getElementById('glossary-tbody');
+            if (!tbody) return;
 
-        // --- 3. Glossary Persistence (Firestore) ---
-        const staticGlossary = [
-            // [EXISTING STATIC TERMS HERE] (Replicar a lista estática original para garantir que sempre existam)
-            { en: "Transfer Fee", pt: "Taxa de Transferência", def: "O valor pago pelo clube comprador ao clube vendedor." },
-            { en: "Wages / Salary", pt: "Salário", def: "Remuneração mensal ou anual do jogador." },
-            { en: "Contract", pt: "Contrato", def: "O documento legal que estabelece os termos de trabalho." },
-            { en: "Release Clause", pt: "Cláusula de Rescisão/Liberação", def: "Valor pré-determinado para o jogador se desvincular do clube." },
-            { en: "Loan Deal", pt: "Empréstimo", def: "Acordo temporário para o jogador atuar em outro clube." },
-            { en: "Option to Buy", pt: "Opção de Compra", def: "Direito de comprar o jogador após um período de empréstimo." },
-            { en: "Sell-on Clause", pt: "Cláusula de Venda Futura", def: "Percentual que o clube anterior recebe em uma futura venda do jogador." },
-            { en: "Agreement", pt: "Acordo", def: "Entendimento mútuo entre as partes." },
-            { en: "Negotiation", pt: "Negociação", def: "O processo de discutir os termos do contrato/transação." },
-            { en: "Agent / Representative", pt: "Agente / Representante", def: "Pessoa que representa os interesses do jogador." },
-            { en: "Breach of Contract", pt: "Quebra de Contrato", def: "Violação de algum termo estabelecido no contrato." },
-            { en: "Indemnity", pt: "Indenização", def: "Compensação por perdas ou danos." },
-            { en: "Liability", pt: "Responsabilidade", def: "Obrigações legais ou financeiras." },
-            { en: "Due Diligence", pt: "Diligência Prévia", def: "Investigação e análise cuidadosa antes de assinar um contrato." },
-            { en: "Performance Bonus", pt: "Bônus por Performance", def: "Pagamento extra baseado em metas (gols, títulos, etc.)." },
-            { en: "Confidentiality", pt: "Confidencialidade", def: "Cláusula que impede a divulgação dos termos do acordo." },
-            { en: "Medical", pt: "Exames Médicos", def: "Processo obrigatório para avaliar a condição física do jogador." },
-            { en: "Termination", pt: "Rescisão / Terminação", def: "O ato de encerrar o contrato." },
-            { en: "Witness", pt: "Testemunha", def: "Pessoa que assina para confirmar a validade do contrato." },
-            { en: "Head of Terms / MoU", pt: "Termos Principais / Memorando", def: "Documento não vinculativo que resume os principais pontos." },
-            { en: "Solidarity Contribution", pt: "Contribuição de Solidariedade", def: "Valor pago ao(s) clube(s) de formação do jogador." },
-            { en: "Training Compensation", pt: "Compensação por Formação", def: "Pagamento ao(s) clube(s) formador(es) no 1º contrato profissional." },
-            { en: "Player Registration", pt: "Registro do Jogador", def: "Processo oficial de inscrição do jogador em uma liga." },
-            { en: "Option to Renew", pt: "Opção de Renovação", def: "Cláusula que permite a prorrogação do contrato." },
-            { en: "Buy-out Clause", pt: "Cláusula de Compra/Aquisição", def: "Valor para 'comprar' a rescisão do contrato (similar a Release Clause)." },
-            { en: "Escrow Account", pt: "Conta Caução", def: "Conta de terceiros onde o dinheiro é mantido até o acordo ser finalizado." },
-            { en: "Non-Disclosure Agreement (NDA)", pt: "Acordo de Não Divulgação", def: "Documento legal para proteger informações confidenciais." },
-            { en: "Draft Contract", pt: "Minuta do Contrato", def: "A versão preliminar ou inicial do documento legal." },
-            { en: "Final Offer", pt: "Oferta Final", def: "A proposta de valor não negociável ('pegar ou largar')." },
-            { en: "Deadline", pt: "Prazo Final", def: "A data ou hora limite para a conclusão da negociação." }
-        ];
-
-        function renderGlossary(customTerms = []) {
-            if (!glossaryTbody) return;
-
-            // Limpa apenas as linhas dinâmicas, mantendo o HTML estático original
-            const dynamicRows = glossaryTbody.querySelectorAll('.custom-term-row');
+            // Remove todas as linhas adicionadas dinamicamente
+            const dynamicRows = tbody.querySelectorAll('.custom-term-row');
             dynamicRows.forEach(row => row.remove());
             
+            const customTermsJson = localStorage.getItem(CUSTOM_GLOSSARY_KEY);
+            let customTerms = customTermsJson ? JSON.parse(customTerms) : [];
+
             // Adiciona as linhas customizadas no final da tabela
             customTerms.forEach(term => {
-                const newRow = glossaryTbody.insertRow();
-                newRow.classList.add('custom-term-row', 'bg-amber-50'); // Estilo diferente
+                const newRow = tbody.insertRow();
+                newRow.classList.add('custom-term-row', 'bg-amber-50'); // Estilo levemente diferente para customizados
                 newRow.innerHTML = `
                     <td class="py-4 px-4 font-medium">${term.en}</td>
                     <td class="py-4 px-4">${term.pt}</td>
                     <td class="py-4 px-4 text-sm">${term.def}</td>
                 `;
             });
+        }
+        
+        function addCustomTerm() {
+            const en = document.getElementById('new-term-en').value.trim();
+            const pt = document.getElementById('new-term-pt').value.trim();
+            const def = document.getElementById('new-term-def').value.trim();
 
-            // Dispara o filtro de pesquisa, caso esteja ativo
+            if (!en || !pt || !def) {
+                alert('Por favor, preencha todos os campos do novo termo.');
+                return;
+            }
+
+            const newTerm = { en, pt, def };
+            
+            const customTermsJson = localStorage.getItem(CUSTOM_GLOSSARY_KEY);
+            let customTerms = customTermsJson ? JSON.parse(customTerms) : [];
+            
+            customTerms.push(newTerm);
+            
+            localStorage.setItem(CUSTOM_GLOSSARY_KEY, JSON.stringify(customTerms));
+            
+            // Limpa inputs
+            document.getElementById('new-term-en').value = '';
+            document.getElementById('new-term-pt').value = '';
+            document.getElementById('new-term-def').value = '';
+            
+            // Recarrega e re-renderiza o glossário, incluindo o novo termo
+            loadCustomGlossary();
+            
+            // Dispara o evento de pesquisa para garantir que o filtro esteja ativo (se estiver digitado algo)
             const glossSearch = document.getElementById('glossary-search');
             if (glossSearch) glossSearch.dispatchEvent(new Event('keyup'));
+
+            // Mensagem de sucesso (comportamento de "alert" simulado, mas aqui usando um alert padrão, pois é um ambiente sandboxed)
+            console.log(`Termo '${en}' adicionado com sucesso!`);
+            alert(`Termo '${en}' adicionado com sucesso!`);
         }
 
-        function setupGlossaryListener() {
-            onSnapshot(GLOSSARY_REF, (docSnapshot) => {
-                if (docSnapshot.exists() && docSnapshot.data().terms) {
-                    renderGlossary(docSnapshot.data().terms);
-                } else {
-                    renderGlossary([]); // Renderiza apenas termos estáticos se não houver customizados
-                }
-            }, (error) => {
-                console.error("Erro ao carregar glossário customizado:", error);
+        // --- Funções de Persistência dos Exercícios ---
+        function saveExerciseAnswers() {
+            const answers = {};
+            const exerciseSections = document.querySelectorAll('#exercicios-accordion > div');
+
+            exerciseSections.forEach((section) => {
+                const inputs = section.querySelectorAll('.accordion-content .exercise-input');
+                inputs.forEach((input, inputIndex) => {
+                    const exerciseId = input.getAttribute('data-exercise-id');
+                    const inputIndexAttr = input.getAttribute('data-input-index');
+                    if (exerciseId && inputIndexAttr !== null) {
+                        if (!answers[exerciseId]) {
+                            answers[exerciseId] = {};
+                        }
+                        answers[exerciseId][inputIndexAttr] = input.value;
+                    }
+                });
+            });
+
+            localStorage.setItem(EXERCISE_ANSWERS_KEY, JSON.stringify(answers));
+        }
+
+        function loadExerciseAnswers() {
+            const savedAnswersJson = localStorage.getItem(EXERCISE_ANSWERS_KEY);
+            if (!savedAnswersJson) return;
+
+            const savedAnswers = JSON.parse(savedAnswersJson);
+            const exerciseSections = document.querySelectorAll('#exercicios-accordion > div');
+
+            exerciseSections.forEach((section) => {
+                const inputs = section.querySelectorAll('.accordion-content .exercise-input');
+                inputs.forEach((input) => {
+                    const exerciseId = input.getAttribute('data-exercise-id');
+                    const inputIndexAttr = input.getAttribute('data-input-index');
+
+                    if (exerciseId && inputIndexAttr !== null && savedAnswers[exerciseId] && savedAnswers[exerciseId][inputIndexAttr] !== undefined) {
+                        input.value = savedAnswers[exerciseId][inputIndexAttr];
+                    }
+                });
             });
         }
+        // --- Fim das Funções de Persistência dos Exercícios ---
 
-        async function addCustomTerm(en, pt, def) {
-            if (!isAuthReady) return alert("Aguarde a conexão com o servidor para adicionar termos.");
-            
-            const newTerm = { en, pt, def };
-            showLoading(true);
-
-            try {
-                // Atualiza o array 'terms' no documento
-                await updateDoc(GLOSSARY_REF, {
-                    terms: [...(await doc(db, GLOSSARY_REF.path).get()).data()?.terms || [], newTerm]
-                }, { merge: true });
-
-                // Limpa inputs
-                document.getElementById('new-term-en').value = '';
-                document.getElementById('new-term-pt').value = '';
-                document.getElementById('new-term-def').value = '';
-                
-                alert(`Termo '${en}' adicionado com sucesso e compartilhado!`);
-            } catch (e) {
-                console.error("Erro ao adicionar termo:", e);
-                alert("Erro ao adicionar termo. Verifique a conexão e permissões.");
-            } finally {
-                showLoading(false);
-            }
-        }
-
-
-        // --- 4. Exercise Answers Persistence (Firestore) ---
-        let currentAnswers = {};
-        let exerciseInputs;
-
-        function loadExerciseAnswers(answers) {
-            currentAnswers = answers || {};
-            exerciseInputs = document.querySelectorAll('#exercicios-accordion .exercise-input');
-            
-            exerciseInputs.forEach((input) => {
-                const exerciseId = input.getAttribute('data-exercise-id');
-                const inputIndexAttr = input.getAttribute('data-input-index');
-                
-                if (currentAnswers[exerciseId] && currentAnswers[exerciseId][inputIndexAttr] !== undefined) {
-                    input.value = currentAnswers[exerciseId][inputIndexAttr];
-                } else {
-                    input.value = ""; // Limpa se não houver dados salvos
-                }
-            });
-        }
-
-        function setupExerciseListener() {
-            onSnapshot(EXERCISES_REF, (docSnapshot) => {
-                if (docSnapshot.exists() && docSnapshot.data().answers) {
-                    loadExerciseAnswers(docSnapshot.data().answers);
-                } else {
-                    loadExerciseAnswers({});
-                }
-            }, (error) => {
-                console.error("Erro ao carregar respostas dos exercícios:", error);
-            });
-        }
-
-        let saveAnswersTimeout;
-        function saveExerciseAnswer(event) {
-            if (!isAuthReady) return;
-
-            const input = event.target;
-            const exerciseId = input.getAttribute('data-exercise-id');
-            const inputIndexAttr = input.getAttribute('data-input-index');
-
-            if (!currentAnswers[exerciseId]) {
-                currentAnswers[exerciseId] = {};
-            }
-            currentAnswers[exerciseId][inputIndexAttr] = input.value;
-
-            clearTimeout(saveAnswersTimeout);
-            saveAnswersTimeout = setTimeout(async () => {
-                try {
-                    await setDoc(EXERCISES_REF, { answers: currentAnswers }, { merge: true });
-                } catch (e) {
-                    console.error("Erro ao salvar respostas:", e);
-                }
-            }, 500); // Debounce de 500ms
-        }
-
-        // --- 5. Initialization Flow ---
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, setup listeners
-                if (!isAuthReady) {
-                    isAuthReady = true;
-                    setupNotesListener();
-                    setupGlossaryListener();
-                    setupExerciseListener();
-                    
-                    // Attach event listeners for saving
-                    if (notesTextarea) notesTextarea.addEventListener('input', saveNotes);
-                    document.querySelectorAll('.exercise-input').forEach(input => {
-                        input.addEventListener('input', saveExerciseAnswer);
-                    });
-                }
-            } else {
-                // User is signed out (should not happen after initial sign in)
-                console.log("Usuário deslogado. Tentando autenticar...");
-                authenticate();
-            }
-        });
 
         document.addEventListener('DOMContentLoaded', () => {
-            authenticate(); // Start auth process
+            loadNotes();
+            loadCustomGlossary(); // Carrega termos customizados ao iniciar
+            loadExerciseAnswers(); // Carrega respostas dos exercícios ao iniciar
 
+            const notesTextarea = document.getElementById('notes-textarea');
+            if (notesTextarea) {
+                // Salva automaticamente a cada alteração
+                notesTextarea.addEventListener('input', saveNotes);
+            }
+            
+            const addTermButton = document.getElementById('add-term-button');
+            if (addTermButton) {
+                addTermButton.addEventListener('click', addCustomTerm);
+            }
+            
+            // Adiciona listener para salvar as respostas dos exercícios
+            document.querySelectorAll('.exercise-input').forEach(input => {
+                input.addEventListener('input', saveExerciseAnswers);
+            });
+
+
+            const tabsNav = document.getElementById('tabs-nav');
+            const tabsContent = document.getElementById('tabs-content').children;
             const glossSearch = document.getElementById('glossary-search');
             const accordions = document.querySelectorAll('.accordion-header');
 
-            // --- Handlers for DOM elements ---
-            const addTermBtn = document.getElementById('add-term-button');
-            if (addTermBtn) {
-                addTermBtn.addEventListener('click', () => {
-                    const en = document.getElementById('new-term-en').value.trim();
-                    const pt = document.getElementById('new-term-pt').value.trim();
-                    const def = document.getElementById('new-term-def').value.trim();
-                    if (en && pt && def) {
-                        addCustomTerm(en, pt, def);
-                    } else {
-                        alert('Por favor, preencha todos os campos.');
-                    }
-                });
-            }
-
             // --- Lógica das Abas (Tabs) ---
-            document.getElementById('tabs-nav').addEventListener('click', (e) => {
+            tabsNav.addEventListener('click', (e) => {
                 const clickedButton = e.target.closest('button.tab-button');
                 if (!clickedButton) return;
+
                 const tabId = clickedButton.getAttribute('data-tab');
-                Array.from(document.getElementById('tabs-nav').children).forEach(button => {
+
+                // Desativa todas as abas
+                Array.from(tabsNav.children).forEach(button => {
                     button.classList.remove('active');
                 });
-                Array.from(document.getElementById('tabs-content').children).forEach(content => {
+                Array.from(tabsContent).forEach(content => {
                     content.classList.add('hidden');
                 });
+
+                // Ativa a aba clicada
                 clickedButton.classList.add('active');
                 document.getElementById('tab-' + tabId).classList.remove('hidden');
             });
@@ -1570,7 +1444,9 @@
             if (glossSearch) {
                 glossSearch.addEventListener('keyup', () => {
                     const filter = glossSearch.value.toLowerCase();
-                    const allTableRows = glossaryTbody.getElementsByTagName('tr');
+                    
+                    // Re-obtem as linhas, incluindo as dinâmicas
+                    const allTableRows = document.getElementById('glossary-tbody').getElementsByTagName('tr');
                     
                     Array.from(allTableRows).forEach(row => {
                         const rowText = row.textContent || row.innerText;
@@ -1583,12 +1459,13 @@
                 });
             }
 
-            // --- Lógica do Sanfona (Accordion) - PERMITE MÚLTIPLOS ABERTOS ---
+            // --- Lógica do Sanfona (Accordion) - AGORA PERMITE MÚLTIPLOS ABERTOS ---
             accordions.forEach(header => {
                 header.addEventListener('click', () => {
                     const content = header.nextElementSibling;
                     const icon = header.querySelector('.accordion-icon');
                     
+                    // Apenas alterna o item clicado, sem fechar os outros
                     content.classList.toggle('hidden');
                     header.classList.toggle('open');
                     
@@ -1599,8 +1476,11 @@
                     }
                 });
             });
+
         });
     </script>
 
 </body>
 </html>
+
+
