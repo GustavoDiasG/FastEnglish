@@ -14,6 +14,10 @@ jobs:
         with:
           fetch-depth: 0
 
+      # Etapa 1: Renomear o arquivo HTML para index.html, garantindo que o GitHub Pages o reconheça como página inicial.
+      - name: Rename HTML file for GitHub Pages
+        run: mv EnglishClasses.html index.html
+      
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
