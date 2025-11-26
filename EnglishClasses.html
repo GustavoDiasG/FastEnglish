@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano Intensivo de Inglês - Negócios de Futebol</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- 
+      Chosen Palette: Warm Neutrals (Stone/Amber)
+      Application Structure Plan: A tab-based SPA ("Plano de Aulas", "Gramática", "Glossário", "Exercícios", "Anotações", "Metodologia"). Esta estrutura foi escolhida para organizar o conteúdo do relatório em *tarefas de usuário* (verificar plano, referenciar gramática, pesquisar vocabulário, praticar e registrar notas), otimizando a usabilidade e gerenciando a carga cognitiva. O painel de anotações é uma folha livre com salvamento automático para registro de progresso e adaptação do plano em tempo real. O Glossário agora é dinâmico e suporta adição de termos via localStorage.
+      Visualization & Content Choices: Sem gráficos, pois o relatório é um plano qualitativo. Apresentações principais: 1) Tabelas HTML estilizadas para o Plano de Aulas. 2) Tabela Pesquisável para o Vocabulário (Glossário), com filtro JS e adição dinâmica (localStorage). 3) Painéis Sanfona (Accordions) para Gramática e Exercícios. 4) Área de texto livre com persistência (localStorage) para Anotações.
+      CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
+    -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4; /* stone-100 */
+        }
+        .tab-button {
+            transition: all 0.3s ease;
+            padding: 0.75rem 1rem;
+            font-weight: 500;
+            color: #57534e; /* stone-600 */
+            border-bottom: 3px solid transparent;
+        }
+        .tab-button.active {
+            color: #d97706; /* amber-600 */
+            border-bottom-color: #d97706; /* amber-600 */
+        }
+        .tab-content {
+            padding-top: 1.5rem;
+        }
+        .accordion-header {
+            transition: background-color 0.2s ease;
+        }
+        .accordion-icon {
+            transition: transform 0.3s ease;
+        }
+        .accordion-header.open .accordion-icon {
+            transform: rotate(180deg);
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 400px;
+        }
+        @media (max-width: 768px) {
+            .chart-container {
+                height: 300px;
+                max-height: 350px;
+            }
+        }
+        /* Estilo para inputs nos exercícios */
+        .exercise-input {
+            padding: 0.25rem 0.5rem;
+            border: 1px solid #d6d3d1; /* stone-300 */
+            border-radius: 0.375rem; /* rounded-md */
+            color: #3b3936; /* stone-800 */
+            background-color: #fcfcfb; /* Slightly lighter for inputs */
+            display: inline-block;
+        }
+        .answer-box {
+            background-color: #fffbeb; /* amber-50 light background for answers */
+            padding: 0.5rem;
+            border-radius: 0.375rem;
+            border-left: 4px solid #f59e0b; /* amber-500 border */
+        }
+        /* Estilo para a área de anotações */
+        #notes-textarea {
+            min-height: 60vh;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body class="text-stone-800">
+
+    <div class="container mx-auto p-4 md:p-8 max-w-7xl">
+        
+        <header class="mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-amber-700">Plano de Estudos Interativo</h1>
+            <p class="text-lg text-stone-600 mt-2">Seu guia de 3 meses para o Inglês em Negócios de Futebol.</p>
+            <p class="text-md text-stone-500 mt-4">Este painel interativo ajuda você a navegar pelo seu plano de aulas, consultar regras gramaticais, pesquisar vocabulário técnico e acessar exercícios práticos. Use as abas abaixo para explorar.</p>
+        </header>
+
+        <!-- Navegação por Abas -->
+        <nav id="tabs-nav" class="flex flex-wrap border-b border-stone-300">
+            <button class="tab-button active" data-tab="plano">Plano de Aulas</button>
+            <button class="tab-button" data-tab="gramatica">Gramática</button>
+            <button class="tab-button" data-tab="glossario">Glossário</button>
+            <button class="tab-button" data-tab="exercicios">Exercícios</button>
+            <button class="tab-button" data-tab="anotacoes">Anotações</button>
+            <button class="tab-button" data-tab="metodologia">Metodologia</button>
+        </nav>
+
+        <!-- Conteúdo das Abas -->
+        <main id="tabs-content" class="mt-6">
+
+            <!-- Aba 1: Plano de Aulas -->
+            <section id="tab-plano" class="tab-content space-y-8">
+                <p class="text-stone-600">Esta é a sua jornada de 12 semanas, dividida em três módulos. Cada semana foca em uma nova habilidade gramatical e em vocabulário técnico para que você possa construir sua fluência de forma lógica e rápida.</p>
+                
+                <!-- Módulo 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-semibold mb-4 text-amber-700">Módulo 1: Fundamentos e Sobrevivência (Semanas 1-4)</h2>
+                    <p class="text-stone-600 mb-6">**Objetivo:** Estabelecer a base gramatical e conversacional para o ambiente de intercâmbio.</p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="bg-stone-50">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Semana</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Foco Gramatical</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Foco Vocabulário/Contexto</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Termos Chave</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-stone-200">
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">1</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Verb To Be (Presente/Passado), Personal Pronouns</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Como se apresentar e interagir em situações básicas de intercâmbio.<br>
+                                        <b>Exemplos:</b> "I am a negotiator..." / "They are responsible for..." / "The meeting was yesterday..."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">I, You, He, She, We, They, Office, Meeting...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">2</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Simple Present (Rotinas/Fatos), Question Words</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Descrever ações habituais e fazer perguntas básicas sobre o trabalho.<br>
+                                        <b>Exemplos:</b> "Do you call the club every day?" / "She works in the transfer department."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Work, Call, Send, Draft, Department, Deadline...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">3</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Present Continuous (Ações em Andamento)</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Falar sobre ações que estão ocorrendo no momento da fala (status de trabalho).<br>
+                                        <b>Exemplos:</b> "I am preparing the final draft..." / "My boss is negotiating the wages."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Preparing, Negotiating, Waiting, Status, Right now...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">4</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Simple Past (Eventos Passados), Verbos Reg/Irreg</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Falar sobre eventos e negociações concluídas no passado.<br>
+                                        <b>Exemplos:</b> "We traveled to London last month..." / "The club accepted the final offer."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Traveled, Signed, Accepted, Decided, Offer, Final...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Módulo 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-semibold mb-4 text-amber-700">Módulo 2: Fluência e Início da Linguagem de Negócios (Semanas 5-8)</h2>
+                    <p class="text-stone-600 mb-6">**Objetivo:** Construir a fluência para expressar opiniões, fazer previsões e usar modais (obrigação/sugestão).</p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="bg-stone-50">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Semana</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Foco Gramatical</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Foco Vocabulário/Contexto</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Termos Chave</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-stone-200">
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">5</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Future Tenses (Will vs. Going To)</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Expressar planos futuros e prever resultados com diferentes níveis de certeza.<br>
+                                        <b>Exemplos:</b> "We are going to sign the contract next week." / "I will call him tomorrow..."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Future, Plan, Prediction, Counter-offer, Medical...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">6</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Present Perfect (Experiências)</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Conectar experiências passadas com o presente (foco no seu currículo).<br>
+                                        <b>Exemplos:</b> "I have worked in this market for ten years." / "Have you ever closed a deal...?"
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Have worked, Has closed, Ever, Never, Experience...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">7</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Modal Verbs (Can, Must, Should, May/Might)</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Usar verbos modais para dar diretrizes, conselhos e expressar obrigações.<br>
+                                        <b>Exemplos:</b> "You must check the termination clause." / "We should propose a lower transfer fee."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Must, Should, Can, May, Check, Propose, Solution...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">8</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Comparativos e Superlativos</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Estruturas para comparar e destacar a superioridade de ofertas, jogadores e clubes.<br>
+                                        <b>Exemplos:</b> "This bonus is better than the previous one." / "He is the fastest player..."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Better, Worse, Fastest, Most, More competitive...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Módulo 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-sm">
+                    <h2 class="text-2xl font-semibold mb-4 text-amber-700">Módulo 3: Especialização Técnica e Simulação Real (Semanas 9-12)</h2>
+                    <p class="text-stone-600 mb-6">**Objetivo:** Dominar a linguagem necessária para ler, discutir e negociar contratos e transações de futebol.</p>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-stone-200">
+                            <thead class="bg-stone-50">
+                                <tr>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Semana</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Foco Gramatical</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Foco Vocabulário/Contexto</th>
+                                    <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Termos Chave</th>
+                                </tr>
+                            </thead>
+                            <tbody class="bg-white divide-y divide-stone-200">
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap font-medium">9</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Passive Voice (Voz Passiva)</td>
+                                    <td class="py-4 px-4 text-sm text-stone-600 max-w-sm">
+                                        <b>Resumo:</b> Focar na ação recebida (ideal para linguagem contratual formal).<br>
+                                        <b>Exemplos:</b> "The fee was paid in three installments." / "The documents must be signed today."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Agreement, Term, Clause, Breach, Execution...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap">10</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Condicionais (0, 1º e 2º)</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">
+                                        <b>Resumo:</b> Discutir os "se" e "então" de uma negociação e cenários hipotéticos.<br>
+                                        <b>Exemplos:</b> "If you increase the wages, we will sign." / "If I were the club director..."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Offer, Counter-offer, Accept, Reject, Indemnity...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap">11</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Reported Speech (Discurso Indireto)</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">
+                                        <b>Resumo:</b> Transmitir informações e ordens dadas por terceiros em reuniões.<br>
+                                        <b>Exemplos:</b> "He said he needed the draft immediately." / "She asked if the fee was included."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Wages, Signing Fee, Loan, Option to Buy, Release Clause...</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-4 px-4 whitespace-nowrap">12</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">Revisão Geral e Simulação Final</td>
+                                    <td class="py-4 px-4 whitespace-nowrap">
+                                        <b>Resumo:</b> Aplicação prática de todo o conteúdo em uma simulação de negociação completa.<br>
+                                        <b>Exemplos:</b> Simulação de Role-Playing de 60 minutos / "We reviewed the entire document..."
+                                    </td>
+                                    <td class="py-4 px-4 text-sm text-stone-500 italic">Agent, Scout, Medical, Performance Bonus, Sell-on Clause...</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Aba 2: Gramática -->
+            <section id="tab-gramatica" class="tab-content hidden">
+                <p class="text-stone-600 mb-6">Use esta seção como sua referência rápida. Clique em um tópico gramatical para expandir e ver as regras, estruturas e erros comuns. Estas são as ferramentas que usaremos para construir suas frases.</p>
+                <div id="gramatica-accordion" class="space-y-2">
+                    
+                    <!-- Item Sanfona: Semana 1 -->
+                    <div class_="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 1: Verb To Be, Pronomes Pessoais e Preposições</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            
+                            <h4 class="font-semibold text-stone-700 mb-2">Tabela 1: Conjugação e Interrogativas do Verb To Be</h4>
+                            <table class="min-w-full divide-y divide-stone-200 mb-6">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Forma</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Presente (Am/Is/Are)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Passado (Was/Were)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2 px-3 font-medium">Afirmativa</td>
+                                        <td class="py-2 px-3">Sujeito + To Be</td>
+                                        <td class="py-2 px-3">"The contract <b>is</b> ready."</td>
+                                        <td class="py-2 px-3">"The meeting <b>was</b> yesterday."</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3 font-medium">Negativa</td>
+                                        <td class="py-2 px-3">Sujeito + To Be + Not</td>
+                                        <td class="py-2 px-3">"The fee <b>is not</b> a problem."</td>
+                                        <td class="py-2 px-3">"They <b>were not</b> in the office."</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3 font-medium">Interrogativa</td>
+                                        <td class="py-2 px-3">To Be + Sujeito?</td>
+                                        <td class="py-2 px-3">"<b>Are</b> you the negotiator?" (Sim/Não)</td>
+                                        <td class="py-2 px-3">"<b>Was</b> the offer accepted?" (Sim/Não)</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3 font-medium">Wh- Interrogativa</td>
+                                        <td class="py-2 px-3">Wh-word + To Be + Sujeito?</td>
+                                        <td class="py-2 px-3">"<b>Who is</b> the new agent?" (Informação)</td>
+                                        <td class="py-2 px-3">"<b>Where were</b> you yesterday?" (Informação)</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h4 class="font-semibold text-stone-700 mb-2">Tabela 2: Pronomes Possessivos em Perguntas</h4>
+                            <p class="text-sm text-stone-600 mb-3">O Adjetivo Possessivo é usado antes do substantivo. O Pronome Possessivo substitui o substantivo para evitar repetição (Ex: "É meu.").</p>
+                            <table class="min-w-full divide-y divide-stone-200 mb-6">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Pronome Pessoal</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Adjetivo Possessivo (Antes do Substantivo)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Pronome Possessivo (Substitui o Substantivo)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3 font-medium">I</td><td class="py-2 px-3"><b>My</b> (Ex: Is **my** laptop?)</td><td class="py-2 px-3"><b>Mine</b> (Ex: Is that **mine**?)</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium">You</td><td class="py-2 px-3"><b>Your</b> (Ex: Is **your** offer ready?)</td><td class="py-2 px-3"><b>Yours</b> (Ex: Is the offer **yours**?)</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium">He</td><td class="py-2 px-3"><b>His</b> (Ex: Is **his** flight delayed?)</td><td class="py-2 px-3"><b>His</b> (Ex: Is that pen **his**?)</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium">She</td><td class="py-2 px-3"><b>Her</b> (Ex: Is **her** lawyer here?)</td><td class="py-2 px-3"><b>Hers</b> (Ex: Is this briefcase **hers**?)</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium">It</td><td class="py-2 px-3"><b>Its</b> (Ex: Its value)</td><td class="py-2 px-3">N/A (raramente usado)</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium">We</td><td class="py-2 px-3"><b>Our</b> (Ex: Is **our** agreement signed?)</td><td class="py-2 px-3"><b>Ours</b> (Ex: Is the decision **ours**?)</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium">They</td><td class="py-2 px-3"><b>Their</b> (Ex: Are **their** conditions accepted?)</td><td class="py-2 px-3"><b>Theirs</b> (Ex: Are those files **theirs**?)</td></tr>
+                                </tbody>
+                            </table>
+                            
+                            <h4 class="font-semibold text-stone-700 mt-4 mb-2">Tabela 3: Preposições Essenciais (IN, ON, AT)</h4>
+                            <table class="min-w-full divide-y divide-stone-200 mb-6">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Preposição</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso (Geral)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo de Tempo</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo de Lugar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2 px-3 font-medium"><b>AT</b></td>
+                                        <td class="py-2 px-3">Ponto Específico (Hora, Local Exato)</td>
+                                        <td class="py-2 px-3">The meeting starts <b>at</b> 9 AM.</td>
+                                        <td class="py-2 px-3">The lawyer is <b>at</b> the airport.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3 font-medium"><b>ON</b></td>
+                                        <td class="py-2 px-3">Superfícies, Dias da Semana, Datas Específicas</td>
+                                        <td class="py-2 px-3">The contract deadline is <b>on</b> Friday.</td>
+                                        <td class="py-2 px-3">The pen is <b>on</b> the table.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3 font-medium"><b>IN</b></td>
+                                        <td class="py-2 px-3">Espaços Amplos, Períodos Longos (Meses, Anos, Estações)</td>
+                                        <td class="py-2 px-3">The transfer window closes <b>in</b> August.</td>
+                                        <td class="py-2 px-3">The documents are <b>in</b> the folder.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h4 class="font-semibold text-stone-700 mt-4 mb-2">Tabela 4: Wh-Words Essenciais (Perguntas)</h4>
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Wh-Word</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Significado</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso com To Be</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3 font-medium"><b>What</b></td><td class="py-2 px-3">O quê / Qual</td><td class="py-2 px-3"><b>What</b> is the transfer fee?</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium"><b>Where</b></td><td class="py-2 px-3">Onde</td><td class="py-2 px-3"><b>Where</b> is the final draft?</td></tr>
+                                    <tr><td class="py-2 px-3"><b>Who</b></td><td class="py-2 px-3">Quem</td><td class="py-2 px-3"><b>Who</b> is the agent?</td></tr>
+                                    <tr><td class="py-2 px-3"><b>When</b></td><td class="py-2 px-3">Quando</td><td class="py-2 px-3"><b>When</b> was the last meeting?</td></tr>
+                                    <tr><td class="py-2 px-3"><b>Why</b></td><td class="py-2 px-3">Por quê</td><td class="py-2 px-3"><b>Why</b> is the clause complicated?</td></tr>
+                                    <tr><td class="py-2 px-3 font-medium"><b>How</b></td><td class="py-2 px-3">Como (Não começa com W, mas funciona igual)</td><td class="py-2 px-3"><b>How</b> was your flight?</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Item Sanfona: Semana 2 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 2: Simple Present (Rotinas e Fatos)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            
+                            <h4 class="font-semibold text-stone-700 mb-2">Tabela 1: Estrutura do Simple Present (Uso de DO/DOES)</h4>
+                            <p class="text-sm text-stone-600 mb-3">O <b>Simple Present</b> usa os auxiliares **DO** e **DOES** para formar frases negativas e interrogativas (exceto com o Verb To Be). **DOES** é usado apenas na terceira pessoa do singular (He, She, It).</p>
+
+                            <table class="min-w-full divide-y divide-stone-200 mb-6">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso Principal</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Erro Comum (X)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Forma Correta (✓)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3">3ª Pessoa (He, She, It)</td><td class="py-2 px-3">Verbo + <b>s</b> (na afirmativa)</td><td class="py-2 px-3">X: He <b>work</b> with my team.</td><td class="py-2 px-3">✓: He <b>works</b> with my team.</td></tr>
+                                    <tr><td class="py-2 px-3">Negativa</td><td class="py-2 px-3">Sujeito + do/does not + Verbo base</td><td class="py-2 px-3">X: She <b>doesn't negotiates</b>...</td><td class="py-2 px-3">✓: She <b>doesn't negotiate</b>...</td></tr>
+                                    <tr><td class="py-2 px-3">Pergunta</td><td class="py-2 px-3">Do/Does + Sujeito + Verbo base</td><td class="py-2 px-3">X: <b>Do</b> the club <b>needs</b>...?</td><td class="py-2 px-3">✓: <b>Does</b> the club <b>need</b>...?</td></tr>
+                                </tbody>
+                            </table>
+
+                            <h4 class="font-semibold text-stone-700 mb-2">Tabela 2: Exemplos de Perguntas e Respostas Curtas (DO/DOES)</h4>
+                            <table class="min-w-full divide-y divide-stone-200 mb-6">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Pergunta (Question)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Resposta Curta Positiva (Yes, ...)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Resposta Curta Negativa (No, ...)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="py-2 px-3"><b>Do</b> you work in transfers?</td>
+                                        <td class="py-2 px-3">Yes, I <b>do</b>.</td>
+                                        <td class="py-2 px-3">No, I <b>don't</b>.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3"><b>Does</b> the director agree?</td>
+                                        <td class="py-2 px-3">Yes, he <b>does</b>.</td>
+                                        <td class="py-2 px-3">No, he <b>doesn't</b>.</td>
+                                        </tr>
+                                    <tr>
+                                        <td class="py-2 px-3"><b>Do</b> the clubs meet every month?</td>
+                                        <td class="py-2 px-3">Yes, they <b>do</b>.</td>
+                                        <td class="py-2 px-3">No, they <b>don't</b>.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="py-2 px-3"><b>Does</b> the clause include a bonus?</td>
+                                        <td class="py-2 px-3">Yes, it <b>does</b>.</td>
+                                        <td class="py-2 px-3">No, it <b>doesn't</b>.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <h4 class="font-semibold text-stone-700 mb-2">Tabela 3: 40 Verbos Essenciais (Simple Present)</h4>
+                            <div class="overflow-x-auto">
+                                <table class="min-w-full divide-y divide-stone-200">
+                                    <thead class="bg-stone-50">
+                                        <tr>
+                                            <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Verbo (Base)</th>
+                                            <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Tradução</th>
+                                            <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Verbo (Base)</th>
+                                            <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Tradução</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td class="py-2 px-3">1. Work</td><td class="py-2 px-3">Trabalhar</td><td class="py-2 px-3">21. Feel</td><td class="py-2 px-3">Sentir</td></tr>
+                                        <tr><td class="py-2 px-3">2. Need</td><td class="py-2 px-3">Precisar</td><td class="py-2 px-3">22. Ask</td><td class="py-2 px-3">Perguntar / Pedir</td></tr>
+                                        <tr><td class="py-2 px-3">3. Go</td><td class="py-2 px-3">Ir</td><td class="py-2 px-3">23. Give</td><td class="py-2 px-3">Dar</td></tr>
+                                        <tr><td class="py-2 px-3">4. Come</td><td class="py-2 px-3">Vir</td><td class="py-2 px-3">24. Take</td><td class="py-2 px-3">Pegar / Levar</td></tr>
+                                        <tr><td class="py-2 px-3">5. Live</td><td class="py-2 px-3">Morar / Viver</td><td class="py-2 px-3">25. Know</td><td class="py-2 px-3">Saber / Conhecer</td></tr>
+                                        <tr><td class="py-2 px-3">6. Call</td><td class="py-2 px-3">Ligar / Chamar</td><td class="py-2 px-3">26. Think</td><td class="py-2 px-3">Pensar / Achar</td></tr>
+                                        <tr><td class="py-2 px-3">7. Send</td><td class="py-2 px-3">Enviar</td><td class="py-2 px-3">27. Find</td><td class="py-2 px-3">Encontrar / Achar</td></tr>
+                                        <tr><td class="py-2 px-3">8. Agree</td><td class="py-2 px-3">Concordar</td><td class="py-2 px-3">28. Tell</td><td class="py-2 px-3">Contar / Dizer</td></tr>
+                                        <tr><td class="py-2 px-3">9. Discuss</td><td class="py-2 px-3">Discutir</td><td class="py-2 px-3">29. Use</td><td class="py-2 px-3">Usar</td></tr>
+                                        <tr><td class="py-2 px-3">10. Finish</td><td class="py-2 px-3">Finalizar / Terminar</td><td class="py-2 px-3">30. Try</td><td class="py-2 px-3">Tentar</td></tr>
+                                        <tr><td class="py-2 px-3">11. Buy</td><td class="py-2 px-3">Comprar</td><td class="py-2 px-3">31. Look</td><td class="py-2 px-3">Olhar / Parecer</td></tr>
+                                        <tr><td class="py-2 px-3">12. Sell</td><td class="py-2 px-3">Vender</td><td class="py-2 px-3">32. Want</td><td class="py-2 px-3">Querer</td></tr>
+                                        <tr><td class="py-2 px-3">13. Watch</td><td class="py-2 px-3">Assistir / Observar</td><td class="py-2 px-3">33. Keep</td><td class="py-2 px-3">Manter / Guardar</td></tr>
+                                        <tr><td class="py-2 px-3">14. Sign</td><td class="py-2 px-3">Assinar</td><td class="py-2 px-3">34. Let</td><td class="py-2 px-3">Permitir / Deixar</td></tr>
+                                        <tr><td class="py-2 px-3">15. Read</td><td class="py-2 px-3">Ler</td><td class="py-2 px-3">35. Put</td><td class="py-2 px-3">Colocar</td></tr>
+                                        <tr><td class="py-2 px-3">16. Write</td><td class="py-2 px-3">Escrever</td><td class="py-2 px-3">36. Show</td><td class="py-2 px-3">Mostrar</td></tr>
+                                        <tr><td class="py-2 px-3">17. Believe</td><td class="py-2 px-3">Acreditar</td><td class="py-2 px-3">37. Change</td><td class="py-2 px-3">Mudar / Trocar</td></tr>
+                                        <tr><td class="py-2 px-3">18. Hope</td><td class="py-2 px-3">Esperar (ter esperança)</td><td class="py-2 px-3">38. Mean</td><td class="py-2 px-3">Significar / Querer dizer</td></tr>
+                                        <tr><td class="py-2 px-3">19. Start</td><td class="py-2 px-3">Começar / Iniciar</td><td class="py-2 px-3">39. Consider</td><td class="py-2 px-3">Considerar / Pensar em</td></tr>
+                                        <tr><td class="py-2 px-3">20. Help</td><td class="py-2 px-3">Ajudar</td><td class="py-2 px-3">40. Expect</td><td class="py-2 px-3">Esperar (ter expectativa)</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Item Sanfona: Semana 3 (AGORA PRESENT CONTINUOUS) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 3: Present Continuous (Ações em Andamento)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo (Status)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Contraste (Cuidado)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3">Ações no momento</td><td class="py-2 px-3">Sujeito + <b>to be</b> + Verbo + <b>ing</b></td><td class="py-2 px-3">"The legal team <b>is reviewing</b>..."</td><td class="py-2 px-3">Não use para rotinas: X: I <b>am working</b> every day.</td></tr>
+                                    <tr><td class="py-2 px-3">Erros</td><td class="py-2 px-3">Omitir o "to be"</td><td class="py-2 px-3">X: I <b>preparing</b> the offer.</td><td class="py-2 px-3">✓: I <b>am preparing</b> the offer.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Item Sanfona: Semana 4 (AGORA SIMPLE PAST) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 4: Simple Past (Eventos Concluídos)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Tipo</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura (Afirmativa)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Erro Comum (X)</th>
+                                        <th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Forma Correta (✓)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3">Regular</td><td class="py-2 px-3">Verbo + <b>ed</b></td><td class="py-2 px-3">X: We <b>didn't accepted</b>...</td><td class="py-2 px-3">✓: We <b>didn't accept</b>...</td></tr>
+                                    <tr><td class="py-2 px-3">Irregular</td><td class="py-2 px-3">Forma única (memorizar)</td><td class="py-2 px-3">X: They <b>buyed</b> the player...</td><td class="py-2 px-3">✓: They <b>bought</b> the player...</td></tr>
+                                    <tr><td class="py-2 px-3">Negativa/Pergunta</td><td class="py-2 px-3">Usar <b>Did</b> + Verbo base</td><td class="py-2 px-3">X: <b>Did</b> you <b>signed</b>...?</td><td class="py-2 px-3">✓: <b>Did</b> you <b>sign</b>...?</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Item Sanfona: Semana 5 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 5: Future Tenses (Will vs. Going To)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Forma</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso Principal</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3"><b>WILL</b></td><td class="py-2 px-3">Decisões espontâneas, promessas, previsões (menos certas).</td><td class="py-2 px-3">"I <b>will call</b> the agent back in 5 minutes." (Decisão na hora)</td></tr>
+                                    <tr><td class="py-2 px-3"><b>GOING TO</b></td><td class="py-2 px-3">Planos e intenções definidos, previsões baseadas em evidência.</td><td class="py-2 px-3">"We <b>are going to announce</b> the deal tomorrow." (Plano)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Item Sanfona: Semana 6 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 6: Present Perfect</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Contraste (Simple Past)</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3">Experiências / Não concluído</td><td class="py-2 px-3">Sujeito + <b>have/has</b> + Past Participle</td><td class="py-2 px-3"><b>Simple Past:</b> I <b>closed</b> the deal last year.</td><td class="py-2 px-3">"I <b>have closed</b> many deals this month." (Mês não acabou)</td></tr>
+                                    <tr><td class="py-2 px-3">Palavras-chave</td><td class="py-2 px-3"><i>Ever, never, since, for, already, yet.</i></td><td class="py-2 px-3">X: He <b>didn't see</b> the contract yet.</td><td class="py-2 px-3">✓: He <b>hasn't seen</b> the contract yet.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Item Sanfona: Semana 7 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 7: Modal Verbs (Can, Must, Should, May/Might)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Modal</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Função</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3"><b>Must</b></td><td class="py-2 px-3">Obrigação forte, necessidade</td><td class="py-2 px-3">"The club <b>must pay</b> the full transfer fee."</td></tr>
+                                    <tr><td class="py-2 px-3"><b>Should</b></td><td class="py-2 px-3">Conselho, Sugestão</td><td class="py-2 px-3">"We <b>should wait</b> for a better counter-offer."</td></tr>
+                                    <tr><td class="py-2 px-3"><b>Can</b></td><td class="py-2 px-3">Habilidade, Permissão</td><td class="py-2 px-3">"The player <b>can</b> leave if the clause is activated."</td></tr>
+                                    <tr><td class="py-2 px-3"><b>Might / May</b></td><td class="py-2 px-3">Possibilidade (Menos certo)</td><td class="py-2 px-3">"The deal <b>might be</b> finalized next week."</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Item Sanfona: Semana 8 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 8: Comparativos e Superlativos</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Tipo</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Regra de Sintaxe</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3">Comparativo</td><td class="py-2 px-3">Adjetivo + <b>er</b> / <b>more</b> + Adjetivo</td><td class="py-2 px-3">A palavra <b>'than'</b> é obrigatória.</td><td class="py-2 px-3">"This bonus is <b>better than</b> the previous one."</td></tr>
+                                    <tr><td class="py-2 px-3">Superlativo</td><td class="py-2 px-3"><b>The</b> + Adjetivo + <b>est</b> / <b>the most</b> + Adjetivo</td><td class="py-2 px-3">A palavra <b>'the'</b> é obrigatória.</td><td class="py-2 px-3">"It is <b>the most complex</b> part of the contract."</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Item Sanfona: Semana 9 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 9: Passive Voice (Voz Passiva)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Foco</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso Contratual</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3">Sujeito + <b>to be</b> + <b>Past Participle</b></td><td class="py-2 px-3">Foca na Ação Recebida</td><td class="py-2 px-3">Comum em documentos formais</td><td class="py-2 px-3"><b>Passiva:</b> The fee <b>was paid</b>.</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <!-- Item Sanfona: Semana 10 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 10: Condicionais (0, 1º e 2º)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Tipo</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Uso</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Estrutura (If... then...)</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3"><b>Tipo 1</b> (Real)</td><td class="py-2 px-3">Condições reais/prováveis.</td><td class="py-2 px-3">If + Simple Present, Will + Verbo.</td><td class="py-2 px-3">"If he <b>passes</b> the medical, we <b>will sign</b>..."</td></tr>
+                                    <tr><td class="py-2 px-3"><b>Tipo 2</b> (Hipotético)</td><td class="py-2 px-3">Situações improváveis/imaginárias.</td><td class="py-2 px-3">If + Simple Past, Would + Verbo.</td><td class="py-2 px-3">"If I <b>were</b> the director, I <b>would accept</b>..."</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Item Sanfona: Semana 11 -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Semana 11: Reported Speech (Discurso Indireto)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-4 border-t border-stone-200">
+                            <table class="min-w-full divide-y divide-stone-200">
+                                <thead class="bg-stone-50">
+                                    <tr><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Direto (Original)</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Indireto (Reportado)</th><th class="py-2 px-3 text-left text-xs font-medium text-stone-500 uppercase">Exemplo</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td class="py-2 px-3">Simple Present</td><td class="py-2 px-3">Simple Past</td><td class="py-2 px-3">He said: "The deal <b>is</b> off." -> He said the deal <b>was</b> off.</td></tr>
+                                    <tr><td class="py-2 px-3">Simple Past</td><td class="py-2 px-3">Past Perfect</td><td class="py-2 px-3">She said: "I <b>sent</b> the draft." -> She said she <b>had sent</b> the draft.</td></tr>
+                                    <tr><td class="py-2 px-3">Will</td><td class="py-2 px-3">Would</td><td class="py-2 px-3">They said: "We <b>will pay</b>..." -> They said they <b>would pay</b>...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Aba 3: Glossário -->
+            <section id="tab-glossario" class="tab-content hidden">
+                <p class="text-stone-600 mb-4">Use esta ferramenta de pesquisa para encontrar rapidamente os termos técnicos essenciais que você precisa para suas negociações. Comece a digitar para filtrar a lista.</p>
+                
+                <!-- Novo Formulário de Adição de Termo -->
+                <div id="add-glossary-form" class="bg-white p-6 rounded-lg shadow-md mb-6 border border-amber-200 space-y-3">
+                    <h3 class="text-xl font-semibold text-amber-700">Adicionar Novo Termo Personalizado</h3>
+                    <input type="text" id="new-term-en" placeholder="Termo em Inglês (Ex: Option Fee)" class="w-full p-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <input type="text" id="new-term-pt" placeholder="Tradução/Significado (Ex: Taxa de Opção)" class="w-full p-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    <textarea id="new-term-def" placeholder="Definição e Aplicação (Ex: Pagamento não-reembolsável para garantir opção de compra futura.)" class="w-full p-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 min-h-[80px] resize-y"></textarea>
+                    <button id="add-term-button" class="w-full bg-amber-600 text-white font-bold py-2 rounded-lg hover:bg-amber-700 transition duration-200 shadow-md">
+                        Adicionar Termo ao Glossário
+                    </button>
+                </div>
+                
+                <input type="text" id="glossary-search" placeholder="Pesquisar termo em Inglês ou Português..." class="w-full p-3 border border-stone-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500 mb-6">
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm overflow-x-auto">
+                    <table class="min-w-full divide-y divide-stone-200" id="glossary-table">
+                        <thead class="bg-stone-50">
+                            <tr>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Termo em Inglês</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Tradução/Significado</th>
+                                <th class="py-3 px-4 text-left text-xs font-medium text-stone-500 uppercase tracking-wider">Definição e Aplicação</th>
+                            </tr>
+                        </thead>
+                        <tbody id="glossary-tbody" class="bg-white divide-y divide-stone-200">
+                            <!-- Termos Estáticos -->
+                            <tr><td class="py-4 px-4 font-medium">Transfer Fee</td><td class="py-4 px-4">Taxa de Transferência</td><td class="py-4 px-4 text-sm">O valor pago pelo clube comprador ao clube vendedor.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Wages / Salary</td><td class="py-4 px-4">Salário</td><td class="py-4 px-4 text-sm">Remuneração mensal ou anual do jogador.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Contract</td><td class="py-4 px-4">Contrato</td><td class="py-4 px-4 text-sm">O documento legal que estabelece os termos de trabalho.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Release Clause</td><td class="py-4 px-4">Cláusula de Rescisão/Liberação</td><td class="py-4 px-4 text-sm">Valor pré-determinado para o jogador se desvincular do clube.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Loan Deal</td><td class="py-4 px-4">Empréstimo</td><td class="py-4 px-4 text-sm">Acordo temporário para o jogador atuar em outro clube.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Option to Buy</td><td class="py-4 px-4">Opção de Compra</td><td class="py-4 px-4 text-sm">Direito de comprar o jogador após um período de empréstimo.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Sell-on Clause</td><td class="py-4 px-4">Cláusula de Venda Futura</td><td class="py-4 px-4 text-sm">Percentual que o clube anterior recebe em uma futura venda do jogador.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Agreement</td><td class="py-4 px-4">Acordo</td><td class="py-4 px-4 text-sm">Entendimento mútuo entre as partes.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Negotiation</td><td class="py-4 px-4">Negociação</td><td class="py-4 px-4 text-sm">O processo de discutir os termos do contrato/transação.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Agent / Representative</td><td class="py-4 px-4">Agente / Representante</td><td class="py-4 px-4 text-sm">Pessoa que representa os interesses do jogador.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Breach of Contract</td><td class="py-4 px-4">Quebra de Contrato</td><td class="py-4 px-4 text-sm">Violação de algum termo estabelecido no contrato.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Indemnity</td><td class="py-4 px-4">Indenização</td><td class="py-4 px-4 text-sm">Compensação por perdas ou danos.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Liability</td><td class="py-4 px-4">Responsabilidade</td><td class="py-4 px-4 text-sm">Obrigações legais ou financeiras.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Due Diligence</td><td class="py-4 px-4">Diligência Prévia</td><td class="py-4 px-4 text-sm">Investigação e análise cuidadosa antes de assinar um contrato.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Performance Bonus</td><td class="py-4 px-4">Bônus por Performance</td><td class="py-4 px-4 text-sm">Pagamento extra baseado em metas (gols, títulos, etc.).</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Confidentiality</td><td class="py-4 px-4">Confidencialidade</td><td class="py-4 px-4 text-sm">Cláusula que impede a divulgação dos termos do acordo.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Medical</td><td class="py-4 px-4">Exames Médicos</td><td class="py-4 px-4 text-sm">Processo obrigatório para avaliar a condição física do jogador.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Termination</td><td class="py-4 px-4">Rescisão / Terminação</td><td class="py-4 px-4 text-sm">O ato de encerrar o contrato.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Witness</td><td class="py-4 px-4">Testemunha</td><td class="py-4 px-4 text-sm">Pessoa que assina para confirmar a validade do contrato.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Head of Terms / MoU</td><td class="py-4 px-4">Termos Principais / Memorando</td><td class="py-4 px-4 text-sm">Documento não vinculativo que resume os principais pontos.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Solidarity Contribution</td><td class="py-4 px-4">Contribuição de Solidariedade</td><td class="py-4 px-4 text-sm">Valor pago ao(s) clube(s) de formação do jogador.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Training Compensation</td><td class="py-4 px-4">Compensação por Formação</td><td class="py-4 px-4 text-sm">Pagamento ao(s) clube(s) formador(es) no 1º contrato profissional.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Player Registration</td><td class="py-4 px-4">Registro do Jogador</td><td class="py-4 px-4 text-sm">Processo oficial de inscrição do jogador em uma liga.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Option to Renew</td><td class="py-4 px-4">Opção de Renovação</td><td class="py-4 px-4 text-sm">Cláusula que permite a prorrogação do contrato.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Buy-out Clause</td><td class="py-4 px-4">Cláusula de Compra/Aquisição</td><td class="py-4 px-4 text-sm">Valor para "comprar" a rescisão do contrato (similar a Release Clause).</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Escrow Account</td><td class="py-4 px-4">Conta Caução</td><td class="py-4 px-4 text-sm">Conta de terceiros onde o dinheiro é mantido até o acordo ser finalizado.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Non-Disclosure Agreement (NDA)</td><td class="py-4 px-4">Acordo de Não Divulgação</td><td class="py-4 px-4 text-sm">Documento legal para proteger informações confidenciais.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Draft Contract</td><td class="py-4 px-4">Minuta do Contrato</td><td class="py-4 px-4 text-sm">A versão preliminar ou inicial do documento legal.</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Final Offer</td><td class="py-4 px-4">Oferta Final</td><td class="py-4 px-4 text-sm">A proposta de valor não negociável ("pegar ou largar").</td></tr>
+                            <tr><td class="py-4 px-4 font-medium">Deadline</td><td class="py-4 px-4">Prazo Final</td><td class="py-4 px-4 text-sm">A data ou hora limite para a conclusão da negociação.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Aba 4: Exercícios -->
+            <section id="tab-exercicios" class="tab-content hidden">
+                <p class="text-stone-600 mb-6">Pratique os conceitos gramaticais que aprendemos. Clique em um exercício para expandir e ver as instruções. Tente completá-los antes de verificar as respostas.</p>
+                <div id="exercicios-accordion" class="space-y-2">
+                    
+                    <!-- Exercício 1 (Semana 1) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 1: Semana 1 - Verb To Be, Pronomes e Perguntas</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <h4 class="font-semibold text-md text-stone-700">Parte A: Conjugação e Pronomes (Preenchimento)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="0" placeholder="Presente"> (Presente) an agent for soccer players.</li>
+                                <li>My main office <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="1" placeholder="Presente"> (Presente) in London, but I <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="2" placeholder="Passado"> (Passado) in São Paulo yesterday.</li>
+                                <li>The contract draft <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="3" placeholder="Passado"> (Passado) ready last week.</li>
+                                <li>We <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="4" placeholder="Presente"> (Presente) always busy during the transfer window.</li>
+                                <li>My friend and I <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="5" placeholder="Presente"> (Presente) the best team for negotiations.</li>
+                                <li>The transfer fee <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="6" placeholder="Presente"> (Presente) high.</li>
+                                <li>My lawyer and I <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="7" placeholder="Passado"> (Passado) in the same city yesterday.</li>
+                                <li>She <input type="text" class="exercise-input w-32" data-exercise-id="Ex1" data-input-index="8" placeholder="Presente, Negativa"> (Presente, Negativa) available for the meeting right now.</li>
+                                <li><input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="9" placeholder="Passado"> (Passado, Interrogativa) the agreement signed on time?</li>
+                                <li>The player's documents <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="10" placeholder="Presente"> (Presente) very complex.</li>
+                            </ol>
+
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Pronomes de Substituição (Use He, She, It, We, They)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I need to talk to the director. <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="11" placeholder="Pronome"> is in Paris. (Ele)</li>
+                                <li><input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="12" placeholder="Pronome"> are the best negotiators. (Nós)</li>
+                                <li>The clause is unclear. <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="13" placeholder="Pronome"> is a problem. (Ela/Isso)</li>
+                                <li>This contract is for the players. <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="14" placeholder="Pronome"> will sign it. (Eles)</li>
+                                <li>My team and I are ready. <input type="text" class="exercise-input w-20" data-exercise-id="Ex1" data-input-index="15" placeholder="Pronome"> were prepared. (Nós)</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte C: Perguntas Sim/Não e Wh-words (Crie a Frase Completa)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>(Pergunta Sim/Não - Presente) O presidente está na cidade? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="16" placeholder="Traduza a pergunta"></li>
+                                <li>(Pergunta Wh- - Passado) Onde estavam os documentos? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="17" placeholder="Traduza a pergunta"></li>
+                                <li>(Pergunta Sim/Não - Passado) A reunião foi produtiva? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="18" placeholder="Traduza a pergunta"></li>
+                                <li>(Pergunta Wh- - Presente) Quem é o agente deste jogador? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="19" placeholder="Traduza a pergunta"></li>
+                                <li>(Pergunta Wh- - Passado) Por que o pagamento estava atrasado? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="20" placeholder="Traduza a pergunta"></li>
+                            </ol>
+
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte D: Tradução Geral (Português para Inglês)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600" start="21">
+                                <li>O meu passaporte está na mala. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="21" placeholder="Traduza para o Inglês"></li>
+                                <li>Eles estavam atrasados para o voo. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="22" placeholder="Traduza para o Inglês"></li>
+                                <li>Eu sou um estudante de inglês. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="23" placeholder="Traduza para o Inglês"></li>
+                                <li>Nós não somos da mesma cidade. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="24" placeholder="Traduza para o Inglês"></li>
+                                <li>O seu celular era novo. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex1" data-input-index="25" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <!-- Exercício 7 (Semana 1) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 7: Semana 1 - Possessivos e Preposições (IN, ON, AT)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete as frases com o Pronome Possessivo, Adjetivo Possessivo ou Preposição correta. **Foque nas perguntas na Parte C.**</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Possessivos (Adjetivo ou Pronome) - 5 Itens</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>This contract is <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="0" placeholder="Pronome Possessivo (I)">, not yours.</li>
+                                <li>The agent is reviewing <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="1" placeholder="Adjetivo Possessivo (He)"> latest offer.</li>
+                                <li>The meeting room is <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="2" placeholder="Pronome Possessivo (We)">; we reserved it first.</li>
+                                <li>Is this <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="3" placeholder="Adjetivo Possessivo (You)"> laptop?</li>
+                                <li>The decision is <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="4" placeholder="Pronome Possessivo (They)"> to make.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Preposições (IN, ON, AT) - 5 Itens</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>The team will fly to London <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="5" placeholder="IN, ON, ou AT"> Tuesday.</li>
+                                <li>We meet the director <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="6" placeholder="IN, ON, ou AT"> 10 AM.</li>
+                                <li>The transfer window closes <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="7" placeholder="IN, ON, ou AT"> July.</li>
+                                <li>The documents are <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="8" placeholder="IN, ON, ou AT"> the folder.</li>
+                                <li>The signing ceremony was <input type="text" class="exercise-input w-40" data-exercise-id="Ex7" data-input-index="9" placeholder="IN, ON, ou AT"> the table.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte C: Perguntas com Possessivos (Traduza para o Inglês) - 5 Itens</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>A responsabilidade é dele (He)? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex7" data-input-index="10" placeholder="Use o Pronome Possessivo"></li>
+                                <li>Você trouxe sua (You) pasta? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex7" data-input-index="11" placeholder="Use o Adjetivo Possessivo"></li>
+                                <li>O escritório é nosso (We)? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex7" data-input-index="12" placeholder="Use o Pronome Possessivo"></li>
+                                <li>Qual é o nome do clube deles (They)? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex7" data-input-index="13" placeholder="Use o Adjetivo Possessivo"></li>
+                                <li>Esta caneta é dela (She)? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex7" data-input-index="14" placeholder="Use o Pronome Possessivo"></li>
+                            </ol>
+
+                        </div>
+                    </div>
+
+                    <!-- Exercício 2 (Semana 2 - Rotinas de Trabalho) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 2: Semana 2 - Simple Present (Rotinas de Trabalho)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete as frases usando o Simple Present (conjugação ou auxiliares) ou traduza.</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação Afirmativa (10 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>(Call) I often <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="0" placeholder="Verbo conjugado"> the clubs in the morning.</li>
+                                <li>(Travel) My partner <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="1" placeholder="Verbo conjugado"> to Spain every month.</li>
+                                <li>(Negotiate) We always <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="2" placeholder="Verbo conjugado"> the financial terms carefully.</li>
+                                <li>(Send) The lawyer <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="3" placeholder="Verbo conjugado"> the final document before the deadline.</li>
+                                <li>(Meet) I never <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="4" placeholder="Verbo conjugado"> the player without my representative.</li>
+                                <li>The club usually (pay) <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="5" placeholder="Verbo conjugado"> the wages on the first day of the month.</li>
+                                <li>My director (not/send) <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="6" placeholder="Auxiliar + Verbo"> emails after 7 PM.</li>
+                                <li>(<input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="7" placeholder="Do/Does">) the agent always travel with the player?</li>
+                                <li>What (<input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="8" placeholder="Auxiliar">) the *scout* (look) <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="9" placeholder="Verbo"> for in a young player?</li>
+                                <li>We (have) <input type="text" class="exercise-input w-40" data-exercise-id="Ex2" data-input-index="10" placeholder="Verbo conjugado"> two important negotiations this week.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Onde você mora? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex2" data-input-index="11" placeholder="Traduza para o Inglês"></li>
+                                <li>Nós estudamos muito para a prova. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex2" data-input-index="12" placeholder="Traduza para o Inglês"></li>
+                                <li>Meu irmão não dirige carros esportivos. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex2" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                                <li>O cachorro come toda a comida dele. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex2" data-input-index="14" placeholder="Traduza para o Inglês"></li>
+                                <li>Você gosta de café preto? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex2" data-input-index="15" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte C: Perguntas e Negativas (DO/DOES) - 10 Itens NOVOS</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600" start="16">
+                                <li><input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="16" placeholder="Auxiliar"> the club (want) <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="17" placeholder="Verbo"> to sell the player?</li>
+                                <li>The contract <input type="text" class="exercise-input w-32" data-exercise-id="Ex2" data-input-index="18" placeholder="Negativa (It)"> (include) the sell-on clause.</li>
+                                <li>Why <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="19" placeholder="Auxiliar"> he (sign) <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="20" placeholder="Verbo"> the new offer?</li>
+                                <li>I <input type="text" class="exercise-input w-32" data-exercise-id="Ex2" data-input-index="21" placeholder="Negativa (I)"> (believe) the agent right now.</li>
+                                <li><input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="22" placeholder="Auxiliar"> you (need) <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="23" placeholder="Verbo"> more time for due diligence?</li>
+                                <li>How often <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="24" placeholder="Auxiliar"> she (travel) <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="25" placeholder="Verbo"> to Italy?</li>
+                                <li>The lawyers <input type="text" class="exercise-input w-32" data-exercise-id="Ex2" data-input-index="26" placeholder="Negativa (They)"> (speak) Portuguese.</li>
+                                <li>What <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="27" placeholder="Auxiliar"> this clause (mean) <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="28" placeholder="Verbo">?</li>
+                                <li>He (not/finish) <input type="text" class="exercise-input w-32" data-exercise-id="Ex2" data-input-index="29" placeholder="Negativa (He)"> the report on time.</li>
+                                <li><input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="30" placeholder="Auxiliar"> we (have) <input type="text" class="exercise-input w-20" data-exercise-id="Ex2" data-input-index="31" placeholder="Verbo"> the original documents here?</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 6 (Semana 2 - Rewriting) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 6: Semana 2 - O Foco (Simple Present 3ª Pessoa)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                             <p class="text-stone-600"><b>Instrução:</b> Reescreva as frases, conjugando o verbo em negrito para a pessoa indicada.</p>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I **watch** television every night. <br> *Reescreva para (She):* She <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="0" placeholder="Verbo conjugado"> television every night.</li>
+                                <li>We **go** to the gym on Mondays. <br> *Reescreva para (He):* He <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="1" placeholder="Verbo conjugado"> to the gym on Mondays.</li>
+                                <li>They **read** books about history. <br> *Reescreva para (My friend - It):* My friend <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="2" placeholder="Verbo conjugado"> books about history.</li>
+                                <li>I **like** strong coffee in the morning. <br> *Reescreva para (My cat - It):* My cat <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="3" placeholder="Verbo conjugado"> strong coffee.</li>
+                            </ol>
+                        </div>
+                    </div>
+                    
+                    <!-- Exercício 3 (AGORA SEMANA 3 - Present Continuous) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 3: Semana 3 - Present Continuous (Ações em Andamento)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete ou traduza, focando no Present Continuous (o que está acontecendo agora).</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação e Perguntas (10 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I (talk) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="0" placeholder="To Be + Verbo -ing"> to the club director right now.</li>
+                                <li>The legal team (review) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="1" placeholder="To Be + Verbo -ing"> the indemnity clause at the moment.</li>
+                                <li>(<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="2" placeholder="To Be">) they (negotiate) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="3" placeholder="Verbo -ing"> the wages this afternoon?</li>
+                                <li>The player (not/train) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="4" placeholder="To Be Negativo + Verbo -ing"> because he is injured.</li>
+                                <li>We (wait) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="5" placeholder="To Be + Verbo -ing"> for the final decision.</li>
+                                <li>The director (fly) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="6" placeholder="To Be + Verbo -ing"> to Madrid tomorrow morning. (Plano futuro)</li>
+                                <li>What (<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="7" placeholder="To Be">) the *scout* (do) <input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="8" placeholder="Verbo -ing"> right now?</li>
+                                <li>She (not/check) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="9" placeholder="To Be Negativo + Verbo -ing"> the contract; she is busy.</li>
+                                <li>The clubs (discuss) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="10" placeholder="To Be + Verbo -ing"> the Buy-out Clause today.</li>
+                                <li>I (<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="11" placeholder="To Be">) (prepare) <input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="12" placeholder="Verbo -ing"> the documents for the transfer deadline.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Nós estamos aprendendo uma nova língua. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                                <li>Está chovendo muito hoje. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="14" placeholder="Traduza para o Inglês"></li>
+                                <li>Por que você não está sorrindo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="15" placeholder="Traduza para o Inglês"></li>
+                                <li>Eles estão construindo uma casa nova. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="16" placeholder="Traduza para o Inglês"></li>
+                                <li>O que ele está lendo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="17" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 4 (AGORA SEMANA 4 - Simple Past) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 4: Semana 4 - Simple Past (Eventos Concluídos)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete, responda ou traduza, focando no Simple Past.</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação e Perguntas (8 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Did you <b>travel</b> to meet the club's president? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="0" placeholder="Sua resposta no Simple Past"> (Ex: Yes, I <b>traveled</b>...)</li>
+                                <li>Did the player <b>sign</b> the contract on Friday? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="1" placeholder="Sua resposta no Simple Past"> (Ex: No, he didn't <b>sign</b> it. He <b>wanted</b>...)</li>
+                                <li>What time did the meeting <b>start</b> yesterday? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="2" placeholder="Sua resposta no Simple Past"> (Ex: The meeting <b>started</b> at 3 PM.)</li>
+                                <li>The lawyer (prepare) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="3" placeholder="Verbo no Simple Past"> the final document yesterday morning.</li>
+                                <li>They (not/agree) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="4" placeholder="Auxiliar + Verbo"> on the transfer fee last week.</li>
+                                <li>I (meet - irregular) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="5" placeholder="Verbo no Simple Past"> the club president in Italy in 2022.</li>
+                                <li>(<input type="text" class="exercise-input w-20" data-exercise-id="Ex3" data-input-index="6" placeholder="Did">) you (send) <input type="text" class="exercise-input w-20" data-exercise-id="Ex3" data-input-index="7" placeholder="Verbo Base"> the NDA this morning?</li>
+                                <li>We (buy - irregular) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="8" placeholder="Verbo no Simple Past"> the rights for that player for a low price.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Nós jantamos no restaurante novo na semana passada. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="9" placeholder="Traduza para o Inglês"></li>
+                                <li>Eu perdi meu celular no trem. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="10" placeholder="Traduza para o Inglês"></li>
+                                <li>Ela não me ligou ontem. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="11" placeholder="Traduza para o Inglês"></li>
+                                <li>Onde você deixou as chaves? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="12" placeholder="Traduza para o Inglês"></li>
+                                <li>Meu pai me ensinou a dirigir. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 5 (Semana 5 - Original + 10 novos) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 5: Semana 5 - Future Tenses (Will vs. Going To)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete ou traduza. Escolha o futuro correto (<b>Will</b> ou <b>Is/Am/Are Going To</b>) com base no contexto (Plano/Promessa/Previsão).</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação (10 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>The transfer window opens next month. We <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="0" placeholder="Futuro + verbo be"> (be) very busy. (Previsão forte)</li>
+                                <li>A club just called with a new offer. I think I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="1" placeholder="Futuro + verbo accept"> (accept) the terms now. (Decisão espontânea)</li>
+                                <li>The player is very fit. He <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="2" placeholder="Futuro + verbo sign"> (sign) a long contract. (Previsão baseada em evidência)</li>
+                                <li>What <input type="text" class="exercise-input w-16" data-exercise-id="Ex5" data-input-index="3" placeholder="To Be"> you <input type="text" class="exercise-input w-24" data-exercise-id="Ex5" data-input-index="4" placeholder="Going To/Will"> (do) about the 'Sell-on Clause'? (Plano/Intenção)</li>
+                                <li>I promise I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="5" placeholder="Futuro + verbo send"> (send) the final draft by the end of the day. (Promessa)</li>
+                                <li>I think the economy (be) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="6" placeholder="Futuro + verbo be"> better next year. (Prediction)</li>
+                                <li>We (not/travel) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="7" placeholder="Futuro Negativo + verbo travel"> to Asia this summer; it is too expensive. (Strong intention/plan)</li>
+                                <li>The meeting starts in five minutes. I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="8" placeholder="Futuro + verbo send"> (send) the agenda now. (Spontaneous decision)</li>
+                                <li>I (meet) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="9" placeholder="Futuro + verbo meet"> my parents for dinner tomorrow. (Fixed arrangement/Plan)</li>
+                                <li>Look at those clouds! It (rain) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="10" placeholder="Futuro + verbo rain"> soon. (Evidence)</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>A loja abrirá às 10 da manhã. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="11" placeholder="Traduza para o Inglês"></li>
+                                <li>Nós vamos assistir a um filme no fim de semana. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="12" placeholder="Traduza para o Inglês"></li>
+                                <li>Ele não vai estudar para o exame. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                                <li>Eu vou te ajudar com o projeto. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="14" placeholder="Traduza para o Inglês"></li>
+                                <li>Quando o show vai começar? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="15" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 6 (Semana 2 - Rewriting) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 6: Semana 2 - O Foco (Simple Present 3ª Pessoa)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                             <p class="text-stone-600"><b>Instrução:</b> Reescreva as frases, conjugando o verbo em negrito para a pessoa indicada.</p>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I **watch** television every night. <br> *Reescreva para (She):* She <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="0" placeholder="Verbo conjugado"> television every night.</li>
+                                <li>We **go** to the gym on Mondays. <br> *Reescreva para (He):* He <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="1" placeholder="Verbo conjugado"> to the gym on Mondays.</li>
+                                <li>They **read** books about history. <br> *Reescreva para (My friend - It):* My friend <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="2" placeholder="Verbo conjugado"> books about history.</li>
+                                <li>I **like** strong coffee in the morning. <br> *Reescreva para (My cat - It):* My cat <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="3" placeholder="Verbo conjugado"> strong coffee.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 3 (AGORA SEMANA 3 - Present Continuous) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 3: Semana 3 - Present Continuous (Ações em Andamento)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete ou traduza, focando no Present Continuous (o que está acontecendo agora).</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação e Perguntas (10 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I (talk) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="0" placeholder="To Be + Verbo -ing"> to the club director right now.</li>
+                                <li>The legal team (review) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="1" placeholder="To Be + Verbo -ing"> the indemnity clause at the moment.</li>
+                                <li>(<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="2" placeholder="To Be">) they (negotiate) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="3" placeholder="Verbo -ing"> the wages this afternoon?</li>
+                                <li>The player (not/train) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="4" placeholder="To Be Negativo + Verbo -ing"> because he is injured.</li>
+                                <li>We (wait) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="5" placeholder="To Be + Verbo -ing"> for the final decision.</li>
+                                <li>The director (fly) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="6" placeholder="To Be + Verbo -ing"> to Madrid tomorrow morning. (Plano futuro)</li>
+                                <li>What (<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="7" placeholder="To Be">) the *scout* (do) <input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="8" placeholder="Verbo -ing"> right now?</li>
+                                <li>She (not/check) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="9" placeholder="To Be Negativo + Verbo -ing"> the contract; she is busy.</li>
+                                <li>The clubs (discuss) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="10" placeholder="To Be + Verbo -ing"> the Buy-out Clause today.</li>
+                                <li>I (<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="11" placeholder="To Be">) (prepare) <input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="12" placeholder="Verbo -ing"> the documents for the transfer deadline.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Nós estamos aprendendo uma nova língua. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                                <li>Está chovendo muito hoje. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="14" placeholder="Traduza para o Inglês"></li>
+                                <li>Por que você não está sorrindo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="15" placeholder="Traduza para o Inglês"></li>
+                                <li>Eles estão construindo uma casa nova. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="16" placeholder="Traduza para o Inglês"></li>
+                                <li>O que ele está lendo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="17" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 4 (AGORA SEMANA 4 - Simple Past) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 4: Semana 4 - Simple Past (Eventos Concluídos)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete, responda ou traduza, focando no Simple Past.</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação e Perguntas (8 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Did you <b>travel</b> to meet the club's president? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="0" placeholder="Sua resposta no Simple Past"> (Ex: Yes, I <b>traveled</b>...)</li>
+                                <li>Did the player <b>sign</b> the contract on Friday? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="1" placeholder="Sua resposta no Simple Past"> (Ex: No, he didn't <b>sign</b> it. He <b>wanted</b>...)</li>
+                                <li>What time did the meeting <b>start</b> yesterday? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="2" placeholder="Sua resposta no Simple Past"> (Ex: The meeting <b>started</b> at 3 PM.)</li>
+                                <li>The lawyer (prepare) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="3" placeholder="Verbo no Simple Past"> the final document yesterday morning.</li>
+                                <li>They (not/agree) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="4" placeholder="Auxiliar + Verbo"> on the transfer fee last week.</li>
+                                <li>I (meet - irregular) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="5" placeholder="Verbo no Simple Past"> the club president in Italy in 2022.</li>
+                                <li>(<input type="text" class="exercise-input w-20" data-exercise-id="Ex3" data-input-index="6" placeholder="Did">) you (send) <input type="text" class="exercise-input w-20" data-exercise-id="Ex3" data-input-index="7" placeholder="Verbo Base"> the NDA this morning?</li>
+                                <li>We (buy - irregular) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="8" placeholder="Verbo no Simple Past"> the rights for that player for a low price.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Nós jantamos no restaurante novo na semana passada. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="9" placeholder="Traduza para o Inglês"></li>
+                                <li>Eu perdi meu celular no trem. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="10" placeholder="Traduza para o Inglês"></li>
+                                <li>Ela não me ligou ontem. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="11" placeholder="Traduza para o Inglês"></li>
+                                <li>Onde você deixou as chaves? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="12" placeholder="Traduza para o Inglês"></li>
+                                <li>Meu pai me ensinou a dirigir. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 5 (Semana 5 - Original + 10 novos) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 5: Semana 5 - Future Tenses (Will vs. Going To)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete ou traduza. Escolha o futuro correto (<b>Will</b> ou <b>Is/Am/Are Going To</b>) com base no contexto (Plano/Promessa/Previsão).</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação (10 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>The transfer window opens next month. We <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="0" placeholder="Futuro + verbo be"> (be) very busy. (Previsão forte)</li>
+                                <li>A club just called with a new offer. I think I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="1" placeholder="Futuro + verbo accept"> (accept) the terms now. (Decisão espontânea)</li>
+                                <li>The player is very fit. He <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="2" placeholder="Futuro + verbo sign"> (sign) a long contract. (Previsão baseada em evidência)</li>
+                                <li>What <input type="text" class="exercise-input w-16" data-exercise-id="Ex5" data-input-index="3" placeholder="To Be"> you <input type="text" class="exercise-input w-24" data-exercise-id="Ex5" data-input-index="4" placeholder="Going To/Will"> (do) about the 'Sell-on Clause'? (Plano/Intenção)</li>
+                                <li>I promise I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="5" placeholder="Futuro + verbo send"> (send) the final draft by the end of the day. (Promessa)</li>
+                                <li>I think the economy (be) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="6" placeholder="Futuro + verbo be"> better next year. (Prediction)</li>
+                                <li>We (not/travel) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="7" placeholder="Futuro Negativo + verbo travel"> to Asia this summer; it is too expensive. (Strong intention/plan)</li>
+                                <li>The meeting starts in five minutes. I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="8" placeholder="Futuro + verbo send"> (send) the agenda now. (Spontaneous decision)</li>
+                                <li>I (meet) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="9" placeholder="Futuro + verbo meet"> my parents for dinner tomorrow. (Fixed arrangement/Plan)</li>
+                                <li>Look at those clouds! It (rain) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="10" placeholder="Futuro + verbo rain"> soon. (Evidence)</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>A loja abrirá às 10 da manhã. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="11" placeholder="Traduza para o Inglês"></li>
+                                <li>Nós vamos assistir a um filme no fim de semana. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="12" placeholder="Traduza para o Inglês"></li>
+                                <li>Ele não vai estudar para o exame. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                                <li>Eu vou te ajudar com o projeto. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="14" placeholder="Traduza para o Inglês"></li>
+                                <li>Quando o show vai começar? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="15" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 6 (Semana 2 - Rewriting) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 6: Semana 2 - O Foco (Simple Present 3ª Pessoa)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                             <p class="text-stone-600"><b>Instrução:</b> Reescreva as frases, conjugando o verbo em negrito para a pessoa indicada.</p>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I **watch** television every night. <br> *Reescreva para (She):* She <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="0" placeholder="Verbo conjugado"> television every night.</li>
+                                <li>We **go** to the gym on Mondays. <br> *Reescreva para (He):* He <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="1" placeholder="Verbo conjugado"> to the gym on Mondays.</li>
+                                <li>They **read** books about history. <br> *Reescreva para (My friend - It):* My friend <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="2" placeholder="Verbo conjugado"> books about history.</li>
+                                <li>I **like** strong coffee in the morning. <br> *Reescreva para (My cat - It):* My cat <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="3" placeholder="Verbo conjugado"> strong coffee.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 3 (AGORA SEMANA 3 - Present Continuous) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 3: Semana 3 - Present Continuous (Ações em Andamento)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete ou traduza, focando no Present Continuous (o que está acontecendo agora).</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação e Perguntas (10 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I (talk) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="0" placeholder="To Be + Verbo -ing"> to the club director right now.</li>
+                                <li>The legal team (review) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="1" placeholder="To Be + Verbo -ing"> the indemnity clause at the moment.</li>
+                                <li>(<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="2" placeholder="To Be">) they (negotiate) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="3" placeholder="Verbo -ing"> the wages this afternoon?</li>
+                                <li>The player (not/train) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="4" placeholder="To Be Negativo + Verbo -ing"> because he is injured.</li>
+                                <li>We (wait) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="5" placeholder="To Be + Verbo -ing"> for the final decision.</li>
+                                <li>The director (fly) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="6" placeholder="To Be + Verbo -ing"> to Madrid tomorrow morning. (Plano futuro)</li>
+                                <li>What (<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="7" placeholder="To Be">) the *scout* (do) <input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="8" placeholder="Verbo -ing"> right now?</li>
+                                <li>She (not/check) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="9" placeholder="To Be Negativo + Verbo -ing"> the contract; she is busy.</li>
+                                <li>The clubs (discuss) <input type="text" class="exercise-input w-40" data-exercise-id="Ex4" data-input-index="10" placeholder="To Be + Verbo -ing"> the Buy-out Clause today.</li>
+                                <li>I (<input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="11" placeholder="To Be">) (prepare) <input type="text" class="exercise-input w-20" data-exercise-id="Ex4" data-input-index="12" placeholder="Verbo -ing"> the documents for the transfer deadline.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Nós estamos aprendendo uma nova língua. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                                <li>Está chovendo muito hoje. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="14" placeholder="Traduza para o Inglês"></li>
+                                <li>Por que você não está sorrindo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="15" placeholder="Traduza para o Inglês"></li>
+                                <li>Eles estão construindo uma casa nova. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="16" placeholder="Traduza para o Inglês"></li>
+                                <li>O que ele está lendo? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex4" data-input-index="17" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 4 (AGORA SEMANA 4 - Simple Past) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 4: Semana 4 - Simple Past (Eventos Concluídos)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete, responda ou traduza, focando no Simple Past.</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação e Perguntas (8 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Did you <b>travel</b> to meet the club's president? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="0" placeholder="Sua resposta no Simple Past"> (Ex: Yes, I <b>traveled</b>...)</li>
+                                <li>Did the player <b>sign</b> the contract on Friday? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="1" placeholder="Sua resposta no Simple Past"> (Ex: No, he didn't <b>sign</b> it. He <b>wanted</b>...)</li>
+                                <li>What time did the meeting <b>start</b> yesterday? <br> *Sua Resposta:* <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="2" placeholder="Sua resposta no Simple Past"> (Ex: The meeting <b>started</b> at 3 PM.)</li>
+                                <li>The lawyer (prepare) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="3" placeholder="Verbo no Simple Past"> the final document yesterday morning.</li>
+                                <li>They (not/agree) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="4" placeholder="Auxiliar + Verbo"> on the transfer fee last week.</li>
+                                <li>I (meet - irregular) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="5" placeholder="Verbo no Simple Past"> the club president in Italy in 2022.</li>
+                                <li>(<input type="text" class="exercise-input w-20" data-exercise-id="Ex3" data-input-index="6" placeholder="Did">) you (send) <input type="text" class="exercise-input w-20" data-exercise-id="Ex3" data-input-index="7" placeholder="Verbo Base"> the NDA this morning?</li>
+                                <li>We (buy - irregular) <input type="text" class="exercise-input w-40" data-exercise-id="Ex3" data-input-index="8" placeholder="Verbo no Simple Past"> the rights for that player for a low price.</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Nós jantamos no restaurante novo na semana passada. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="9" placeholder="Traduza para o Inglês"></li>
+                                <li>Eu perdi meu celular no trem. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="10" placeholder="Traduza para o Inglês"></li>
+                                <li>Ela não me ligou ontem. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="11" placeholder="Traduza para o Inglês"></li>
+                                <li>Onde você deixou as chaves? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="12" placeholder="Traduza para o Inglês"></li>
+                                <li>Meu pai me ensinou a dirigir. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex3" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 5 (Semana 5 - Original + 10 novos) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 5: Semana 5 - Future Tenses (Will vs. Going To)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                            <p class="text-stone-600"><b>Instrução:</b> Complete ou traduza. Escolha o futuro correto (<b>Will</b> ou <b>Is/Am/Are Going To</b>) com base no contexto (Plano/Promessa/Previsão).</p>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte A: Conjugação (10 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>The transfer window opens next month. We <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="0" placeholder="Futuro + verbo be"> (be) very busy. (Previsão forte)</li>
+                                <li>A club just called with a new offer. I think I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="1" placeholder="Futuro + verbo accept"> (accept) the terms now. (Decisão espontânea)</li>
+                                <li>The player is very fit. He <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="2" placeholder="Futuro + verbo sign"> (sign) a long contract. (Previsão baseada em evidência)</li>
+                                <li>What <input type="text" class="exercise-input w-16" data-exercise-id="Ex5" data-input-index="3" placeholder="To Be"> you <input type="text" class="exercise-input w-24" data-exercise-id="Ex5" data-input-index="4" placeholder="Going To/Will"> (do) about the 'Sell-on Clause'? (Plano/Intenção)</li>
+                                <li>I promise I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="5" placeholder="Futuro + verbo send"> (send) the final draft by the end of the day. (Promessa)</li>
+                                <li>I think the economy (be) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="6" placeholder="Futuro + verbo be"> better next year. (Prediction)</li>
+                                <li>We (not/travel) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="7" placeholder="Futuro Negativo + verbo travel"> to Asia this summer; it is too expensive. (Strong intention/plan)</li>
+                                <li>The meeting starts in five minutes. I <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="8" placeholder="Futuro + verbo send"> (send) the agenda now. (Spontaneous decision)</li>
+                                <li>I (meet) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="9" placeholder="Futuro + verbo meet"> my parents for dinner tomorrow. (Fixed arrangement/Plan)</li>
+                                <li>Look at those clouds! It (rain) <input type="text" class="exercise-input w-40" data-exercise-id="Ex5" data-input-index="10" placeholder="Futuro + verbo rain"> soon. (Evidence)</li>
+                            </ol>
+                            
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">Parte B: Tradução (Português para Inglês - 5 Itens)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>A loja abrirá às 10 da manhã. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="11" placeholder="Traduza para o Inglês"></li>
+                                <li>Nós vamos assistir a um filme no fim de semana. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="12" placeholder="Traduza para o Inglês"></li>
+                                <li>Ele não vai estudar para o exame. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="13" placeholder="Traduza para o Inglês"></li>
+                                <li>Eu vou te ajudar com o projeto. <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="14" placeholder="Traduza para o Inglês"></li>
+                                <li>Quando o show vai começar? <input type="text" class="exercise-input w-full mt-1" data-exercise-id="Ex5" data-input-index="15" placeholder="Traduza para o Inglês"></li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Exercício 6 (Semana 2 - Rewriting) -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-stone-50 hover:bg-stone-100 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-700">Exercício 6: Semana 2 - O Foco (Simple Present 3ª Pessoa)</span>
+                            <span class="accordion-icon text-amber-700 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-4">
+                             <p class="text-stone-600"><b>Instrução:</b> Reescreva as frases, conjugando o verbo em negrito para a pessoa indicada.</p>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I **watch** television every night. <br> *Reescreva para (She):* She <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="0" placeholder="Verbo conjugado"> television every night.</li>
+                                <li>We **go** to the gym on Mondays. <br> *Reescreva para (He):* He <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="1" placeholder="Verbo conjugado"> to the gym on Mondays.</li>
+                                <li>They **read** books about history. <br> *Reescreva para (My friend - It):* My friend <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="2" placeholder="Verbo conjugado"> books about history.</li>
+                                <li>I **like** strong coffee in the morning. <br> *Reescreva para (My cat - It):* My cat <input type="text" class="exercise-input w-40" data-exercise-id="Ex6" data-input-index="3" placeholder="Verbo conjugado"> strong coffee.</li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <!-- Gabarito -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button class="accordion-header w-full flex justify-between items-center p-4 bg-amber-100 hover:bg-amber-200 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-800">Gabarito - Respostas Sugeridas (Para Autoavaliação)</span>
+                            <span class="accordion-icon text-amber-800 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-6">
+
+                            <h4 class="font-bold text-lg text-amber-700">Exercício 1: Semana 1</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Preenchimento)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **am**</p>
+                                        <p>2. **is** / **was**</p>
+                                        <p>3. **was**</p>
+                                        <p>4. **are**</p>
+                                        <p>5. **are**</p>
+                                        <p>6. **is**</p>
+                                        <p>7. **were**</p>
+                                        <p>8. **is not**</p>
+                                        <p>9. **Was**</p>
+                                        <p>10. **are**</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte B (Pronomes)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **He**</p>
+                                        <p>2. **We**</p>
+                                        <p>3. **It**</p>
+                                        <p>4. **They**</p>
+                                        <p>5. **We**</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte C (Perguntas)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **Is** the president **in** the city?</p>
+                                        <p>2. **Where were** the documents?</p>
+                                        <p>3. **Was** the meeting productive?</p>
+                                        <p>4. **Who is** this player's agent?</p>
+                                        <p>5. **Why was** the payment late?</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte D (Tradução Geral)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. My passport **is** in the suitcase.</p>
+                                        <p>2. They **were** late for the flight.</p>
+                                        <p>3. I **am** an English student.</p>
+                                        <p>4. We **are** not from the same city.</p>
+                                        <p>5. Your cell phone **was** new.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 7: Semana 1 (Possessivos e Preposições)</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Possessivos)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **Mine**</p>
+                                        <p>2. **His**</p>
+                                        <p>3. **Ours**</p>
+                                        <p>4. **Your**</p>
+                                        <p>5. **Theirs**</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte B (Preposições)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **on** (Dias da Semana)</p>
+                                        <p>2. **at** (Hora Específica)</p>
+                                        <p>3. **in** (Meses)</p>
+                                        <p>4. **in** (Espaço Fechado)</p>
+                                        <p>5. **on** (Superfície)</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte C (Perguntas com Possessivos)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. Is the responsibility **his**?</p>
+                                        <p>2. Did you bring **your** briefcase?</p>
+                                        <p>3. Is the office **ours**?</p>
+                                        <p>4. What is **their** club name?</p>
+                                        <p>5. Is this pen **hers**?</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 2: Semana 2 (Simple Present - Rotinas)</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação Afirmativa)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. I often **call** the clubs in the morning.</p>
+                                        <p>2. My partner **travels** to Spain every month.</p>
+                                        <p>3. We always **negotiate** the financial terms carefully.</p>
+                                        <p>4. The lawyer **sends** the final document before the deadline.</p>
+                                        <p>5. I never **meet** the player without my representative.</p>
+                                        <p>6. The club usually **pays** the wages on the first day of the month.</p>
+                                        <p>7. My director **does not send** (doesn't send) emails after 7 PM.</p>
+                                        <p>8. **Does** the agent always travel with the player?</p>
+                                        <p>9. What **does** the *scout* **look** for in a young player?</p>
+                                        <p>10. We **have** two important negotiations this week.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte B (Tradução Geral)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. Where **do** you live?</p>
+                                        <p>2. We **study** a lot for the test.</p>
+                                        <p>3. My brother **does not drive** (doesn't drive) sports cars.</p>
+                                        <p>4. The dog **eats** all his food.</p>
+                                        <p>5. **Do** you **like** black coffee?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Perguntas e Negativas)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. **Does** the club **want** to sell the player?</p>
+                                <p>2. The contract **does not include** (doesn't include) the sell-on clause.</p>
+                                <p>3. Why **does** he **sign** the new offer?</p>
+                                <p>4. I **do not believe** (don't believe) the agent right now.</p>
+                                <p>5. **Do** you **need** more time for due diligence?</p>
+                                <p>6. How often **does** she **travel** to Italy?</p>
+                                <p>7. The lawyers **do not speak** (don't speak) Portuguese.</p>
+                                <p>8. What **does** this clause **mean**?</p>
+                                <p>9. He **does not finish** (doesn't finish) the report on time.</p>
+                                <p>10. **Do** we **have** the original documents here?</p>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 3: Semana 3 (Present Continuous - Ações Agora)</h4>
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação e Perguntas)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. I **am talking** to the club director right now.</p>
+                                <p>2. The legal team **is reviewing** the indemnity clause at the moment.</p>
+                                <p>3. **Are** they **negotiating** the wages this afternoon?</p>
+                                <p>4. The player **is not training** (isn't training) because he is injured.</p>
+                                <p>5. We **are waiting** for the final decision.</p>
+                                <p>6. The director **is flying** to Madrid tomorrow morning.</p>
+                                <p>7. What **is** the *scout* **doing** right now?</p>
+                                <p>8. She **is not checking** (isn't checking) the contract; she is busy.</p>
+                                <p>9. The clubs **are discussing** the Buy-out Clause today.</p>
+                                <p>10. I **am preparing** the documents for the transfer deadline.</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. We **are learning** a new language.</p>
+                                <p>2. It **is raining** a lot today.</p>
+                                <p>3. Why **are** you **not smiling** (aren't you smiling)?</p>
+                                <p>4. They **are building** a new house.</p>
+                                <p>5. What **is** he **reading**?</p>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 4: Semana 4 (Simple Past - Eventos Concluídos)</h4>
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação e Perguntas)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. *Ex:* Yes, I **traveled** to Madrid last week. / No, I didn't **travel**.</p>
+                                <p>2. *Ex:* Yes, he **signed** on Friday. / No, he didn't **sign** it. He **wanted** more time.</p>
+                                <p>3. *Ex:* The meeting **started** at 3 PM.</p>
+                                <p>4. The lawyer **prepared** the final document yesterday morning.</p>
+                                <p>5. They **did not agree** (didn't agree) on the transfer fee last week.</p>
+                                <p>6. I **met** the club president in Italy in 2022.</p>
+                                <p>7. **Did** you **send** the NDA this morning?</p>
+                                <p>8. We **bought** the rights for that player for a low price.</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. We **had** dinner at the new restaurant last week.</p>
+                                <p>2. I **lost** my cell phone on the train.</p>
+                                <p>3. She **did not call** (didn't call) me yesterday.</p>
+                                <p>4. Where **did** you **leave** the keys?</p>
+                                <p>5. My father **taught** me to drive.</p>
+                            </div>
+                            
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 5: Semana 5 (Future Tenses - Planos/Previsões)</h4>
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. The transfer window opens next month. We **are going to be** very busy.</p>
+                                <p>2. A club just called with a new offer. I think I **will accept** the terms now. (Decisão espontânea)</p>
+                                <p>3. The player is very fit. He **is going to sign** a long contract. (Previsão baseada em evidência)</p>
+                                <p>4. What **are** you **going to do** about the 'Sell-on Clause'? (Plano/Intenção)</p>
+                                <p>5. I promise I **will send** the final draft by the end of the day. (Promessa)</p>
+                                <p>6. I think the economy **will be** better next year. (Prediction)</p>
+                                <p>7. We **are not going to travel** to Asia this summer; it is too expensive. (Strong intention/plan)</p>
+                                <p>8. The meeting starts in five minutes. I **will send** the agenda now. (Spontaneous decision)</p>
+                                <p>9. I **am meeting** (ou **am going to meet**) my parents for dinner tomorrow. (Fixed arrangement/Plan)</p>
+                                <p>10. Look at those clouds! It **is going to rain** soon. (Evidence)</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. The store **will open** at 10 AM. (Fato futuro)</p>
+                                <p>2. We **are going to watch** a movie this weekend. (Plano)</p>
+                                <p>3. He **is not going to study** (isn't going to study) for the exam. (Intenção)</p>
+                                <p>4. I **will help** you with the project. (Promessa)</p>
+                                <p>5. When **is** the show **going to start**? (Plano/Evento)</p>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 6: Semana 2 (Simple Present - 3ª Pessoa)</h4>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. She **watches** television every night.</p>
+                                <p>2. He **goes** to the gym on Mondays.</p>
+                                <p>3. My friend **reads** books about history.</p>
+                                <p>4. My cat **likes** strong coffee.</p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            
+            <!-- Aba 5: Anotações -->
+            <section id="tab-anotacoes" class="tab-content hidden">
+                <p class="text-stone-600 mb-4">Use esta área como sua folha de anotações pessoal para cada aula. Registre vocabulário novo, dúvidas, pontos de foco e tarefas de casa. O conteúdo é **salvo automaticamente no seu navegador**.</p>
+                <textarea id="notes-textarea" class="w-full p-4 border border-stone-300 rounded-lg shadow-inner focus:outline-none focus:ring-2 focus:ring-amber-500 text-stone-800 bg-white" placeholder="Comece a digitar suas notas aqui. Ex: 10/11 - Foco: Diferença entre Simple Past e Present Perfect. Próxima aula: Revisar lista de verbos irregulares."></textarea>
+            </section>
+
+            <!-- Aba 6: Metodologia -->
+            <section id="tab-metodologia" class="tab-content hidden">
+                <p class="text-stone-600 mb-6">Esta seção explica como vamos trabalhar. Nosso foco é a **Metodologia CRE (Contextualização e Repetição Estruturada)**, projetada para que você fale com confiança o mais rápido possível.</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-3 text-amber-700">Nossa Metodologia</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-600">
+                            <li><b>Intensidade e Imersão:</b> A aula será 90% em inglês.</li>
+                            <li><b>Foco na Produção:</b> A conversação é o objetivo principal. Gramática é a ferramenta, não o fim.</li>
+                            <li><b>Role-Playing (Simulação):</b> Vamos aplicar tudo em simulações de trabalho (ligações, reuniões).</li>
+                            <li><b>Tarefas de Casa (Homework):</b> Essenciais. Pequenas, mas diárias, para fixar o conteúdo.</li>
+                            <li><b>Feedback Imediato:</b> Correção de erros na hora para garantir a fixação correta.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-3 text-amber-700">Estrutura Diária (60 minutos)</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-600">
+                            <li><b>5 min - Revisão Rápida:</b> Flashcards de vocabulário e frases da aula anterior.</li>
+                            <li><b>20 min - Gramática e Estrutura:</b> Novo tópico gramatical e exercícios curtos.</li>
+                            <li><b>25 min - Conversação Contextual:</b> Aplicação imediata da gramática em *Role-Playing*.</li>
+                            <li><b>10 min - Glossário Técnico:</b> Introdução de 3-5 termos novos e resumo do dia.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white p-6 rounded-lg shadow-sm md:col-span-2">
+                        <h3 class="text-xl font-semibold mb-3 text-amber-700">Sugestões de Materiais Extras</h3>
+                        <ul class="list-disc list-inside space-y-2 text-stone-600">
+                            <li><b>Análise de Cláusulas:</b> Vamos analisar frases de contratos reais.</li>
+                            <li><b>Leitura Diária:</b> 5 minutos de notícias de negócios (Financial Times, Bloomberg).</li>
+                            <li><b>Escuta Ativa:</b> Trechos de entrevistas com dirigentes e agentes no YouTube.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script>
+        const NOTES_STORAGE_KEY = 'appNotesContent';
+        const CUSTOM_GLOSSARY_KEY = 'customGlossary';
+        const EXERCISE_ANSWERS_KEY = 'exerciseAnswersState';
+
+        function loadNotes() {
+            const notesTextarea = document.getElementById('notes-textarea');
+            if (notesTextarea) {
+                const savedContent = localStorage.getItem(NOTES_STORAGE_KEY);
+                if (savedContent) {
+                    notesTextarea.value = savedContent;
+                }
+            }
+        }
+
+        function saveNotes() {
+            const notesTextarea = document.getElementById('notes-textarea');
+            if (notesTextarea) {
+                localStorage.setItem(NOTES_STORAGE_KEY, notesTextarea.value);
+            }
+        }
+        
+        function loadCustomGlossary() {
+            const tbody = document.getElementById('glossary-tbody');
+            if (!tbody) return;
+
+            // Remove todas as linhas adicionadas dinamicamente
+            const dynamicRows = tbody.querySelectorAll('.custom-term-row');
+            dynamicRows.forEach(row => row.remove());
+            
+            const customTermsJson = localStorage.getItem(CUSTOM_GLOSSARY_KEY);
+            let customTerms = customTermsJson ? JSON.parse(customTerms) : [];
+
+            // Adiciona as linhas customizadas no final da tabela
+            customTerms.forEach(term => {
+                const newRow = tbody.insertRow();
+                newRow.classList.add('custom-term-row', 'bg-amber-50'); // Estilo levemente diferente para customizados
+                newRow.innerHTML = `
+                    <td class="py-4 px-4 font-medium">${term.en}</td>
+                    <td class="py-4 px-4">${term.pt}</td>
+                    <td class="py-4 px-4 text-sm">${term.def}</td>
+                `;
+            });
+        }
+        
+        function addCustomTerm() {
+            const en = document.getElementById('new-term-en').value.trim();
+            const pt = document.getElementById('new-term-pt').value.trim();
+            const def = document.getElementById('new-term-def').value.trim();
+
+            if (!en || !pt || !def) {
+                alert('Por favor, preencha todos os campos do novo termo.');
+                return;
+            }
+
+            const newTerm = { en, pt, def };
+            
+            const customTermsJson = localStorage.getItem(CUSTOM_GLOSSARY_KEY);
+            let customTerms = customTermsJson ? JSON.parse(customTerms) : [];
+            
+            customTerms.push(newTerm);
+            
+            localStorage.setItem(CUSTOM_GLOSSARY_KEY, JSON.stringify(customTerms));
+            
+            // Limpa inputs
+            document.getElementById('new-term-en').value = '';
+            document.getElementById('new-term-pt').value = '';
+            document.getElementById('new-term-def').value = '';
+            
+            // Recarrega e re-renderiza o glossário, incluindo o novo termo
+            loadCustomGlossary();
+            
+            // Dispara o evento de pesquisa para garantir que o filtro esteja ativo (se estiver digitado algo)
+            const glossSearch = document.getElementById('glossary-search');
+            if (glossSearch) glossSearch.dispatchEvent(new Event('keyup'));
+
+            // Mensagem de sucesso (comportamento de "alert" simulado, mas aqui usando um alert padrão, pois é um ambiente sandboxed)
+            console.log(`Termo '${en}' adicionado com sucesso!`);
+            alert(`Termo '${en}' adicionado com sucesso!`);
+        }
+
+        // --- Funções de Persistência dos Exercícios ---
+        function saveExerciseAnswers() {
+            const answers = {};
+            const exerciseSections = document.querySelectorAll('#exercicios-accordion > div');
+
+            exerciseSections.forEach((section) => {
+                const inputs = section.querySelectorAll('.accordion-content .exercise-input');
+                inputs.forEach((input, inputIndex) => {
+                    const exerciseId = input.getAttribute('data-exercise-id');
+                    const inputIndexAttr = input.getAttribute('data-input-index');
+                    if (exerciseId && inputIndexAttr !== null) {
+                        if (!answers[exerciseId]) {
+                            answers[exerciseId] = {};
+                        }
+                        answers[exerciseId][inputIndexAttr] = input.value;
+                    }
+                });
+            });
+
+            localStorage.setItem(EXERCISE_ANSWERS_KEY, JSON.stringify(answers));
+        }
+
+        function loadExerciseAnswers() {
+            const savedAnswersJson = localStorage.getItem(EXERCISE_ANSWERS_KEY);
+            if (!savedAnswersJson) return;
+
+            const savedAnswers = JSON.parse(savedAnswersJson);
+            const exerciseSections = document.querySelectorAll('#exercicios-accordion > div');
+
+            exerciseSections.forEach((section) => {
+                const inputs = section.querySelectorAll('.accordion-content .exercise-input');
+                inputs.forEach((input) => {
+                    const exerciseId = input.getAttribute('data-exercise-id');
+                    const inputIndexAttr = input.getAttribute('data-input-index');
+
+                    if (exerciseId && inputIndexAttr !== null && savedAnswers[exerciseId] && savedAnswers[exerciseId][inputIndexAttr] !== undefined) {
+                        input.value = savedAnswers[exerciseId][inputIndexAttr];
+                    }
+                });
+            });
+        }
+        // --- Fim das Funções de Persistência dos Exercícios ---
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadNotes();
+            loadCustomGlossary(); // Carrega termos customizados ao iniciar
+            loadExerciseAnswers(); // Carrega respostas dos exercícios ao iniciar
+
+            const notesTextarea = document.getElementById('notes-textarea');
+            if (notesTextarea) {
+                // Salva automaticamente a cada alteração
+                notesTextarea.addEventListener('input', saveNotes);
+            }
+            
+            const addTermButton = document.getElementById('add-term-button');
+            if (addTermButton) {
+                addTermButton.addEventListener('click', addCustomTerm);
+            }
+            
+            // Adiciona listener para salvar as respostas dos exercícios
+            document.querySelectorAll('.exercise-input').forEach(input => {
+                input.addEventListener('input', saveExerciseAnswers);
+            });
+
+
+            const tabsNav = document.getElementById('tabs-nav');
+            const tabsContent = document.getElementById('tabs-content').children;
+            const glossSearch = document.getElementById('glossary-search');
+            const accordions = document.querySelectorAll('.accordion-header');
+
+            // --- Lógica das Abas (Tabs) ---
+            tabsNav.addEventListener('click', (e) => {
+                const clickedButton = e.target.closest('button.tab-button');
+                if (!clickedButton) return;
+
+                const tabId = clickedButton.getAttribute('data-tab');
+
+                // Desativa todas as abas
+                Array.from(tabsNav.children).forEach(button => {
+                    button.classList.remove('active');
+                });
+                Array.from(tabsContent).forEach(content => {
+                    content.classList.add('hidden');
+                });
+
+                // Ativa a aba clicada
+                clickedButton.classList.add('active');
+                document.getElementById('tab-' + tabId).classList.remove('hidden');
+            });
+
+            // --- Lógica de Pesquisa do Glossário ---
+            if (glossSearch) {
+                glossSearch.addEventListener('keyup', () => {
+                    const filter = glossSearch.value.toLowerCase();
+                    
+                    // Re-obtem as linhas, incluindo as dinâmicas
+                    const allTableRows = document.getElementById('glossary-tbody').getElementsByTagName('tr');
+                    
+                    Array.from(allTableRows).forEach(row => {
+                        const rowText = row.textContent || row.innerText;
+                        if (rowText.toLowerCase().indexOf(filter) > -1) {
+                            row.style.display = "";
+                        } else {
+                            row.style.display = "none";
+                        }
+                    });
+                });
+            }
+
+            // --- Lógica do Sanfona (Accordion) - AGORA PERMITE MÚLTIPLOS ABERTOS ---
+            accordions.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('.accordion-icon');
+                    
+                    // Apenas alterna o item clicado, sem fechar os outros
+                    content.classList.toggle('hidden');
+                    header.classList.toggle('open');
+                    
+                    if (header.classList.contains('open')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            });
+
+        });
+    </script>
+
+</body>
+</html>
