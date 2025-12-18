@@ -16,96 +16,9 @@
       Visualization & Content Choices: Sem gráficos, pois o relatório é um plano qualitativo. Apresentações principais: 1) Tabelas HTML estilizadas para o Plano de Aulas. 2) Tabela Pesquisável para o Vocabulário (Glossário), com filtro JS e adição dinâmica (localStorage). 3) Painéis Sanfona (Accordions) para Gramática e Exercícios. 4) Área de texto livre com persistência (localStorage) para Anotações.
       CONFIRMATION: NO SVG graphics used. NO Mermaid JS used.
     -->
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f5f5f4;
-            /* stone-100 */
-        }
 
-        .tab-button {
-            transition: all 0.3s ease;
-            padding: 0.75rem 1rem;
-            font-weight: 500;
-            color: #57534e;
-            /* stone-600 */
-            border-bottom: 3px solid transparent;
-        }
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 
-        .tab-button.active {
-            color: #d97706;
-            /* amber-600 */
-            border-bottom-color: #d97706;
-            /* amber-600 */
-        }
-
-        .tab-content {
-            padding-top: 1.5rem;
-        }
-
-        .accordion-header {
-            transition: background-color 0.2s ease;
-        }
-
-        .accordion-icon {
-            transition: transform 0.3s ease;
-        }
-
-        .accordion-header.open .accordion-icon {
-            transform: rotate(180deg);
-        }
-
-        .chart-container {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-            height: 350px;
-            max-height: 400px;
-        }
-
-        @media (max-width: 768px) {
-            .chart-container {
-                height: 300px;
-                max-height: 350px;
-            }
-        }
-
-        /* Estilo para inputs nos exercícios */
-        .exercise-input {
-            padding: 0.25rem 0.5rem;
-            border: 1px solid #d6d3d1;
-            /* stone-300 */
-            border-radius: 0.375rem;
-            /* rounded-md */
-            color: #3b3936;
-            /* stone-800 */
-            background-color: #fcfcfb;
-            /* Slightly lighter for inputs */
-            display: inline-block;
-        }
-
-        .answer-box {
-            background-color: #fffbeb;
-            /* amber-50 light background for answers */
-            padding: 0.5rem;
-            border-radius: 0.375rem;
-            border-left: 4px solid #f59e0b;
-            /* amber-500 border */
-        }
-
-        /* Estilo para a área de anotações */
-        #notes-textarea {
-            min-height: 60vh;
-            resize: vertical;
-        }
-
-        .link {
-            text-decoration: underline;
-            color: blue;
-        }
-    </style>
 </head>
 
 <body class="text-stone-800">
@@ -1227,7 +1140,7 @@
                                 </table>
                             </div>
 
-                            <h4 class="font-semibold text-stone-700 mb-2">Tabela 3: Conjugação de 100 Verbos Essenciais
+                            <h4 class="font-semibold text-stone-700 mb-2">Tabela 3: Conjugação de 110 Verbos Essenciais
                                 no Passado (Simple Past)</h4>
                             <p class="text-sm text-stone-600 mb-3">Verbos em **Bold** são Irregulares. Verbos em
                                 *itálico* são Regulares (terminam em -ed).</p>
@@ -1673,7 +1586,7 @@
                                         <tr>
                                             <td class="py-2 px-3">71. Listen</td>
                                             <td class="py-2 px-3"><i>listened</i></td>
-                                            <td class="py-2 px-3">Ouvir</td>
+                                            <td class="py-2 px-3">Escutar/ouvir</td>
                                             <td class="py-2 px-3">We **listened** to music all night.</td>
                                         </tr>
                                         <tr>
@@ -1811,13 +1724,13 @@
                                         <tr>
                                             <td class="py-2 px-3">94. Reach</td>
                                             <td class="py-2 px-3"><i>Reached</i></td>
-                                            <td class="py-2 px-3">Chegar</td>
+                                            <td class="py-2 px-3">Alcançar(alcance) /Chegar</td>
                                             <td class="py-2 px-3">We **reached** our destination.</td>
                                         </tr>
                                         <tr>
                                             <td class="py-2 px-3">95. Wear</td>
                                             <td class="py-2 px-3"><i>Wore</i></td>
-                                            <td class="py-2 px-3">Usar</td>
+                                            <td class="py-2 px-3">Vestir</td>
                                             <td class="py-2 px-3">We **wore** our jackets.</td>
                                         </tr>
                                         <tr>
@@ -1867,6 +1780,48 @@
                                             <td class="py-2 px-3"><i>Missed</i></td>
                                             <td class="py-2 px-3">Faltar</td>
                                             <td class="py-2 px-3">I **missed** the train.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3">104. Trust</td>
+                                            <td class="py-2 px-3"><i>Trusted</i></td>
+                                            <td class="py-2 px-3">Confiar</td>
+                                            <td class="py-2 px-3">I **trusted** my friend.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3">105. Include</td>
+                                            <td class="py-2 px-3"><i>Included</i></td>
+                                            <td class="py-2 px-3">Incluir</td>
+                                            <td class="py-2 px-3">I **included** my friend in the invitation.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3">106. Update</td>
+                                            <td class="py-2 px-3"><i>Updated</i></td>
+                                            <td class="py-2 px-3">Atualizar</td>
+                                            <td class="py-2 px-3">I **updated** my profile picture.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3">107. Check</td>
+                                            <td class="py-2 px-3"><i>Checked</i></td>
+                                            <td class="py-2 px-3">Verificar</td>
+                                            <td class="py-2 px-3">I **checked** the box.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3">108. Cut</td>
+                                            <td class="py-2 px-3"><i>Cut</i></td>
+                                            <td class="py-2 px-3">Cortar</td>
+                                            <td class="py-2 px-3">I **cut** the grass.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3">109. Explain</td>
+                                            <td class="py-2 px-3"><i>Explained</i></td>
+                                            <td class="py-2 px-3">Explicar</td>
+                                            <td class="py-2 px-3">I **explained** the problem.</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="py-2 px-3">110. Become</td>
+                                            <td class="py-2 px-3"><i>Become</i></td>
+                                            <td class="py-2 px-3">Tornar-se</td>
+                                            <td class="py-2 px-3">They **became** good friends.</td>
                                         </tr>
 
                                     </tbody>
@@ -5832,806 +5787,1019 @@
                                         data-input-index="61" placeholder="Traduza"></li>
                             </ol>
 
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">PARTE 11 – Complete as frases (Verb to
+                                Be – Present & Past)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>The students <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="62" placeholder="be"> very tired after the long test
+                                    yesterday.</li>
+                                <li>My phone <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="63" placeholder="be"> on the table when I left the room.</li>
+                                <li>We <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="64" placeholder="be"> not ready for the meeting this morning.
+                                </li>
+                                <li>Her parents <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="65" placeholder="be"> proud of her results last semester.</li>
+                                <li>I <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="66" placeholder="be"> late because the traffic was terrible.
+                                </li>
+                                <li>I <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="92" placeholder="be"> surprised by the news this morning.</li>
+                                <li>They <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="93" placeholder="be"> not at home when I called last night.
+                                </li>
+                                <li>The classroom <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="94" placeholder="be"> empty after the students left.</li>
+                                <li>We <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="95" placeholder="be"> excited about the trip last weekend.
+                                </li>
+                                <li>She <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="96" placeholder="be"> responsible for organizing the event.
+                                </li>
+                                <li>The results <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="97" placeholder="be"> announced yesterday afternoon.</li>
+                                <li>My parents <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="98" placeholder="be"> worried about me last night.</li>
+                                <li>The weather <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="99" placeholder="be"> perfect during our vacation.</li>
+                                <li>I <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="100" placeholder="be"> ready to start the test now.</li>
+                                <li>The books <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="101" placeholder="be"> on the shelf when I checked earlier.
+                                </li>
+                            </ol>
 
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">PARTE 12 – Complete (Verb to Be +
+                                Prepositions)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>The keys <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="67" placeholder="be"> under the chair near the door.</li>
+                                <li>The manager <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="68" placeholder="be"> in the office at the moment.</li>
+                                <li>Our bags <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="69" placeholder="be"> between the seats on the bus.</li>
+                                <li>The restaurant <input type="text" class="exercise-input w-24"
+                                        data-exercise-id="Rev2" data-input-index="70" placeholder="be"> across from the
+                                    bank.</li>
+                                <li>My notebook <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="71" placeholder="be"> inside my backpack.</li>
+                            </ol>
 
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">PARTE 13 – Complete (Verb to Be +
+                                Future / Modals)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>The test <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="72" placeholder="be"> going to be difficult for many students.
+                                </li>
+                                <li>She <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="73" placeholder="be"> be very happy if she passes the exam.
+                                </li>
+                                <li>We <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="74" placeholder="be"> not be able to finish the project today.
+                                </li>
+                                <li>The meeting <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="75" placeholder="be"> be at 3 p.m., according to the email.
+                                </li>
+                                <li>You <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="76" placeholder="be"> be more careful with your answers.</li>
+                            </ol>
 
-                            <!-- Gabarito -->
-                            <div class="bg-white rounded-lg shadow-sm border border-stone-200">
-                                <button
-                                    class="accordion-header w-full flex justify-between items-center p-4 bg-amber-100 hover:bg-amber-200 rounded-t-lg">
-                                    <span class="font-semibold text-lg text-amber-800">Gabarito - Respostas Sugeridas
-                                        (Para
-                                        Autoavaliação)</span>
-                                    <span
-                                        class="accordion-icon text-amber-800 text-2xl font-bold transform rotate-0">&#9660;</span>
-                                </button>
-                                <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-6">
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">PARTE 14 – Complete (Verb to Be +
+                                Continuous / Passive idea)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>I <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="77" placeholder="be"> being very patient with them lately.
+                                </li>
+                                <li>The house <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="78" placeholder="be"> being cleaned right now.</li>
+                                <li>They <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="79" placeholder="be"> being interviewed at the moment.</li>
+                                <li>He <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="80" placeholder="be"> being honest about the problem.</li>
+                                <li>We <input type="text" class="exercise-input w-24" data-exercise-id="Rev2"
+                                        data-input-index="81" placeholder="be"> being watched during the presentation.
+                                </li>
+                            </ol>
 
-                                    <h4 class="font-bold text-lg text-amber-700">Exercício 1: Semana 1</h4>
-                                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Preenchimento)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. **am**</p>
-                                                <p>2. **is** / **was**</p>
-                                                <p>3. **was**</p>
-                                                <p>4. **are**</p>
-                                                <p>5. **are**</p>
-                                                <p>6. **is**</p>
-                                                <p>7. **were**</p>
-                                                <p>8. **is not**</p>
-                                                <p>9. **Was**</p>
-                                                <p>10. **are**</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte B (Pronomes)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. **He**</p>
-                                                <p>2. **We**</p>
-                                                <p>3. **It**</p>
-                                                <p>4. **They**</p>
-                                                <p>5. **We**</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte C (Perguntas)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. **Is** the president **in** the city?</p>
-                                                <p>2. **Where were** the documents?</p>
-                                                <p>3. **Was** the meeting productive?</p>
-                                                <p>4. **Who is** this player's agent?</p>
-                                                <p>5. **Why was** the payment late?</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte D (Tradução Geral)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. My passport **is** in the suitcase.</p>
-                                                <p>2. They **were** late for the flight.</p>
-                                                <p>3. I **am** an English student.</p>
-                                                <p>4. We **are** not from the same city.</p>
-                                                <p>5. Your cell phone **was** new.</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte E (There
-                                                Is/Are/Can/Verbs)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. How many students **were** in the classroom yesterday?</p>
-                                                <p>2. **Can** you help me with this exercise?</p>
-                                                <p>3. **Is there** a supermarket near your house now?</p>
-                                                <p>4. The hotel **was** really expensive last year.</p>
-                                                <p>5. **Can** you speak Spanish?</p>
-                                                <p>6. **There were** two cats in the garden this morning.</p>
-                                                <p>7. I **am** not sure about the answer.</p>
-                                                <p>8. **Is there** any milk in the fridge?</p>
-                                                <p>9. She **is** very happy today.</p>
-                                                <p>10. He **can’t** go to the party because he was sick.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">PARTE 15 – Tradução (Português →
+                                Inglês)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Eu estava muito nervoso antes da entrevista de emprego ontem. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="82"
+                                        placeholder="Traduza"></li>
+                                <li>As chaves estavam dentro da minha mochila pela manhã. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="83"
+                                        placeholder="Traduza"></li>
+                                <li>Nós não estávamos prontos para a prova naquele dia. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="84"
+                                        placeholder="Traduza"></li>
+                                <li>Ela vai estar disponível para a reunião amanhã à tarde. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="85"
+                                        placeholder="Traduza"></li>
+                                <li>Eles estavam orgulhosos do trabalho deles no final do projeto. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="86"
+                                        placeholder="Traduza"></li>
+                            </ol>
 
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 1.1: Semana 1
-                                        (Possessivos e
-                                        Preposições)</h4>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Possessivos)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. **Mine**</p>
-                                                <p>2. **His**</p>
-                                                <p>3. **Ours**</p>
-                                                <p>4. **Your**</p>
-                                                <p>5. **Theirs**</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte B (Preposições)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. **on** (Dias da Semana)</p>
-                                                <p>2. **at** (Hora Específica)</p>
-                                                <p>3. **in** (Meses)</p>
-                                                <p>4. **in** (Espaço Fechado)</p>
-                                                <p>5. **on** (Superfície)</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte C (Perguntas com
-                                                Possessivos)
-                                            </h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. Is the responsibility **his**?</p>
-                                                <p>2. Did you bring **your** briefcase?</p>
-                                                <p>3. Is the office **ours**?</p>
-                                                <p>4. What is **their** club name?</p>
-                                                <p>5. Is this pen **hers**?</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte D (Preposições -
-                                                Complete)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. in</p>
-                                                <p>2. at</p>
-                                                <p>3. across / through</p>
-                                                <p>4. inside / in</p>
-                                                <p>5. over</p>
-                                                <p>6. next to / beside</p>
-                                                <p>7. on</p>
-                                                <p>8. about</p>
-                                                <p>9. down</p>
-                                                <p>10. since</p>
-                                                <p>11. under</p>
-                                                <p>12. through</p>
-                                                <p>13. onto / on</p>
-                                                <p>14. to</p>
-                                                <p>15. from</p>
-                                                <p>16. above</p>
-                                                <p>17. across</p>
-                                                <p>18. in front of</p>
-                                                <p>19. at</p>
-                                                <p>20. off</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte E (Múltipla Escolha)
-                                            </h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. at</p>
-                                                <p>2. across</p>
-                                                <p>3. for</p>
-                                                <p>4. around</p>
-                                                <p>5. between</p>
-                                                <p>6. near</p>
-                                                <p>7. above</p>
-                                                <p>8. without</p>
-                                                <p>9. about</p>
-                                                <p>10. under</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte F (Reescreva)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. **into** / **out of**</p>
-                                                <p>2. **across**</p>
-                                                <p>3. **down**</p>
-                                                <p>4. **above** / **on**</p>
-                                                <p>5. **until**</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte G (Tradução)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. I live **near** the station.</p>
-                                                <p>2. Put the book **inside** the box.</p>
-                                                <p>3. Walk **across** the street and turn right.</p>
-                                                <p>4. He went **through** the tunnel.</p>
-                                                <p>5. We talked **about** the problem yesterday.</p>
-                                                <p>6. She is **between** two friends.</p>
-                                                <p>7. He took **off** his shoes.</p>
-                                                <p>8. The airplane flew **over** the city.</p>
-                                                <p>9. He is **against** the wall.</p>
-                                                <p>10. Wait **until** tomorrow.</p>
-                                            </div>
-                                        </div>
-                                    </div>
+                            <h4 class="font-semibold text-md text-stone-700 pt-4">PARTE 16 – Tradução (Misto e Mais
+                                Desafiador)</h4>
+                            <ol class="list-decimal list-inside space-y-2 text-stone-600">
+                                <li>Eu estarei em casa depois do trabalho hoje à noite. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="87"
+                                        placeholder="Traduza"></li>
+                                <li>O relatório não estava pronto quando o chefe pediu. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="88"
+                                        placeholder="Traduza"></li>
+                                <li>Nós podemos não estar certos sobre o resultado ainda. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="89"
+                                        placeholder="Traduza"></li>
+                                <li>Ela está sendo muito paciente com os alunos novos. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="90"
+                                        placeholder="Traduza"></li>
+                                <li>As instruções não estavam claras no início da aula. <input type="text"
+                                        class="exercise-input w-full mt-1" data-exercise-id="Rev2" data-input-index="91"
+                                        placeholder="Traduza"></li>
+                            </ol>
 
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 2: Semana 2 (Simple
-                                        Present -
-                                        Rotinas)</h4>
-                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação
-                                                Afirmativa)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. I often **call** the clubs in the morning.</p>
-                                                <p>2. My partner **travels** to Spain every month.</p>
-                                                <p>3. We always **negotiate** the financial terms carefully.</p>
-                                                <p>4. The lawyer **sends** the final document before the deadline.</p>
-                                                <p>5. I never **meet** the player without my representative.</p>
-                                                <p>6. The club usually **pays** the wages on the first day of the month.
-                                                </p>
-                                                <p>7. My director **does not send** (doesn't send) emails after 7 PM.
-                                                </p>
-                                                <p>8. **Does** the agent always travel with the player?</p>
-                                                <p>9. What **does** the *scout* **look** for in a young player?</p>
-                                                <p>10. We **have** two important negotiations this week.</p>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">Parte B (Tradução Geral)</h5>
-                                            <div class="answer-box space-y-1 text-sm">
-                                                <p>1. Where **do** you live?</p>
-                                                <p>2. We **study** a lot for the test.</p>
-                                                <p>3. My brother **does not drive** (doesn't drive) sports cars.</p>
-                                                <p>4. The dog **eats** all his food.</p>
-                                                <p>5. **Do** you **like** black coffee?</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Perguntas e Negativas)
-                                    </h5>
+                        </div>
+                    </div>
+
+                    <!-- Gabarito -->
+                    <div class="bg-white rounded-lg shadow-sm border border-stone-200">
+                        <button
+                            class="accordion-header w-full flex justify-between items-center p-4 bg-amber-100 hover:bg-amber-200 rounded-t-lg">
+                            <span class="font-semibold text-lg text-amber-800">Gabarito - Respostas Sugeridas
+                                (Para
+                                Autoavaliação)</span>
+                            <span
+                                class="accordion-icon text-amber-800 text-2xl font-bold transform rotate-0">&#9660;</span>
+                        </button>
+                        <div class="accordion-content hidden p-6 border-t border-stone-200 space-y-6">
+
+                            <h4 class="font-bold text-lg text-amber-700">Exercício 1: Semana 1</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Preenchimento)</h5>
                                     <div class="answer-box space-y-1 text-sm">
-                                        <p>1. **Does** the club **want** to sell the player?</p>
-                                        <p>2. The contract **does not include** (doesn't include) the sell-on clause.
-                                        </p>
-                                        <p>3. Why **does** he **sign** the new offer?</p>
-                                        <p>4. I **do not believe** (don't believe) the agent right now.</p>
-                                        <p>5. **Do** you **need** more time for due diligence?</p>
-                                        <p>6. How often **does** she **travel** to Italy?</p>
-                                        <p>7. The lawyers **do not speak** (don't speak) Portuguese.</p>
-                                        <p>8. What **does** this clause **mean**?</p>
-                                        <p>9. He **does not finish** (doesn't finish) the report on time.</p>
-                                        <p>10. **Do** we **have** the original documents here?</p>
+                                        <p>1. **am**</p>
+                                        <p>2. **is** / **was**</p>
+                                        <p>3. **was**</p>
+                                        <p>4. **are**</p>
+                                        <p>5. **are**</p>
+                                        <p>6. **is**</p>
+                                        <p>7. **were**</p>
+                                        <p>8. **is not**</p>
+                                        <p>9. **Was**</p>
+                                        <p>10. **are**</p>
                                     </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Prática Geral)</h5>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte B (Pronomes)</h5>
                                     <div class="answer-box space-y-1 text-sm">
-                                        <p>1. My sister **lives** in New York.</p>
-                                        <p>2. I usually **drink** tea for breakfast.</p>
-                                        <p>3. The shop **closes** at 9 PM.</p>
-                                        <p>4. We **do not go** (don't go) to the park on Mondays.</p>
-                                        <p>5. **Do** you **play** the guitar?</p>
+                                        <p>1. **He**</p>
+                                        <p>2. **We**</p>
+                                        <p>3. **It**</p>
+                                        <p>4. **They**</p>
+                                        <p>5. **We**</p>
                                     </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte E (Tradução Geral)</h5>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte C (Perguntas)</h5>
                                     <div class="answer-box space-y-1 text-sm">
-                                        <p>1. My roommate **does not cook** (doesn't cook) dinner.</p>
-                                        <p>2. What **do** you **learn** in your English course?</p>
-                                        <p>3. **Does** it usually **rain** a lot in April?</p>
-                                        <p>4. My boss always **smiles** at the clients.</p>
-                                        <p>5. We **do not build** (don't build) sandcastles on the beach.</p>
+                                        <p>1. **Is** the president **in** the city?</p>
+                                        <p>2. **Where were** the documents?</p>
+                                        <p>3. **Was** the meeting productive?</p>
+                                        <p>4. **Who is** this player's agent?</p>
+                                        <p>5. **Why was** the payment late?</p>
                                     </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte F: Infinitivo com 'To' e
-                                        Zero
-                                        Infinitivo</h5>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte D (Tradução Geral)</h5>
                                     <div class="answer-box space-y-1 text-sm">
-                                        <p>1. You must **check** the clause carefully.</p>
-                                        <p>2. I need **to call** my boss immediately.</p>
-                                        <p>3. We decided **to travel** to Lisbon for the meeting.</p>
-                                        <p>4. Does the lawyer **want** to postpone the signing?</p>
-                                        <p>5. She should **start** the due diligence today.</p>
+                                        <p>1. My passport **is** in the suitcase.</p>
+                                        <p>2. They **were** late for the flight.</p>
+                                        <p>3. I **am** an English student.</p>
+                                        <p>4. We **are** not from the same city.</p>
+                                        <p>5. Your cell phone **was** new.</p>
                                     </div>
-
-
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 2.2: Semana 2 (Simple
-                                        Present -
-                                        3ª Pessoa)</h4>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte E (There
+                                        Is/Are/Can/Verbs)</h5>
                                     <div class="answer-box space-y-1 text-sm">
-                                        <p>1. She **watches** television every night.</p>
-                                        <p>2. He **goes** to the gym on Mondays.</p>
-                                        <p>3. My friend **reads** books about history.</p>
-                                        <p>4. My cat **likes** strong coffee.</p>
-                                    </div>
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 3: Semana 3 (Present
-                                        Continuous
-                                        - Ações Agora)</h4>
-                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação e Perguntas)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. I **am talking** to the club director right now.</p>
-                                        <p>2. The legal team **is reviewing** the indemnity clause at the moment.</p>
-                                        <p>3. **Are** they **negotiating** the wages this afternoon?</p>
-                                        <p>4. The player **is not training** (isn't training) because he is injured.</p>
-                                        <p>5. We **are waiting** for the final decision.</p>
-                                        <p>6. The director **is flying** to Madrid tomorrow morning.</p>
-                                        <p>7. What **is** the *scout* **doing** right now?</p>
-                                        <p>8. She **is not checking** (isn't checking) the contract; she is busy.</p>
-                                        <p>9. The clubs **are discussing** the Buy-out Clause today.</p>
-                                        <p>10. I **am preparing** the documents for the transfer deadline.</p>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto
-                                        Geral)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. We **are learning** a new language.</p>
-                                        <p>2. It **is raining** a lot today.</p>
-                                        <p>3. Why **are** you **not smiling** (aren't you smiling)?</p>
-                                        <p>4. They **are building** a new house.</p>
-                                        <p>5. What **is** he **reading**?</p>
-                                        <p>6. I **am cooking** dinner now.</p>
-                                        <p>7. Where **are** you **going**?</p>
-                                        <p>8. She **is studying** for the final exam.</p>
-                                        <p>9. We **are waiting** for a bus.</p>
-                                        <p>10. My sister **is not working** (isn't working) today.</p>
-                                    </div>
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 4: Semana 4 (Simple Past
-                                        -
-                                        Eventos Concluídos)</h4>
-                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação e Perguntas)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. *Ex:* Yes, I **traveled** to Madrid last week. / No, I didn't **travel**.
-                                        </p>
-                                        <p>2. *Ex:* Yes, he **signed** on Friday. / No, he didn't **sign** it. He
-                                            **wanted**
-                                            more time.</p>
-                                        <p>3. *Ex:* The meeting **started** at 3 PM.</p>
-                                        <p>4. The lawyer **prepared** the final document yesterday morning.</p>
-                                        <p>5. They **did not agree** (didn't agree) on the transfer fee last week.</p>
-                                        <p>6. I **met** the club president in Italy in 2022.</p>
-                                        <p>7. **Did** you **send** the NDA this morning?</p>
-                                        <p>8. We **bought** the rights for that player for a low price.</p>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto
-                                        Geral)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. We **had** dinner at the new restaurant last week.</p>
-                                        <p>2. I **lost** my cell phone on the train.</p>
-                                        <p>3. She **did not call** (didn't call) me yesterday.</p>
-                                        <p>4. Where **did** you **leave** the keys?</p>
-                                        <p>5. My father **taught** me to drive.</p>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Prática Intensiva -
-                                        Novos)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. **watched** / **went** / **didn't visit** / **ate** / **studied**</p>
-                                        <p>2. I **played** soccer. / She **drank** coffee. / They **walked** to work. /
-                                            He
-                                            **studied** every day. / We **cooked** dinner.</p>
-                                        <p>3. She **didn't travel** to Rio. / They **didn't like** the movie. / He
-                                            **didn't
-                                            clean** the house. / We **didn't work** yesterday. / I **didn't visit** my
-                                            friend.
-                                        </p>
-                                        <p>4. **Did** you **finish** the homework? / **Did** she **study** English? /
-                                            **Did**
-                                            they **play** tennis? / **Did** he **cook** dinner? / **Did** we **enjoy**
-                                            the
-                                            party?</p>
-                                        <p>5. **Did** you go...? / I **didn't** eat... / She **didn't** (or **did**)
-                                            buy... /
-                                            **Did** they like...? / We **didn't** (or **did**) see...</p>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Tradução e Tempos
-                                        Mistos)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>I. Simple Past Puro:</p>
-                                        <p>1. I **studied** English yesterday.</p>
-                                        <p>2. She **did not go** (didn't go) to work yesterday.</p>
-                                        <p>3. We **watched** a movie on Saturday.</p>
-                                        <p>4. They **bought** a new television.</p>
-                                        <p>5. **Did** you **visit** your friends on the weekend?</p>
-                                        <p>6. He **ate** pizza for lunch.</p>
-                                        <p>7. The day **was** very tiring.</p>
-                                        <p>8. You **did not call** (didn't call) me yesterday.</p>
-                                        <p>9. **Where did** you **put** my book?</p>
-                                        <p>10. **What did** you **do** last night?</p>
-                                        <p>II. Tempos Mistos:</p>
-                                        <p>1. I **am studying** now, but yesterday I **did not study** (didn't study).
-                                        </p>
-                                        <p>2. She **works** in an office, but today she **is working** from home.</p>
-                                        <p>3. We **are waiting** for the bus; yesterday we **walked** to school.</p>
-                                        <p>4. He usually **drinks** coffee, but today he **is drinking** tea.</p>
-                                        <p>5. I **did not go out** (didn't go out) yesterday, but today I **am going**
-                                            to the
-                                            market.</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte E (Simple Past - nível um
-                                        pouco
-                                        mais difícil)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. They **didn't understand** the last part of the explanation.</p>
-                                        <p>2. **Where did** you **leave** the keys after you **arrived** home?</p>
-                                        <p>3. I **traveled** last month, but I **didn't like** the hotel.</p>
-                                        <p>4. She **wrote** a letter, but she **didn't send** it.</p>
-                                        <p>5. We **decided** to buy the car because the price **was** good.</p>
-                                        <p>6. **How long did** you **wait** for the bus yesterday?</p>
-                                        <p>7. He **lost** his phone, but he **found** it later in the car.</p>
-                                        <p>8. I **didn't know** you **lived** in São Paulo.</p>
-                                        <p>9. The movie **started** late and **ended** almost at midnight.</p>
-                                        <p>10. **What did** they **say** when you **told** the news?</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte F (Simple Past + Simple
-                                        Present +
-                                        Present Continuous)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. I **am working** now, but yesterday I **rested** all day.</p>
-                                        <p>2. She always **arrives** early, but today she **is arriving** late.</p>
-                                        <p>3. We **didn't like** the restaurant yesterday, but today we **are eating**
-                                            there
-                                            again.</p>
-                                        <p>4. He **is studying** English today, but yesterday he **studied** math.</p>
-                                        <p>5. I usually **walk** to work, but yesterday I **went** by car.</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte G (Tradução de Perguntas)
-                                    </h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. **When did** you **arrive** home yesterday?</p>
-                                        <p>2. **Why didn't** you **come** yesterday?</p>
-                                        <p>3. **What are** you **doing** now?</p>
-                                        <p>4. **How did** he **go** to work yesterday?</p>
-                                        <p>5. **What does** she usually **eat** for breakfast?</p>
-                                        <p>6. **Who did** you **speak** to at the party? (or **With whom did** you
-                                            **speak**?)
-                                        </p>
-                                        <p>7. **Why are** they **running**?</p>
-                                        <p>8. **Where did** you **live** when you **were** a child?</p>
-                                        <p>9. **Which movie do** you **want** to watch today? (or **What movie**)</p>
-                                        <p>10. **Is** she **studying** for the test now?</p>
-                                        <p>11. **What did** you **buy** at the mall last Saturday?</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte H (Tradução - Simple Past)
-                                    </h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. I **woke up** very early yesterday.</p>
-                                        <p>2. They **didn’t like** the movie.</p>
-                                        <p>3. We **visited** my grandparents last weekend.</p>
-                                        <p>4. She **studied** for the test all night.</p>
-                                        <p>5. **Did** you **find** your phone?</p>
-                                    </div>
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício Extra: Revisão
-                                        Gramatical</h4>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Artigos)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. I saw **an** elephant at the zoo yesterday.</p>
-                                        <p>2. She bought **a** new dress for the party.</p>
-                                        <p>3. **The** moon looks beautiful tonight.</p>
-                                        <p>4. He works as **an** engineer in New York.</p>
-                                        <p>5. They opened **a** restaurant near our house.</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Conectivos)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. She was tired, **but** (or **although**) she continued working.</p>
-                                        <p>2. I like tea **but** I don't like coffee.</p>
-                                        <p>3. He stayed home **because** it was raining.</p>
-                                        <p>4. She is smart **and** hardworking.</p>
-                                        <p>5. It was late, **so** we decided to go home.</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Advérbios)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. She drives **carefully** at night.</p>
-                                        <p>2. He **always** forgets his homework.</p>
-                                        <p>3. The cat ran **suddenly** across the street.</p>
-                                        <p>4. I will **never** eat sushi again!</p>
-                                        <p>5. The teacher speaks **slowly** so everyone can understand.</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Preposições)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. We usually have lunch **at** noon.</p>
-                                        <p>2. My birthday is **in** March.</p>
-                                        <p>3. The keys are **on** the table.</p>
-                                        <p>4. She lives **in** London.</p>
-                                        <p>5. I will see you **on** Monday morning.</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte E (Demonstrativos)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. **This** is my favorite movie (perto, singular).</p>
-                                        <p>2. Look at **those** stars in the sky (longe, plural).</p>
-                                        <p>3. **These** shoes are too big for me (perto, plural).</p>
-                                        <p>4. Who is **that** boy near the door? (longe, singular).</p>
-                                        <p>5. **This** is my best friend, Lucas (perto, singular).</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte F</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>tell
-                                            Please tell me the truth. I won’t be angry.</p>
-
-                                        <p>talk (ou speak, mas talk é mais comum aqui)
-                                            She usually talks to her parents on the phone every Sunday.</p>
-
-                                        <p>say
-                                            Don’t say anything! I want it to be a surprise.</p>
-
-                                        <p>say
-                                            He didn’t even say goodbye before leaving.</p>
-
-                                        <p>talk
-                                            We need to talk about your grades today.</p>
-
-                                        <p>call
-                                            I tried to call him, but he didn’t answer.</p>
-
-                                        <p>tell
-                                            Can you tell the difference between these two words?</p>
-
-                                        <p>speak
-                                            They speak English fluently because they lived in Canada.</p>
-
-                                        <p>said
-                                            My boss said that the meeting was cancelled.</p>
-
-                                        <p>speak
-                                            Stop speaking so loudly! People are staring.
-                                            (talking também é possível, mas speaking enfatiza o ato de falar em voz
-                                            alta)</p>
-
-                                        <p>tell
-                                            Did she tell you that she was moving abroad?</p>
-
-                                        <p>talk
-                                            Let’s talk to the teacher after class.
-                                            (speak possível, mas talk é mais natural)</p>
-
-                                        <p>call
-                                            If you need help, just call me!</p>
-
-                                        <p>say
-                                            I can’t believe he said such a rude thing to her!</p>
-
-                                        <p>speak
-                                            The doctor needs to speak with you about the results.
-                                            (talk também aceito, mas speak é mais formal)</p>
-
-                                    </div>
-
-
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 4.1: Semana 4 - Pronomes
-                                        Objeto
-                                    </h4>
-                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Exercícios de completar)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. **him**</p>
-                                        <p>2. **her**</p>
-                                        <p>3. **it**</p>
-                                        <p>4. **us**</p>
-                                        <p>5. **them**</p>
-                                        <p>6. **him**</p>
-                                        <p>7. **him**</p>
-                                        <p>8. **me**</p>
-                                        <p>9. **them**</p>
-                                        <p>10. **them**</p>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Traduções)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. I saw **her** yesterday.</p>
-                                        <p>2. Can you help **me**?</p>
-                                        <p>3. We invited **them** to the party.</p>
-                                        <p>4. He doesn’t know **you**.</p>
-                                        <p>5. She bought **it** for us.</p>
-                                        <p>6. I heard **him** on the phone.</p>
-                                        <p>7. Can you take **it** with you?</p>
-                                        <p>8. They invited **her** to travel.</p>
-                                        <p>9. The teacher explained **it** to me.</p>
-                                        <p>10. I want to see **you** today.</p>
-                                    </div>
-
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 5: Semana 5 (Future
-                                        Tenses -
-
-                                        Planos/Previsões)</h4>
-                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. The traffic is terrible. We **are going to be** late.</p>
-                                        <p>2. It's very cold in here. I think I **will close** the window.
-                                            (Decisão espontânea)</p>
-                                        <p>3. Look at that driver! He is driving too fast. He **is going to crash** the
-                                            car.
-                                            (Previsão baseada
-                                            em evidência)</p>
-                                        <p>4. What **are** you **going to cook** for dinner tonight? (Plano/Intenção)
-                                        </p>
-                                        <p>5. I promise I **will help** you clean the house tomorrow. (Promessa)</p>
-                                        <p>6. I think the economy **will be** better next year. (Prediction)</p>
-                                        <p>7. We **are not going to travel** to Asia this summer; it is too expensive.
-                                            (Strong
-                                            intention/plan)</p>
-                                        <p>8. The meeting starts in five minutes. I **will send** the agenda now.
-                                            (Spontaneous
-                                            decision)</p>
-                                        <p>9. I **am meeting** (ou **am going to meet**) my parents for dinner tomorrow.
-                                            (Fixed
-                                            arrangement/Plan)</p>
-                                        <p>10. Look at those clouds! It **is going to rain** soon. (Evidence)</p>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto
-                                        Geral)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. The store **will open** at 10 AM. (Fato futuro)</p>
-                                        <p>2. We **are going to watch** a movie this weekend. (Plano)</p>
-                                        <p>3. He **is not going to study** (isn't going to study) for the exam.
-                                            (Intenção)</p>
-                                        <p>4. I **will help** you with the project. (Promessa)</p>
-                                        <p>5. When **is** the show **going to start**? (Plano/Evento)</p>
-                                    </div>
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Future with Will)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. I think it **will rain** tomorrow.</p>
-                                        <p>2. Hold on, I **will get** (I'll get) the door.</p>
-                                        <p>3. She **will probably pass** the exam.</p>
-                                        <p>4. I promise I **will not tell** (won't tell) anyone.</p>
-                                        <p>5. **Will** you **help** me with this bag?</p>
-                                        <p>6. Don't worry, I **will pay** (I'll pay) properly.</p>
-                                        <p>7. I expect they **will be** (they'll be) here soon.</p>
-                                        <p>8. There's no milk left. I **will buy** (I'll buy) some.</p>
-                                        <p>9. She **will turn** (she'll turn) 15 next month.</p>
-                                        <p>10. I'm hungry. I **will make** (I'll make) a sandwich.</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Future with Going To)
-                                    </h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. We **are going to visit** our grandparents.</p>
-                                        <p>2. Look at the clouds! It **is going to rain**.</p>
-                                        <p>3. He **is going to buy** a new car next week.</p>
-                                        <p>4. I **am going to study** medicine.</p>
-                                        <p>5. **Are** they **going to paint** the house?</p>
-                                        <p>6. She **is not going to watch** (isn't going to watch) TV tonight.</p>
-                                        <p>7. What **are** you **going to do** after class?</p>
-                                        <p>8. The company **is going to open** a new office.</p>
-                                        <p>9. I **am going to start** a diet on Monday.</p>
-                                        <p>10. We **are going to fly** to Paris next summer.</p>
-                                    </div>
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 7: Semana 7 (Modal
-                                        Verbs)</h4>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Can & Could)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>1. **can speak**</p>
-                                        <p>2. **could run**</p>
-                                        <p>3. **Could / Can** you **help**</p>
-                                        <p>4. **couldn't go** / **could not go**</p>
-                                        <p>5. **Can / Could / May** I **use**</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Must & Should)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>6. **must stop**</p>
-                                        <p>7. **should take**</p>
-                                        <p>8. **must wear**</p>
-                                        <p>9. **should rest**</p>
-                                        <p>10. **must respect**</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (May & Might)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>11. **may rain**</p>
-                                        <p>12. **might be**</p>
-                                        <p>13. **May** I **come**</p>
-                                        <p>14. **might accept**</p>
-                                        <p>15. **may get** (or **might**)</p>
-                                    </div>
-
-                                    <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Mixed)</h5>
-                                    <div class="answer-box space-y-1 text-sm">
-                                        <p>16. **must be**</p>
-                                        <p>17. **can't smoke** / **must not smoke**</p>
-                                        <p>18. **Can / Could** you **pass**</p>
-                                        <p>19. **should eat**</p>
-                                        <p>20. **could swim**</p>
-                                    </div>
-
-
-
-
-                                    <h4 class="font-bold text-lg text-amber-700 pt-4">Gabarito - Revisão Gramatical 2
-                                    </h4>
-                                    <div class="space-y-4">
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 1 – Simple Present +
-                                                Articles + Adverbs</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>She <b>works</b> at <b>a</b> hospital near my house.</p>
-                                                <p>They usually <b>have</b> lunch <b>at</b> noon.</p>
-                                                <p>My brother <b>studies</b> English <b>in</b> the evening.</p>
-                                                <p>We <b>live</b> in <b>a</b> small apartment downtown.</p>
-                                                <p>He always <b>forgets</b> <b>his</b> keys at home.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 2 – Verb to Be +
-                                                Prepositions + Possessives</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>My keys <b>are</b> on <b>the</b> table in <b>my</b> room.</p>
-                                                <p>The students <b>are</b> in <b>the</b> classroom with <b>their</b>
-                                                    teacher.</p>
-                                                <p>Her phone <b>is</b> under <b>the</b> chair next to mine.</p>
-                                                <p>Our meeting <b>is</b> at <b>the</b> office this afternoon.</p>
-                                                <p>Their house <b>is</b> near <b>the</b> park.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 3 – Present Continuous
-                                            </h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>I <b>am studying</b> for my test right now.</p>
-                                                <p>She <b>is talking</b> to her manager at the moment.</p>
-                                                <p>They <b>are working</b> on their project this week.</p>
-                                                <p>We <b>are waiting</b> for the bus at the corner.</p>
-                                                <p>He <b>is sending</b> her an email now.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 4 – Simple Past</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>I <b>met</b> him at the mall yesterday.</p>
-                                                <p>She <b>finished</b> her homework last night.</p>
-                                                <p>We <b>went</b> to the beach last weekend.</p>
-                                                <p>They <b>bought</b> a new car two months ago.</p>
-                                                <p>He <b>forgot</b> his wallet at home.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 5 – Future Tenses</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>I <b>will</b> call you later tonight.</p>
-                                                <p>She <b>is</b> going to travel next month.</p>
-                                                <p>We <b>will</b> meet them at the airport tomorrow.</p>
-                                                <p>They <b>will</b> finish the project by Friday.</p>
-                                                <p>He <b>is</b> going to start a new job soon.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 6 – Modal Verbs</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>You <b>should</b> study more if you want to improve.</p>
-                                                <p>She <b>can</b> speak three languages fluently.</p>
-                                                <p>We <b>must</b> finish this today; the deadline is tomorrow.</p>
-                                                <p>He <b>should</b> not drive tonight; he is very tired.</p>
-                                                <p>They <b>should</b> arrive early to get good seats.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 7 – Object Pronouns</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>Can you help <b>me</b> with this exercise?</p>
-                                                <p>I sent <b>him / her</b> an email yesterday.</p>
-                                                <p>She invited <b>us</b> to her party.</p>
-                                                <p>We saw <b>them</b> at the restaurant last night.</p>
-                                                <p>He explained the problem to <b>me</b>.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 8 – Tradução</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>1. I met my friends at the mall last night.</p>
-                                                <p>2. She is studying English at home right now.</p>
-                                                <p>3. We are going to finish the work by Friday.</p>
-                                                <p>4. He always forgets his keys inside the car.</p>
-                                                <p>5. They were waiting for the bus near the school.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 9 – Tradução</h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>1. My sister can help me with the homework this afternoon.</p>
-                                                <p>2. We live in a small apartment near downtown.</p>
-                                                <p>3. She bought a new dress for the party yesterday.</p>
-                                                <p>4. They are going to travel by plane next month.</p>
-                                                <p>5. He is talking to the boss in the office now.</p>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <h5 class="font-semibold text-stone-700 mb-2">PARTE 10 – Tradução (Mista)
-                                            </h5>
-                                            <div class="answer-box space-y-1 text-sm text-stone-600">
-                                                <p>1. I need to finish my report before the meeting tomorrow.</p>
-                                                <p>2. She left her cellphone on top of the table.</p>
-                                                <p>3. We could not go to the movies because of work.</p>
-                                                <p>4. They are going to meet in front of the restaurant at night.</p>
-                                                <p>5. He is trying to learn English to get a better job.</p>
-                                            </div>
-                                        </div>
+                                        <p>1. How many students **were** in the classroom yesterday?</p>
+                                        <p>2. **Can** you help me with this exercise?</p>
+                                        <p>3. **Is there** a supermarket near your house now?</p>
+                                        <p>4. The hotel **was** really expensive last year.</p>
+                                        <p>5. **Can** you speak Spanish?</p>
+                                        <p>6. **There were** two cats in the garden this morning.</p>
+                                        <p>7. I **am** not sure about the answer.</p>
+                                        <p>8. **Is there** any milk in the fridge?</p>
+                                        <p>9. She **is** very happy today.</p>
+                                        <p>10. He **can’t** go to the party because he was sick.</p>
                                     </div>
                                 </div>
                             </div>
 
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 1.1: Semana 1
+                                (Possessivos e
+                                Preposições)</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Possessivos)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **Mine**</p>
+                                        <p>2. **His**</p>
+                                        <p>3. **Ours**</p>
+                                        <p>4. **Your**</p>
+                                        <p>5. **Theirs**</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte B (Preposições)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **on** (Dias da Semana)</p>
+                                        <p>2. **at** (Hora Específica)</p>
+                                        <p>3. **in** (Meses)</p>
+                                        <p>4. **in** (Espaço Fechado)</p>
+                                        <p>5. **on** (Superfície)</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte C (Perguntas com
+                                        Possessivos)
+                                    </h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. Is the responsibility **his**?</p>
+                                        <p>2. Did you bring **your** briefcase?</p>
+                                        <p>3. Is the office **ours**?</p>
+                                        <p>4. What is **their** club name?</p>
+                                        <p>5. Is this pen **hers**?</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte D (Preposições -
+                                        Complete)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. in</p>
+                                        <p>2. at</p>
+                                        <p>3. across / through</p>
+                                        <p>4. inside / in</p>
+                                        <p>5. over</p>
+                                        <p>6. next to / beside</p>
+                                        <p>7. on</p>
+                                        <p>8. about</p>
+                                        <p>9. down</p>
+                                        <p>10. since</p>
+                                        <p>11. under</p>
+                                        <p>12. through</p>
+                                        <p>13. onto / on</p>
+                                        <p>14. to</p>
+                                        <p>15. from</p>
+                                        <p>16. above</p>
+                                        <p>17. across</p>
+                                        <p>18. in front of</p>
+                                        <p>19. at</p>
+                                        <p>20. off</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte E (Múltipla Escolha)
+                                    </h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. at</p>
+                                        <p>2. across</p>
+                                        <p>3. for</p>
+                                        <p>4. around</p>
+                                        <p>5. between</p>
+                                        <p>6. near</p>
+                                        <p>7. above</p>
+                                        <p>8. without</p>
+                                        <p>9. about</p>
+                                        <p>10. under</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte F (Reescreva)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. **into** / **out of**</p>
+                                        <p>2. **across**</p>
+                                        <p>3. **down**</p>
+                                        <p>4. **above** / **on**</p>
+                                        <p>5. **until**</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte G (Tradução)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. I live **near** the station.</p>
+                                        <p>2. Put the book **inside** the box.</p>
+                                        <p>3. Walk **across** the street and turn right.</p>
+                                        <p>4. He went **through** the tunnel.</p>
+                                        <p>5. We talked **about** the problem yesterday.</p>
+                                        <p>6. She is **between** two friends.</p>
+                                        <p>7. He took **off** his shoes.</p>
+                                        <p>8. The airplane flew **over** the city.</p>
+                                        <p>9. He is **against** the wall.</p>
+                                        <p>10. Wait **until** tomorrow.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 2: Semana 2 (Simple
+                                Present -
+                                Rotinas)</h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação
+                                        Afirmativa)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. I often **call** the clubs in the morning.</p>
+                                        <p>2. My partner **travels** to Spain every month.</p>
+                                        <p>3. We always **negotiate** the financial terms carefully.</p>
+                                        <p>4. The lawyer **sends** the final document before the deadline.</p>
+                                        <p>5. I never **meet** the player without my representative.</p>
+                                        <p>6. The club usually **pays** the wages on the first day of the month.
+                                        </p>
+                                        <p>7. My director **does not send** (doesn't send) emails after 7 PM.
+                                        </p>
+                                        <p>8. **Does** the agent always travel with the player?</p>
+                                        <p>9. What **does** the *scout* **look** for in a young player?</p>
+                                        <p>10. We **have** two important negotiations this week.</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">Parte B (Tradução Geral)</h5>
+                                    <div class="answer-box space-y-1 text-sm">
+                                        <p>1. Where **do** you live?</p>
+                                        <p>2. We **study** a lot for the test.</p>
+                                        <p>3. My brother **does not drive** (doesn't drive) sports cars.</p>
+                                        <p>4. The dog **eats** all his food.</p>
+                                        <p>5. **Do** you **like** black coffee?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Perguntas e Negativas)
+                            </h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. **Does** the club **want** to sell the player?</p>
+                                <p>2. The contract **does not include** (doesn't include) the sell-on clause.
+                                </p>
+                                <p>3. Why **does** he **sign** the new offer?</p>
+                                <p>4. I **do not believe** (don't believe) the agent right now.</p>
+                                <p>5. **Do** you **need** more time for due diligence?</p>
+                                <p>6. How often **does** she **travel** to Italy?</p>
+                                <p>7. The lawyers **do not speak** (don't speak) Portuguese.</p>
+                                <p>8. What **does** this clause **mean**?</p>
+                                <p>9. He **does not finish** (doesn't finish) the report on time.</p>
+                                <p>10. **Do** we **have** the original documents here?</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Prática Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. My sister **lives** in New York.</p>
+                                <p>2. I usually **drink** tea for breakfast.</p>
+                                <p>3. The shop **closes** at 9 PM.</p>
+                                <p>4. We **do not go** (don't go) to the park on Mondays.</p>
+                                <p>5. **Do** you **play** the guitar?</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte E (Tradução Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. My roommate **does not cook** (doesn't cook) dinner.</p>
+                                <p>2. What **do** you **learn** in your English course?</p>
+                                <p>3. **Does** it usually **rain** a lot in April?</p>
+                                <p>4. My boss always **smiles** at the clients.</p>
+                                <p>5. We **do not build** (don't build) sandcastles on the beach.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte F: Infinitivo com 'To' e
+                                Zero
+                                Infinitivo</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. You must **check** the clause carefully.</p>
+                                <p>2. I need **to call** my boss immediately.</p>
+                                <p>3. We decided **to travel** to Lisbon for the meeting.</p>
+                                <p>4. Does the lawyer **want** to postpone the signing?</p>
+                                <p>5. She should **start** the due diligence today.</p>
+                            </div>
+
+
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 2.2: Semana 2 (Simple
+                                Present -
+                                3ª Pessoa)</h4>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. She **watches** television every night.</p>
+                                <p>2. He **goes** to the gym on Mondays.</p>
+                                <p>3. My friend **reads** books about history.</p>
+                                <p>4. My cat **likes** strong coffee.</p>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 3: Semana 3 (Present
+                                Continuous
+                                - Ações Agora)</h4>
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação e Perguntas)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. I **am talking** to the club director right now.</p>
+                                <p>2. The legal team **is reviewing** the indemnity clause at the moment.</p>
+                                <p>3. **Are** they **negotiating** the wages this afternoon?</p>
+                                <p>4. The player **is not training** (isn't training) because he is injured.</p>
+                                <p>5. We **are waiting** for the final decision.</p>
+                                <p>6. The director **is flying** to Madrid tomorrow morning.</p>
+                                <p>7. What **is** the *scout* **doing** right now?</p>
+                                <p>8. She **is not checking** (isn't checking) the contract; she is busy.</p>
+                                <p>9. The clubs **are discussing** the Buy-out Clause today.</p>
+                                <p>10. I **am preparing** the documents for the transfer deadline.</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto
+                                Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. We **are learning** a new language.</p>
+                                <p>2. It **is raining** a lot today.</p>
+                                <p>3. Why **are** you **not smiling** (aren't you smiling)?</p>
+                                <p>4. They **are building** a new house.</p>
+                                <p>5. What **is** he **reading**?</p>
+                                <p>6. I **am cooking** dinner now.</p>
+                                <p>7. Where **are** you **going**?</p>
+                                <p>8. She **is studying** for the final exam.</p>
+                                <p>9. We **are waiting** for a bus.</p>
+                                <p>10. My sister **is not working** (isn't working) today.</p>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 4: Semana 4 (Simple Past
+                                -
+                                Eventos Concluídos)</h4>
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação e Perguntas)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. *Ex:* Yes, I **traveled** to Madrid last week. / No, I didn't **travel**.
+                                </p>
+                                <p>2. *Ex:* Yes, he **signed** on Friday. / No, he didn't **sign** it. He
+                                    **wanted**
+                                    more time.</p>
+                                <p>3. *Ex:* The meeting **started** at 3 PM.</p>
+                                <p>4. The lawyer **prepared** the final document yesterday morning.</p>
+                                <p>5. They **did not agree** (didn't agree) on the transfer fee last week.</p>
+                                <p>6. I **met** the club president in Italy in 2022.</p>
+                                <p>7. **Did** you **send** the NDA this morning?</p>
+                                <p>8. We **bought** the rights for that player for a low price.</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto
+                                Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. We **had** dinner at the new restaurant last week.</p>
+                                <p>2. I **lost** my cell phone on the train.</p>
+                                <p>3. She **did not call** (didn't call) me yesterday.</p>
+                                <p>4. Where **did** you **leave** the keys?</p>
+                                <p>5. My father **taught** me to drive.</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Prática Intensiva -
+                                Novos)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. **watched** / **went** / **didn't visit** / **ate** / **studied**</p>
+                                <p>2. I **played** soccer. / She **drank** coffee. / They **walked** to work. /
+                                    He
+                                    **studied** every day. / We **cooked** dinner.</p>
+                                <p>3. She **didn't travel** to Rio. / They **didn't like** the movie. / He
+                                    **didn't
+                                    clean** the house. / We **didn't work** yesterday. / I **didn't visit** my
+                                    friend.
+                                </p>
+                                <p>4. **Did** you **finish** the homework? / **Did** she **study** English? /
+                                    **Did**
+                                    they **play** tennis? / **Did** he **cook** dinner? / **Did** we **enjoy**
+                                    the
+                                    party?</p>
+                                <p>5. **Did** you go...? / I **didn't** eat... / She **didn't** (or **did**)
+                                    buy... /
+                                    **Did** they like...? / We **didn't** (or **did**) see...</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Tradução e Tempos
+                                Mistos)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>I. Simple Past Puro:</p>
+                                <p>1. I **studied** English yesterday.</p>
+                                <p>2. She **did not go** (didn't go) to work yesterday.</p>
+                                <p>3. We **watched** a movie on Saturday.</p>
+                                <p>4. They **bought** a new television.</p>
+                                <p>5. **Did** you **visit** your friends on the weekend?</p>
+                                <p>6. He **ate** pizza for lunch.</p>
+                                <p>7. The day **was** very tiring.</p>
+                                <p>8. You **did not call** (didn't call) me yesterday.</p>
+                                <p>9. **Where did** you **put** my book?</p>
+                                <p>10. **What did** you **do** last night?</p>
+                                <p>II. Tempos Mistos:</p>
+                                <p>1. I **am studying** now, but yesterday I **did not study** (didn't study).
+                                </p>
+                                <p>2. She **works** in an office, but today she **is working** from home.</p>
+                                <p>3. We **are waiting** for the bus; yesterday we **walked** to school.</p>
+                                <p>4. He usually **drinks** coffee, but today he **is drinking** tea.</p>
+                                <p>5. I **did not go out** (didn't go out) yesterday, but today I **am going**
+                                    to the
+                                    market.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte E (Simple Past - nível um
+                                pouco
+                                mais difícil)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. They **didn't understand** the last part of the explanation.</p>
+                                <p>2. **Where did** you **leave** the keys after you **arrived** home?</p>
+                                <p>3. I **traveled** last month, but I **didn't like** the hotel.</p>
+                                <p>4. She **wrote** a letter, but she **didn't send** it.</p>
+                                <p>5. We **decided** to buy the car because the price **was** good.</p>
+                                <p>6. **How long did** you **wait** for the bus yesterday?</p>
+                                <p>7. He **lost** his phone, but he **found** it later in the car.</p>
+                                <p>8. I **didn't know** you **lived** in São Paulo.</p>
+                                <p>9. The movie **started** late and **ended** almost at midnight.</p>
+                                <p>10. **What did** they **say** when you **told** the news?</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte F (Simple Past + Simple
+                                Present +
+                                Present Continuous)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. I **am working** now, but yesterday I **rested** all day.</p>
+                                <p>2. She always **arrives** early, but today she **is arriving** late.</p>
+                                <p>3. We **didn't like** the restaurant yesterday, but today we **are eating**
+                                    there
+                                    again.</p>
+                                <p>4. He **is studying** English today, but yesterday he **studied** math.</p>
+                                <p>5. I usually **walk** to work, but yesterday I **went** by car.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte G (Tradução de Perguntas)
+                            </h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. **When did** you **arrive** home yesterday?</p>
+                                <p>2. **Why didn't** you **come** yesterday?</p>
+                                <p>3. **What are** you **doing** now?</p>
+                                <p>4. **How did** he **go** to work yesterday?</p>
+                                <p>5. **What does** she usually **eat** for breakfast?</p>
+                                <p>6. **Who did** you **speak** to at the party? (or **With whom did** you
+                                    **speak**?)
+                                </p>
+                                <p>7. **Why are** they **running**?</p>
+                                <p>8. **Where did** you **live** when you **were** a child?</p>
+                                <p>9. **Which movie do** you **want** to watch today? (or **What movie**)</p>
+                                <p>10. **Is** she **studying** for the test now?</p>
+                                <p>11. **What did** you **buy** at the mall last Saturday?</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte H (Tradução - Simple Past)
+                            </h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. I **woke up** very early yesterday.</p>
+                                <p>2. They **didn’t like** the movie.</p>
+                                <p>3. We **visited** my grandparents last weekend.</p>
+                                <p>4. She **studied** for the test all night.</p>
+                                <p>5. **Did** you **find** your phone?</p>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício Extra: Revisão
+                                Gramatical</h4>
+
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Artigos)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. I saw **an** elephant at the zoo yesterday.</p>
+                                <p>2. She bought **a** new dress for the party.</p>
+                                <p>3. **The** moon looks beautiful tonight.</p>
+                                <p>4. He works as **an** engineer in New York.</p>
+                                <p>5. They opened **a** restaurant near our house.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Conectivos)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. She was tired, **but** (or **although**) she continued working.</p>
+                                <p>2. I like tea **but** I don't like coffee.</p>
+                                <p>3. He stayed home **because** it was raining.</p>
+                                <p>4. She is smart **and** hardworking.</p>
+                                <p>5. It was late, **so** we decided to go home.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Advérbios)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. She drives **carefully** at night.</p>
+                                <p>2. He **always** forgets his homework.</p>
+                                <p>3. The cat ran **suddenly** across the street.</p>
+                                <p>4. I will **never** eat sushi again!</p>
+                                <p>5. The teacher speaks **slowly** so everyone can understand.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Preposições)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. We usually have lunch **at** noon.</p>
+                                <p>2. My birthday is **in** March.</p>
+                                <p>3. The keys are **on** the table.</p>
+                                <p>4. She lives **in** London.</p>
+                                <p>5. I will see you **on** Monday morning.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte E (Demonstrativos)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. **This** is my favorite movie (perto, singular).</p>
+                                <p>2. Look at **those** stars in the sky (longe, plural).</p>
+                                <p>3. **These** shoes are too big for me (perto, plural).</p>
+                                <p>4. Who is **that** boy near the door? (longe, singular).</p>
+                                <p>5. **This** is my best friend, Lucas (perto, singular).</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte F</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>tell
+                                    Please tell me the truth. I won’t be angry.</p>
+
+                                <p>talk (ou speak, mas talk é mais comum aqui)
+                                    She usually talks to her parents on the phone every Sunday.</p>
+
+                                <p>say
+                                    Don’t say anything! I want it to be a surprise.</p>
+
+                                <p>say
+                                    He didn’t even say goodbye before leaving.</p>
+
+                                <p>talk
+                                    We need to talk about your grades today.</p>
+
+                                <p>call
+                                    I tried to call him, but he didn’t answer.</p>
+
+                                <p>tell
+                                    Can you tell the difference between these two words?</p>
+
+                                <p>speak
+                                    They speak English fluently because they lived in Canada.</p>
+
+                                <p>said
+                                    My boss said that the meeting was cancelled.</p>
+
+                                <p>speak
+                                    Stop speaking so loudly! People are staring.
+                                    (talking também é possível, mas speaking enfatiza o ato de falar em voz
+                                    alta)</p>
+
+                                <p>tell
+                                    Did she tell you that she was moving abroad?</p>
+
+                                <p>talk
+                                    Let’s talk to the teacher after class.
+                                    (speak possível, mas talk é mais natural)</p>
+
+                                <p>call
+                                    If you need help, just call me!</p>
+
+                                <p>say
+                                    I can’t believe he said such a rude thing to her!</p>
+
+                                <p>speak
+                                    The doctor needs to speak with you about the results.
+                                    (talk também aceito, mas speak é mais formal)</p>
+
+                            </div>
+
+
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 4.1: Semana 4 - Pronomes
+                                Objeto
+                            </h4>
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Exercícios de completar)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. **him**</p>
+                                <p>2. **her**</p>
+                                <p>3. **it**</p>
+                                <p>4. **us**</p>
+                                <p>5. **them**</p>
+                                <p>6. **him**</p>
+                                <p>7. **him**</p>
+                                <p>8. **me**</p>
+                                <p>9. **them**</p>
+                                <p>10. **them**</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Traduções)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. I saw **her** yesterday.</p>
+                                <p>2. Can you help **me**?</p>
+                                <p>3. We invited **them** to the party.</p>
+                                <p>4. He doesn’t know **you**.</p>
+                                <p>5. She bought **it** for us.</p>
+                                <p>6. I heard **him** on the phone.</p>
+                                <p>7. Can you take **it** with you?</p>
+                                <p>8. They invited **her** to travel.</p>
+                                <p>9. The teacher explained **it** to me.</p>
+                                <p>10. I want to see **you** today.</p>
+                            </div>
+
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 5: Semana 5 (Future
+                                Tenses -
+
+                                Planos/Previsões)</h4>
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Conjugação)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. The traffic is terrible. We **are going to be** late.</p>
+                                <p>2. It's very cold in here. I think I **will close** the window.
+                                    (Decisão espontânea)</p>
+                                <p>3. Look at that driver! He is driving too fast. He **is going to crash** the
+                                    car.
+                                    (Previsão baseada
+                                    em evidência)</p>
+                                <p>4. What **are** you **going to cook** for dinner tonight? (Plano/Intenção)
+                                </p>
+                                <p>5. I promise I **will help** you clean the house tomorrow. (Promessa)</p>
+                                <p>6. I think the economy **will be** better next year. (Prediction)</p>
+                                <p>7. We **are not going to travel** to Asia this summer; it is too expensive.
+                                    (Strong
+                                    intention/plan)</p>
+                                <p>8. The meeting starts in five minutes. I **will send** the agenda now.
+                                    (Spontaneous
+                                    decision)</p>
+                                <p>9. I **am meeting** (ou **am going to meet**) my parents for dinner tomorrow.
+                                    (Fixed
+                                    arrangement/Plan)</p>
+                                <p>10. Look at those clouds! It **is going to rain** soon. (Evidence)</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Tradução - Contexto
+                                Geral)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. The store **will open** at 10 AM. (Fato futuro)</p>
+                                <p>2. We **are going to watch** a movie this weekend. (Plano)</p>
+                                <p>3. He **is not going to study** (isn't going to study) for the exam.
+                                    (Intenção)</p>
+                                <p>4. I **will help** you with the project. (Promessa)</p>
+                                <p>5. When **is** the show **going to start**? (Plano/Evento)</p>
+                            </div>
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (Future with Will)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. I think it **will rain** tomorrow.</p>
+                                <p>2. Hold on, I **will get** (I'll get) the door.</p>
+                                <p>3. She **will probably pass** the exam.</p>
+                                <p>4. I promise I **will not tell** (won't tell) anyone.</p>
+                                <p>5. **Will** you **help** me with this bag?</p>
+                                <p>6. Don't worry, I **will pay** (I'll pay) properly.</p>
+                                <p>7. I expect they **will be** (they'll be) here soon.</p>
+                                <p>8. There's no milk left. I **will buy** (I'll buy) some.</p>
+                                <p>9. She **will turn** (she'll turn) 15 next month.</p>
+                                <p>10. I'm hungry. I **will make** (I'll make) a sandwich.</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Future with Going To)
+                            </h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. We **are going to visit** our grandparents.</p>
+                                <p>2. Look at the clouds! It **is going to rain**.</p>
+                                <p>3. He **is going to buy** a new car next week.</p>
+                                <p>4. I **am going to study** medicine.</p>
+                                <p>5. **Are** they **going to paint** the house?</p>
+                                <p>6. She **is not going to watch** (isn't going to watch) TV tonight.</p>
+                                <p>7. What **are** you **going to do** after class?</p>
+                                <p>8. The company **is going to open** a new office.</p>
+                                <p>9. I **am going to start** a diet on Monday.</p>
+                                <p>10. We **are going to fly** to Paris next summer.</p>
+                            </div>
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Exercício 7: Semana 7 (Modal
+                                Verbs)</h4>
+
+                            <h5 class="font-semibold text-stone-700 mb-2">Parte A (Can & Could)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>1. **can speak**</p>
+                                <p>2. **could run**</p>
+                                <p>3. **Could / Can** you **help**</p>
+                                <p>4. **couldn't go** / **could not go**</p>
+                                <p>5. **Can / Could / May** I **use**</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte B (Must & Should)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>6. **must stop**</p>
+                                <p>7. **should take**</p>
+                                <p>8. **must wear**</p>
+                                <p>9. **should rest**</p>
+                                <p>10. **must respect**</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte C (May & Might)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>11. **may rain**</p>
+                                <p>12. **might be**</p>
+                                <p>13. **May** I **come**</p>
+                                <p>14. **might accept**</p>
+                                <p>15. **may get** (or **might**)</p>
+                            </div>
+
+                            <h5 class="font-semibold text-stone-700 mb-2 mt-4">Parte D (Mixed)</h5>
+                            <div class="answer-box space-y-1 text-sm">
+                                <p>16. **must be**</p>
+                                <p>17. **can't smoke** / **must not smoke**</p>
+                                <p>18. **Can / Could** you **pass**</p>
+                                <p>19. **should eat**</p>
+                                <p>20. **could swim**</p>
+                            </div>
+
+
+
+
+                            <h4 class="font-bold text-lg text-amber-700 pt-4">Gabarito - Revisão Gramatical 2
+                            </h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 1 – Simple Present +
+                                        Articles + Adverbs</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>She <b>works</b> at <b>a</b> hospital near my house.</p>
+                                        <p>They usually <b>have</b> lunch <b>at</b> noon.</p>
+                                        <p>My brother <b>studies</b> English <b>in</b> the evening.</p>
+                                        <p>We <b>live</b> in <b>a</b> small apartment downtown.</p>
+                                        <p>He always <b>forgets</b> <b>his</b> keys at home.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 2 – Verb to Be +
+                                        Prepositions + Possessives</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>My keys <b>are</b> on <b>the</b> table in <b>my</b> room.</p>
+                                        <p>The students <b>are</b> in <b>the</b> classroom with <b>their</b>
+                                            teacher.</p>
+                                        <p>Her phone <b>is</b> under <b>the</b> chair next to mine.</p>
+                                        <p>Our meeting <b>is</b> at <b>the</b> office this afternoon.</p>
+                                        <p>Their house <b>is</b> near <b>the</b> park.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 3 – Present Continuous
+                                    </h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>I <b>am studying</b> for my test right now.</p>
+                                        <p>She <b>is talking</b> to her manager at the moment.</p>
+                                        <p>They <b>are working</b> on their project this week.</p>
+                                        <p>We <b>are waiting</b> for the bus at the corner.</p>
+                                        <p>He <b>is sending</b> her an email now.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 4 – Simple Past</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>I <b>met</b> him at the mall yesterday.</p>
+                                        <p>She <b>finished</b> her homework last night.</p>
+                                        <p>We <b>went</b> to the beach last weekend.</p>
+                                        <p>They <b>bought</b> a new car two months ago.</p>
+                                        <p>He <b>forgot</b> his wallet at home.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 5 – Future Tenses</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>I <b>will</b> call you later tonight.</p>
+                                        <p>She <b>is</b> going to travel next month.</p>
+                                        <p>We <b>will</b> meet them at the airport tomorrow.</p>
+                                        <p>They <b>will</b> finish the project by Friday.</p>
+                                        <p>He <b>is</b> going to start a new job soon.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 6 – Modal Verbs</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>You <b>should</b> study more if you want to improve.</p>
+                                        <p>She <b>can</b> speak three languages fluently.</p>
+                                        <p>We <b>must</b> finish this today; the deadline is tomorrow.</p>
+                                        <p>He <b>should</b> not drive tonight; he is very tired.</p>
+                                        <p>They <b>should</b> arrive early to get good seats.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 7 – Object Pronouns</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>Can you help <b>me</b> with this exercise?</p>
+                                        <p>I sent <b>him / her</b> an email yesterday.</p>
+                                        <p>She invited <b>us</b> to her party.</p>
+                                        <p>We saw <b>them</b> at the restaurant last night.</p>
+                                        <p>He explained the problem to <b>me</b>.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 8 – Tradução</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>1. I met my friends at the mall last night.</p>
+                                        <p>2. She is studying English at home right now.</p>
+                                        <p>3. We are going to finish the work by Friday.</p>
+                                        <p>4. He always forgets his keys inside the car.</p>
+                                        <p>5. They were waiting for the bus near the school.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 9 – Tradução</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>1. My sister can help me with the homework this afternoon.</p>
+                                        <p>2. We live in a small apartment near downtown.</p>
+                                        <p>3. She bought a new dress for the party yesterday.</p>
+                                        <p>4. They are going to travel by plane next month.</p>
+                                        <p>5. He is talking to the boss in the office now.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 10 – Tradução (Mista)
+                                    </h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>1. I need to finish my report before the meeting tomorrow.</p>
+                                        <p>2. She left her cellphone on top of the table.</p>
+                                        <p>3. We could not go to the movies because of work.</p>
+                                        <p>4. They are going to meet in front of the restaurant at night.</p>
+                                        <p>5. He is trying to learn English to get a better job.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 11 – Verb to Be (Present & Past)
+                                    </h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>The students <b>were</b> very tired after the long test yesterday.</p>
+                                        <p>My phone <b>was</b> on the table when I left the room.</p>
+                                        <p>We <b>were</b> not ready for the meeting this morning.</p>
+                                        <p>Her parents <b>were</b> proud of her results last semester.</p>
+                                        <p>I <b>was</b> late because the traffic was terrible.</p>
+                                        <p>I <b>was</b> surprised by the news this morning.</p>
+                                        <p>They <b>were</b> not at home when I called last night.</p>
+                                        <p>The classroom <b>was</b> empty after the students left.</p>
+                                        <p>We <b>were</b> excited about the trip last weekend.</p>
+                                        <p>She <b>is</b> responsible for organizing the event.</p>
+                                        <p>The results <b>were</b> announced yesterday afternoon.</p>
+                                        <p>My parents <b>were</b> worried about me last night.</p>
+                                        <p>The weather <b>was</b> perfect during our vacation.</p>
+                                        <p>I <b>am</b> ready to start the test now.</p>
+                                        <p>The books <b>were</b> on the shelf when I checked earlier.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 12 – Verb to Be + Prepositions
+                                    </h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>The keys <b>are</b> under the chair near the door.</p>
+                                        <p>The manager <b>is</b> in the office at the moment.</p>
+                                        <p>Our bags <b>are</b> between the seats on the bus.</p>
+                                        <p>The restaurant <b>is</b> across from the bank.</p>
+                                        <p>My notebook <b>is</b> inside my backpack.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 13 – Verb to Be + Future /
+                                        Modals</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>The test <b>is</b> going to be difficult for many students.</p>
+                                        <p>She <b>will</b> be very happy if she passes the exam.</p>
+                                        <p>We <b>may</b> not be able to finish the project today.</p>
+                                        <p>The meeting <b>will</b> be at 3 p.m., according to the email.</p>
+                                        <p>You <b>should</b> be more careful with your answers.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 14 – Verb to Be + Continuous /
+                                        Passive Idea</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>I <b>am</b> being very patient with them lately.</p>
+                                        <p>The house <b>is</b> being cleaned right now.</p>
+                                        <p>They <b>are</b> being interviewed at the moment.</p>
+                                        <p>He <b>is</b> being honest about the problem.</p>
+                                        <p>We <b>are</b> being watched during the presentation.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 15 – Tradução</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>I was very nervous before the job interview yesterday.</p>
+                                        <p>The keys were inside my backpack in the morning.</p>
+                                        <p>We were not ready for the test that day.</p>
+                                        <p>She will be available for the meeting tomorrow afternoon.</p>
+                                        <p>They were proud of their work at the end of the project.</p>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <h5 class="font-semibold text-stone-700 mb-2">PARTE 16 – Tradução (Mista)</h5>
+                                    <div class="answer-box space-y-1 text-sm text-stone-600">
+                                        <p>I will be at home after work tonight.</p>
+                                        <p>The report was not ready when the boss asked.</p>
+                                        <p>We may not be sure about the result yet.</p>
+                                        <p>She is being very patient with the new students.</p>
+                                        <p>The instructions were not clear at the beginning of the class.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
+
+
             </section>
 
             <!-- Aba 5: Anotações -->
