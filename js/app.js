@@ -19,18 +19,23 @@ try {
 
 const db = firebase.firestore();
 
-// --- User Identity (Mock Auth) ---
-function getUserId() {
-    let userId = localStorage.getItem('app_user_id');
-    if (!userId) {
-        userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-        localStorage.setItem('app_user_id', userId);
-    }
-    console.log("Current User ID:", userId);
-    return userId;
-}
+// --- User Identity ---
+// ID fixo para permitir acesso compartilhado em qualquer dispositivo
+const USER_ID = 'aluno_fe_classes_global';
 
+/*
+function getUserId() {
+  let userId = localStorage.getItem('app_user_id');
+  if (!userId) {
+      userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('app_user_id', userId);
+  }
+  console.log("Current User ID:", userId);
+  return userId;
+}
 const USER_ID = getUserId();
+*/
+
 const NOTES_DOC_REF = db.collection('users').doc(USER_ID).collection('data').doc('notes');
 const EXERCISES_COL_REF = db.collection('users').doc(USER_ID).collection('exercises');
 
@@ -60,7 +65,7 @@ function updateSaveStatus(status) {
             if (saveStatusText.textContent === 'Saved') {
                 saveStatusEl.classList.remove('visible');
             }
-        }, 10000);
+        }, 2000);
     } else if (status === 'error') {
         saveStatusEl.classList.remove('saving', 'saved');
         saveStatusText.textContent = 'Error saving';
@@ -83,14 +88,14 @@ function debounce(func, wait) {
 async function migrateDataIfNeeded() {
     const NOTES_STORAGE_KEY = 'appNotesContent';
     const EXERCISE_ANSWERS_KEY = 'exerciseAnswersState';
-    const MIGRATED_KEY = 'firebase_migrated_v2'; // Changed to v2 to force retry
+    const MIGRATED_KEY = 'firebase_migrated_to_global_v1'; // Novo key para o global
 
     if (localStorage.getItem(MIGRATED_KEY)) {
-        console.log("Migration (v2) already performed.");
+        console.log("Migration (Global) already performed.");
         return;
     }
 
-    console.log("Starting migration...");
+    console.log("Starting migration to Global ID...");
     let migrationSuccess = true;
 
     // Migrate Notes
@@ -130,11 +135,11 @@ async function migrateDataIfNeeded() {
 
     if (migrationSuccess) {
         localStorage.setItem(MIGRATED_KEY, 'true');
-        console.log('Migration completed successfully.');
-        alert('Seus dados foram migrados com sucesso para o banco de dados!');
+        console.log('Migration to Global ID completed successfully.');
+        alert('Seus dados locais foram migrados para o aceso Globlal!');
     } else {
-        console.warn('Migration failed or partial. Will retry on next load.');
-        alert('Erro na migração: Verifique se você liberou as Regras no Firebase Console.');
+        console.warn('Migration failed or partial.');
+        alert('Erro na migração.');
     }
 }
 
@@ -241,8 +246,10 @@ const saveExercisesDebounced = debounce(async () => {
 document.addEventListener('DOMContentLoaded', async () => {
     // 0. UI Init
     const saveEl = document.getElementById('save-status'); // ensure we grab it if it wasn't caught early
+
     // 1. Migration
-    await migrateDataIfNeeded();
+    // Decomente a linha abaixo UMA VEZ para migrar seus dados locais para o novo usuário global
+    //await migrateDataIfNeeded();
 
     // 2. Initial Load
     await loadNotes();
