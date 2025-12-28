@@ -108,10 +108,16 @@ iframe {
     border-radius: 10px;
 }
 
-/* Ou espaçando vários iframes */
 .container-iframes iframe {
+    flex-grow: 1;
+    /* O iframe cresce para ocupar espaço, mas pode ter um max-width */
+    max-width: 50%;
+    /* Limita a largura do iframe */
+    width: 100%;
+    /* Garante que ocupe espaço */
     margin: 10px;
     /* Margem em todos os lados para todos os iframes dentro da classe */
+    /*height: auto;*/
 }
 
 .video-container-flex {
