@@ -111,7 +111,7 @@ iframe {
 .container-iframes iframe {
     flex-grow: 1;
     /* O iframe cresce para ocupar espaço, mas pode ter um max-width */
-    max-width: 50%;
+    max-width: 80%;
     /* Limita a largura do iframe */
     width: 100%;
     /* Garante que ocupe espaço */
