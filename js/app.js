@@ -1,132 +1,331 @@
-const NOTES_STORAGE_KEY = 'appNotesContent';
-const CUSTOM_GLOSSARY_KEY = 'customGlossary';
-const EXERCISE_ANSWERS_KEY = 'exerciseAnswersState';
+const firebaseConfig = {
+    apiKey: "AIzaSyAEab4hyNrsX-VOvl9M_egOpBe7C5l19tI",
+    authDomain: "fe-classes.firebaseapp.com",
+    projectId: "fe-classes",
+    storageBucket: "fe-classes.firebasestorage.app",
+    messagingSenderId: "935342192138",
+    appId: "1:935342192138:web:fd01edfb42cb812ff091f3",
+    measurementId: "G-7C3LWVYKL2"
+};
 
-function loadNotes() {
-    const notesTextarea = document.getElementById('notes-textarea');
-    if (notesTextarea) {
-        const savedContent = localStorage.getItem(NOTES_STORAGE_KEY);
-        if (savedContent) {
-            notesTextarea.value = savedContent;
+// Initialize Firebase
+try {
+    firebase.initializeApp(firebaseConfig);
+    console.log("Firebase initialized successfully");
+} catch (e) {
+    console.error("Firebase initialization failed:", e);
+    alert("Erro ao conectar com o banco de dados. Verifique o console.");
+}
+
+const db = firebase.firestore();
+
+// --- User Identity ---
+// ID fixo para permitir acesso compartilhado em qualquer dispositivo
+const USER_ID = 'aluno_fe_classes_global';
+
+/*
+function getUserId() {
+  let userId = localStorage.getItem('app_user_id');
+  if (!userId) {
+      userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      localStorage.setItem('app_user_id', userId);
+  }
+  console.log("Current User ID:", userId);
+  return userId;
+}
+const USER_ID = getUserId();
+*/
+
+// const NOTES_DOC_REF = db.collection('users').doc(USER_ID).collection('data').doc('notes'); // Removed in favor of generic getDataDocRef
+
+const EXERCISES_COL_REF = db.collection('users').doc(USER_ID).collection('exercises');
+
+
+// --- UI Helpers ---
+// Note: Elements might not be available immediately if script runs in head, but defer is used.
+
+function updateSaveStatus(status) {
+    const saveStatusEl = document.getElementById('save-status');
+    const saveStatusText = document.getElementById('save-status-text');
+
+    if (!saveStatusEl || !saveStatusText) return;
+
+    saveStatusEl.className = 'visible'; // Always visible when interacting
+
+    if (status === 'saving') {
+        saveStatusEl.classList.add('saving');
+        saveStatusEl.classList.remove('saved');
+        saveStatusText.textContent = 'Saving...';
+    } else if (status === 'saved') {
+        saveStatusEl.classList.remove('saving');
+        saveStatusEl.classList.add('saved');
+        saveStatusText.textContent = 'Saved';
+
+        // Hide after 10 seconds
+        setTimeout(() => {
+            if (saveStatusText.textContent === 'Saved') {
+                saveStatusEl.classList.remove('visible');
+            }
+        }, 10000);
+    } else if (status === 'error') {
+        saveStatusEl.classList.remove('saving', 'saved');
+        saveStatusText.textContent = 'Error saving';
+    }
+}
+
+// --- Utils ---
+function debounce(func, wait) {
+    let timeout;
+    return function (...args) {
+        const context = this;
+        clearTimeout(timeout);
+        updateSaveStatus('saving');
+        timeout = setTimeout(() => func.apply(context, args), wait);
+    };
+}
+
+// --- Migration ---
+// --- Migration ---
+async function migrateDataIfNeeded() {
+    const NOTES_STORAGE_KEY = 'appNotesContent';
+    const EXERCISE_ANSWERS_KEY = 'exerciseAnswersState';
+    const MIGRATED_KEY = 'firebase_migrated_to_global_v1'; // Novo key para o global
+
+    if (localStorage.getItem(MIGRATED_KEY)) {
+        console.log("Migration (Global) already performed.");
+        return;
+    }
+
+    console.log("Starting migration to Global ID...");
+    let migrationSuccess = true;
+
+    // Migrate Notes
+    const localNotes = localStorage.getItem(NOTES_STORAGE_KEY);
+    if (localNotes) {
+        try {
+            await getDataDocRef('notes').set({ content: localNotes }, { merge: true });
+            console.log("Notes migrated.");
+        } catch (e) {
+            console.error("Migration: Failed to migrate notes", e);
+            migrationSuccess = false;
         }
     }
-}
 
-function saveNotes() {
-    const notesTextarea = document.getElementById('notes-textarea');
-    if (notesTextarea) {
-        localStorage.setItem(NOTES_STORAGE_KEY, notesTextarea.value);
+    // Migrate Exercises
+    const localExercises = JSON.parse(localStorage.getItem(EXERCISE_ANSWERS_KEY) || '{}');
+    const batch = db.batch();
+    let batchCount = 0;
+
+    for (const [exerciseId, answers] of Object.entries(localExercises)) {
+        const docRef = EXERCISES_COL_REF.doc(exerciseId);
+        batch.set(docRef, { answers }, { merge: true });
+        batchCount++;
+    }
+
+    if (batchCount > 0) {
+        try {
+            await batch.commit();
+            console.log("Exercises migrated.");
+        } catch (e) {
+            console.error("Migration: Failed to migrate exercises", e);
+            migrationSuccess = false;
+        }
+    } else {
+        console.log("No exercises to migrate.");
+    }
+
+    if (migrationSuccess) {
+        localStorage.setItem(MIGRATED_KEY, 'true');
+        console.log('Migration to Global ID completed successfully.');
+        alert('Seus dados locais foram migrados para o aceso Globlal!');
+    } else {
+        console.warn('Migration failed or partial.');
+        alert('Erro na migração.');
     }
 }
 
-
-
-// --- Funções de Persistência dos Exercícios ---
-function saveExerciseAnswers() {
-    const answers = {};
-    const exerciseSections = document.querySelectorAll('#exercicios-accordion > div');
-
-    exerciseSections.forEach((section) => {
-        const inputs = section.querySelectorAll('.accordion-content .exercise-input');
-        inputs.forEach((input, inputIndex) => {
-            const exerciseId = input.getAttribute('data-exercise-id');
-            const inputIndexAttr = input.getAttribute('data-input-index');
-            if (exerciseId && inputIndexAttr !== null) {
-                if (!answers[exerciseId]) {
-                    answers[exerciseId] = {};
-                }
-                answers[exerciseId][inputIndexAttr] = input.value;
-            }
-        });
-    });
-
-    localStorage.setItem(EXERCISE_ANSWERS_KEY, JSON.stringify(answers));
+// --- Generic Persistence ---
+function getDataDocRef(docKey) {
+    return db.collection('users').doc(USER_ID).collection('data').doc(docKey);
 }
 
-function loadExerciseAnswers() {
-    const savedAnswersJson = localStorage.getItem(EXERCISE_ANSWERS_KEY);
-    if (!savedAnswersJson) return;
+async function setupPersistence(docKey, elementId) {
+    const element = document.getElementById(elementId);
+    if (!element) return;
 
-    const savedAnswers = JSON.parse(savedAnswersJson);
-    const exerciseSections = document.querySelectorAll('#exercicios-accordion > div');
+    const docRef = getDataDocRef(docKey);
 
-    exerciseSections.forEach((section) => {
-        const inputs = section.querySelectorAll('.accordion-content .exercise-input');
-        inputs.forEach((input) => {
-            const exerciseId = input.getAttribute('data-exercise-id');
-            const inputIndexAttr = input.getAttribute('data-input-index');
-
-            if (exerciseId && inputIndexAttr !== null && savedAnswers[exerciseId] && savedAnswers[exerciseId][inputIndexAttr] !== undefined) {
-                input.value = savedAnswers[exerciseId][inputIndexAttr];
-            }
-        });
-    });
-}
-// --- Fim das Funções de Persistência dos Exercícios ---
-
-
-document.addEventListener('DOMContentLoaded', () => {
-    loadNotes();
-
-    loadExerciseAnswers(); // Carrega respostas dos exercícios ao iniciar
-
-    const notesTextarea = document.getElementById('notes-textarea');
-    if (notesTextarea) {
-        // Salva automaticamente a cada alteração
-        notesTextarea.addEventListener('input', saveNotes);
+    // 1. Load initial data
+    try {
+        const doc = await docRef.get();
+        if (doc.exists) {
+            element.value = doc.data().content || '';
+        }
+    } catch (e) {
+        console.error(`Error loading ${docKey}:`, e);
     }
 
+    // 2. Setup generic save with debounce
+    const debouncedSave = debounce(async (content) => {
+        try {
+            await docRef.set({ content }, { merge: true });
+            updateSaveStatus('saved');
+        } catch (e) {
+            console.error(`Error saving ${docKey}:`, e);
+            updateSaveStatus('error');
+        }
+    }, 1000);
+
+    // 3. Add listener
+    element.addEventListener('input', (e) => {
+        debouncedSave(e.target.value);
+    });
+}
 
 
-    // Adiciona listener para salvar as respostas dos exercícios
-    document.querySelectorAll('.exercise-input').forEach(input => {
-        input.addEventListener('input', saveExerciseAnswers);
+// --- Exercises Persistence ---
+async function loadExerciseAnswers() {
+    try {
+        const snapshot = await EXERCISES_COL_REF.get();
+        const allAnswers = {};
+
+        snapshot.forEach(doc => {
+            allAnswers[doc.id] = doc.data().answers;
+        });
+
+        document.querySelectorAll('.exercise-input').forEach(input => {
+            const { exerciseId, inputIndex } = input.dataset;
+            const val = allAnswers[exerciseId]?.[inputIndex];
+            if (val !== undefined) input.value = val;
+        });
+    } catch (e) {
+        console.error("Error loading exercises:", e);
+    }
+}
+
+// We need to bundle updates per exercise to avoid too many writes if possible, 
+// but for simplicity with debounce, we can save the specific exercise doc.
+// We'll organize saving by exerciseId.
+
+const pendingExerciseUpdates = {}; // { exerciseId: { inputIndex: value, ... } }
+
+const saveExercisesDebounced = debounce(async () => {
+    const batch = db.batch();
+    let hasUpdates = false;
+
+    for (const [exerciseId, updates] of Object.entries(pendingExerciseUpdates)) {
+        if (Object.keys(updates).length === 0) continue;
+
+        const docRef = EXERCISES_COL_REF.doc(exerciseId);
+        // We need to use dot notation for nested updates in Firestore or merge
+        // But to just update specific fields inside 'answers' map without overwriting others:
+        // Firestore update paths: "answers.0": "val"
+
+        const updateData = {};
+        for (const [idx, val] of Object.entries(updates)) {
+            updateData[`answers.${idx}`] = val;
+        }
+
+        // Check if doc exists first? set with merge should handle creation.
+        // However, for nested fields like "answers.0", the parent map "answers" must exist if we use update.
+        // easier to use set with merge, but set({answers: {0: val}}, {merge: true}) will overwrite answers map?
+        // No, set with merge merges top level fields. nested maps:
+        // If we do set({ answers: { [idx]: val } }, { merge: true }), it might overwrite other keys in 'answers' if not careful? 
+        // Firestore v9 set with merge behavior on maps: it deep merges. 
+        // Let's verify: yes, set(..., {merge: true}) merges fields.
+
+        // Actually, 'answers' is a map. If I do set({ answers: { 1: 'a'} }, { merge: true }), it technically merges 'answers' field.
+        // But if 'answers' was { 0: 'b'}, does it become { 0: 'b', 1: 'a' }?
+        // YES, Firestore set with merge performs a deep merge on Maps.
+
+        // However, to be extra safe and correct with dot notation which guarantees partial update:
+        batch.set(docRef, { answers: updates }, { merge: true });
+        hasUpdates = true;
+    }
+
+    // Clear pending
+    for (const key in pendingExerciseUpdates) delete pendingExerciseUpdates[key];
+
+    if (hasUpdates) {
+        try {
+            await batch.commit();
+            updateSaveStatus('saved');
+        } catch (e) {
+            console.error("Error saving exercises:", e);
+            updateSaveStatus('error');
+        }
+    }
+}, 1500);
+
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // 0. UI Init
+    const saveEl = document.getElementById('save-status'); // ensure we grab it if it wasn't caught early
+
+    // 1. Migration
+    // Decomente a linha abaixo UMA VEZ para migrar seus dados locais para o novo usuário global
+    //await migrateDataIfNeeded();
+
+    // 2. Initial Load
+    //await loadNotes(); // Replaced by setupPersistence
+    await loadExerciseAnswers();
+
+    // Setup Persistence for Notes and Links
+    setupPersistence('notes', 'notes-textarea');
+    setupPersistence('links', 'links-textarea');
+
+
+    // 3. Event Delegation for auto-saving
+    document.body.addEventListener('input', (e) => {
+        if (e.target.matches('.exercise-input')) {
+            const { exerciseId, inputIndex } = e.target.dataset;
+            if (exerciseId && inputIndex !== undefined) {
+                // Queue update
+                pendingExerciseUpdates[exerciseId] ??= {};
+                pendingExerciseUpdates[exerciseId][inputIndex] = e.target.value;
+
+                saveExercisesDebounced();
+            }
+        }
     });
 
-
+    // 3. Tabs Logic
     const tabsNav = document.getElementById('tabs-nav');
-    const tabsContent = document.getElementById('tabs-content').children;
+    const tabsContent = document.getElementById('tabs-content');
 
-    const accordions = document.querySelectorAll('.accordion-header');
+    if (tabsNav && tabsContent) { // Guard in case elements don't exist
+        tabsNav.addEventListener('click', (e) => {
+            const btn = e.target.closest('.tab-button');
+            if (!btn) return;
 
-    // --- Lógica das Abas (Tabs) ---
-    tabsNav.addEventListener('click', (e) => {
-        const clickedButton = e.target.closest('button.tab-button');
-        if (!clickedButton) return;
+            // Toggle active class on buttons
+            Array.from(tabsNav.children).forEach(b => b.classList.toggle('active', b === btn));
 
-        const tabId = clickedButton.getAttribute('data-tab');
-
-        // Desativa todas as abas
-        Array.from(tabsNav.children).forEach(button => {
-            button.classList.remove('active');
+            // Toggle visibility of content
+            const targetId = `tab-${btn.dataset.tab}`;
+            Array.from(tabsContent.children).forEach(content => {
+                content.classList.toggle('hidden', content.id !== targetId);
+            });
         });
-        Array.from(tabsContent).forEach(content => {
-            content.classList.add('hidden');
-        });
+    }
 
-        // Ativa a aba clicada
-        clickedButton.classList.add('active');
-        document.getElementById('tab-' + tabId).classList.remove('hidden');
-    });
-
-
-
-    // --- Lógica do Sanfona (Accordion) - AGORA PERMITE MÚLTIPLOS ABERTOS ---
-    accordions.forEach(header => {
+    // 4. Accordion Logic (Allows multiple open)
+    document.querySelectorAll('.accordion-header').forEach(header => {
         header.addEventListener('click', () => {
             const content = header.nextElementSibling;
+
+            // Toggle visibility and open state
+            const isOpen = content.classList.toggle('hidden') === false; // toggle returns true if class added (hidden), so false means visible/open
+            // Wait, toggle returns 'true' if token is now present. So if hidden is added, it's CLOSED.
+            // If hidden is removed (returns false), it's OPEN.
+
+            const isNowOpen = !content.classList.contains('hidden');
+            header.classList.toggle('open', isNowOpen);
+
             const icon = header.querySelector('.accordion-icon');
-
-            // Apenas alterna o item clicado, sem fechar os outros
-            content.classList.toggle('hidden');
-            header.classList.toggle('open');
-
-            if (header.classList.contains('open')) {
-                icon.style.transform = 'rotate(180deg)';
-            } else {
-                icon.style.transform = 'rotate(0deg)';
+            if (icon) {
+                icon.style.transform = isNowOpen ? 'rotate(180deg)' : 'rotate(0deg)';
             }
         });
     });
-
 });

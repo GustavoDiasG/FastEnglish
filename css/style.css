@@ -26,6 +26,11 @@ body {
     padding-top: 1.5rem;
 }
 
+/* Fallback for hidden class if Tailwind fails */
+.hidden {
+    display: none !important;
+}
+
 .accordion-header {
     transition: background-color 0.2s ease;
 }
