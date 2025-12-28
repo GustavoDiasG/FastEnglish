@@ -23,7 +23,7 @@ body {
 }
 
 .tab-content {
-    padding-top: 1.5rem;
+    padding-top: 1rem;
 }
 
 /* Fallback for hidden class if Tailwind fails */
@@ -121,16 +121,23 @@ iframe {
 }
 
 .video-container-flex {
-  display: flex;
-  align-items: center; /* Alinha verticalmente */
-  gap: 20px; /* Espaçamento entre título e iframe */
-  flex-wrap: wrap; /* Permite quebrar linha em telas pequenas */
-}
-.video-container-flex h2 {
-  flex-shrink: 0; /* Impede que o título encolha */
-  min-width: 150px; /* Largura mínima para o título */
-}
-.video-container-flex iframe {
-  flex-grow: 1; /* Iframe ocupa o espaço restante */
+    display: flex;
+    align-items: center;
+    /* Alinha verticalmente */
+    gap: 20px;
+    /* Espaçamento entre título e iframe */
+    flex-wrap: wrap;
+    /* Permite quebrar linha em telas pequenas */
 }
 
+.video-container-flex h2 {
+    flex-shrink: 0;
+    /* Impede que o título encolha */
+    min-width: 150px;
+    /* Largura mínima para o título */
+}
+
+.video-container-flex iframe {
+    flex-grow: 1;
+    /* Iframe ocupa o espaço restante */
+}
