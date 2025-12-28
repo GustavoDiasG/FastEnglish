@@ -101,9 +101,9 @@ iframe {
     /* Espaço abaixo do iframe */
     /* padding: 15px; */
     /* Opcional: adiciona uma borda com espaçamento */
-    width: 500px;
+    width: 560px;
     /* Ocupa a largura total */
-    height: 281px;
+    height: 315px;
     /* Altura definida */
     border-radius: 10px;
 }
@@ -133,3 +133,4 @@ iframe {
 .video-container-flex iframe {
   flex-grow: 1; /* Iframe ocupa o espaço restante */
 }
+
