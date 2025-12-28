@@ -258,7 +258,38 @@ const saveExercisesDebounced = debounce(async () => {
 }, 1500);
 
 
+
+async function loadTabsContent() {
+    const tabs = ['plano', 'gramatica', 'glossario', 'exercicios', 'anotacoes', 'links', 'metodologia'];
+    const saves = tabs.map(async (tab) => {
+        try {
+            const response = await fetch(`sections/${tab}.html`);
+            if (!response.ok) throw new Error(`Status ${response.status}`);
+            const html = await response.text();
+            const container = document.getElementById(`tab-${tab}`);
+            if (container) {
+                container.innerHTML = html;
+            }
+        } catch (e) {
+            console.error(`Error loading tab ${tab}:`, e);
+            const container = document.getElementById(`tab-${tab}`);
+            if (container) {
+                container.innerHTML = `<div class="p-4 text-red-600 bg-red-50 border border-red-200 rounded">
+                    Erro ao carregar conteúdo da aba <b>${tab}</b>.<br>
+                    Verifique se você está rodando um servidor local (http://localhost) e não abrindo o arquivo diretamente (file://).<br>
+                    Erro técnico: ${e.message}
+                 </div>`;
+            }
+        }
+    });
+    await Promise.all(saves);
+}
+
+
 document.addEventListener('DOMContentLoaded', async () => {
+    // 0. Load HTML Content
+    await loadTabsContent();
+
     // 0. UI Init
     const saveEl = document.getElementById('save-status'); // ensure we grab it if it wasn't caught early
 
