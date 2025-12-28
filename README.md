@@ -16,3 +16,5 @@ Dialogos e videos para listening e shadowing
 patch-test-2 -> 
 abas particionadas
 iframes da aba links estilizados (falta título a direita)
+
+tab-content -> padding-top: 1.5rem; alterado para 1rem
